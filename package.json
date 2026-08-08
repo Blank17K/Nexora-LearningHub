@@ -8,9 +8,23 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node server.js"
+    "build": "webpack && babel server.js -d dist",
+    "start": "npm run build && node dist/server.js"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "path": "^0.12.7",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "url": "^0.11.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^8.0.4",
+    "@babel/core": "^8.0.1",
+    "@babel/preset-env": "^8.0.2",
+    "@babel/preset-react": "^8.0.1",
+    "babel-loader": "^10.1.1",
+    "webpack": "^5.109.2",
+    "webpack-cli": "^7.2.2"
   }
 }
