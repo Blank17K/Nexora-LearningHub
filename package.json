@@ -1,0 +1,16 @@
+{
+  "name": "nexora",
+  "version": "1.0.0",
+  "description": "This is an online learning platform. Like Udemy, Skill Share etc.",
+  "license": "ISC",
+  "author": "Trump Alliance",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
