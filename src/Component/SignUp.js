@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import logo from "../Assets/Images/Logo.png";
-import loginHero from "../Assets/Images/LoginHero.png";
+import loginHero from "../Assets/Images/LoginHeroSignUp.png";
 import "../styleComp/Login.css";
+import { Link } from "react-router-dom";
 
-export default function Login() {
-  const [activeTab, setActiveTab] = useState("login"); // 'login' | 'register'
+export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
-  const [keepSignedIn, setKeepSignedIn] = useState(false);
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({ fullName: "", email: "", password: "" });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,9 +15,12 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log("Logging in with", form, "Keep signed in:", keepSignedIn);
+    console.log("Creating account with", form);
   };
+
+  const hasMinLength = form.password.length >= 8;
+  const hasNumber = /\d/.test(form.password);
+  const hasCapital = /[A-Z]/.test(form.password);
 
   return (
     <div className="logInBody">
@@ -38,27 +39,32 @@ export default function Login() {
       <div className="logInAndImage">
         <div className="loginLeft">
           <div className="loginContent">
-            <h1 className="welcomeTitle">Welcome back</h1>
-            <p className="welcomeSubtitle">Pick up where you left off.</p>
+            <h1 className="welcomeTitle">Create your account</h1>
+            <p className="welcomeSubtitle">Free to start. No card needed.</p>
 
             <div className="tabSwitch">
-              <button
-                type="button"
-                className={`tabBtn ${activeTab === "login" ? "tabBtnActive" : ""}`}
-                onClick={() => setActiveTab("login")}
-              >
-                Log in
+              <button type="button" className="tabBtn">
+                <Link to={"/login"}>Log in</Link>
               </button>
-              <button
-                type="button"
-                className={`tabBtn ${activeTab === "register" ? "tabBtnActive" : ""}`}
-                onClick={() => setActiveTab("register")}
-              >
-                <Link to={"/signup"}>Register</Link>
+              <button type="button" className="tabBtn tabBtnActive">
+                Register
               </button>
             </div>
 
             <form className="loginForm" onSubmit={handleSubmit}>
+              <label className="fieldLabel" htmlFor="fullName">
+                Full Name
+              </label>
+              <input
+                id="fullName"
+                name="fullName"
+                type="text"
+                placeholder="Luke Walker"
+                value={form.fullName}
+                onChange={handleChange}
+                className="textInput"
+              />
+
               <label className="fieldLabel" htmlFor="email">
                 Email Address
               </label>
@@ -66,26 +72,21 @@ export default function Login() {
                 id="email"
                 name="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder="lukeWalker12@example.com"
                 value={form.email}
                 onChange={handleChange}
                 className="textInput"
               />
 
-              <div className="passwordRow">
-                <label className="fieldLabel" htmlFor="password">
-                  Password
-                </label>
-                <a href="#forgot" className="forgotLink">
-                  Forgot password?
-                </a>
-              </div>
+              <label className="fieldLabel" htmlFor="password">
+                Password
+              </label>
               <div className="passwordWrapper">
                 <input
                   id="password"
                   name="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
+                  placeholder="Create a password"
                   value={form.password}
                   onChange={handleChange}
                   className="textInput"
@@ -100,18 +101,36 @@ export default function Login() {
                 </button>
               </div>
 
-              <label className="keepSignedIn">
-                <input
-                  type="checkbox"
-                  checked={keepSignedIn}
-                  onChange={() => setKeepSignedIn((s) => !s)}
-                />
-                Keep me signed in
-              </label>
+              <ul className="passwordChecklist">
+                <li className={hasMinLength ? "checkDone" : ""}>
+                  <span className="checkDot">{hasMinLength ? "✓" : ""}</span>
+                  At least 8 characters
+                </li>
+                <li className={hasNumber ? "checkDone" : ""}>
+                  <span className="checkDot">{hasNumber ? "✓" : ""}</span>
+                  One number
+                </li>
+                <li className={hasCapital ? "checkDone" : ""}>
+                  <span className="checkDot">{hasCapital ? "✓" : ""}</span>
+                  One capital letter
+                </li>
+              </ul>
 
               <button type="submit" className="primaryBtn">
-                Log in
+                Create Account
               </button>
+
+              <p className="termsText">
+                By creating an account you agree to our{" "}
+                <a href="#terms" className="signupLink">
+                  Terms
+                </a>{" "}
+                and{" "}
+                <a href="#privacy" className="signupLink">
+                  Privacy Policy
+                </a>
+                .
+              </p>
 
               <div className="dividerRow">
                 <span className="dividerLine" />
@@ -127,14 +146,6 @@ export default function Login() {
                   Github
                 </button>
               </div>
-
-              <p className="signupText">
-                New here?{" "}
-                <Link className="signupLink" to={"/signup"}>
-                  Create Account
-                </Link>
-                — it takes about thirty seconds.
-              </p>
             </form>
           </div>
         </div>
