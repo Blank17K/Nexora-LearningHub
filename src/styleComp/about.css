@@ -43,3 +43,12 @@
 .aboutIntro{
     padding: var(--worldPad);
 }
+.freeCourse{
+    background-color: var(--cardCol);
+    color: var(--primary);
+}
+
+.btnCourse button{
+    background-color: var(--primary);
+    color: var(--cardCol);
+}

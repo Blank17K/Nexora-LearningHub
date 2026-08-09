@@ -47,22 +47,22 @@ export class AboutUs extends React.Component{
                     </div>
                     <div className="col teamObj align-self-center">
                         <img alt="Team Member" src="./media/imgs/team1.svg"/>
-                        <h6>Lerato M</h6>
+                        <h6>Njabulo N</h6>
                         <p>Role Placeholder</p>
                     </div>
                     <div className="col teamObj align-self-center">
                         <img alt="Team Member" src="./media/imgs/team1.svg"/>
-                        <h6>Lerato M</h6>
+                        <h6>Thabo S</h6>
                         <p>Role Placeholder</p>
                     </div>
                     <div className="col teamObj align-self-center">
                         <img alt="Team Member" src="./media/imgs/team1.svg"/>
-                        <h6>Lerato M</h6>
+                        <h6>Boikanyo T</h6>
                         <p>Role Placeholder</p>
                     </div>
                     <div className="col teamObj align-self-center">
                         <img alt="Team Member" src="./media/imgs/team1.svg"/>
-                        <h6>Lerato M</h6>
+                        <h6>Tadi C</h6>
                         <p>Role Placeholder</p>
                     </div>
                 </div>

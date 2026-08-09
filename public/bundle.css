@@ -465,6 +465,15 @@ a:hover {
 .aboutIntro{
     padding: var(--worldPad);
 }
+.freeCourse{
+    background-color: var(--cardCol);
+    color: var(--primary);
+}
+
+.btnCourse button{
+    background-color: var(--primary);
+    color: var(--cardCol);
+}
 /*!****************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/footer.css ***!
   \****************************************************************************/
