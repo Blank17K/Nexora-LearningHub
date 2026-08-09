@@ -31,7 +31,7 @@ export default function Login() {
             <p>Nexora</p>
           </div>
           <div className="backBtn">
-            <Link to={"/log"}>Back to site</Link></div>
+            <Link to={"/"}>Back to site</Link></div>
         </div>
       </div>
 

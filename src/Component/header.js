@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";  
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styleComp/header.css'
+import { Link } from 'react-router-dom';
 
 export class Header extends React.Component{
     constructor(props){
@@ -15,7 +16,7 @@ export class Header extends React.Component{
                 <div className="col-2"><b>Nexora</b></div>
                 <div className ="col-6 browseTxt">Browse</div>
                 <button className="btn SignUpButt col-1 me-2">Sign Up</button>
-                <button className="btn LoginButt col-1 ">Login</button>
+                <button className="btn LoginButt col-1 "><Link to={"/login"}>Login</Link></button>
             </div>
         );
     }
