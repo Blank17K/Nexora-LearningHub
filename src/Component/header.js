@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";  
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styleComp/header.css'
 
 export class Header extends React.Component{
     constructor(props){
@@ -9,12 +10,12 @@ export class Header extends React.Component{
 
     render(){
         return(
-            <div className="row">
-                <div className="col-1"><img alt="logo" /></div>
-                <div className="col-2">Nexora</div>
-                <div className ="col-6">Browse</div>
-                <button className="btn LoginButt col-1 me-2">Login</button>
-                <button className="btn RegisterButt col-1">Register</button>
+            <div className="row align-items-center header">
+                <div className="col-1"><img alt="logo" src="./media/imgs/logo.svg"/></div>
+                <div className="col-2"><b>Nexora</b></div>
+                <div className ="col-6 browseTxt">Browse</div>
+                <button className="btn SignUpButt col-1 me-2">Sign Up</button>
+                <button className="btn LoginButt col-1 ">Login</button>
             </div>
         );
     }

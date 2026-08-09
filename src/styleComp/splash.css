@@ -1,0 +1,70 @@
+:root{
+    --primary: #fff;
+    --btnCol: #0F6B57;
+    --worldPad: 3rem;
+    --grey: #DDDDDD;
+    --cardCol: #004133;
+}
+.intro{
+    padding: 5rem;
+}
+.introText h1{
+    font-size: 6vw;
+    margin-bottom: 1rem;
+}
+.strtBtn{
+    background-color: var(--btnCol);
+    color: var(--primary);
+}
+.catBtn{
+    color: var(--btnCol);
+}
+.banner{
+    max-width: 100vw;
+}
+.banner img{
+    width: 100%;
+}
+.popularClass, .theMovement{
+    padding: var(--worldPad);
+}
+.card-img-top{
+    border-bottom: solid 2px var(--btnCol);
+}
+.card-subtitle{
+    border-radius: 1rem;
+    width: fit-content;
+    padding: 0.25rem 1rem;
+}
+.best{
+    background-color: var(--btnCol);
+    color: var(--primary) !important;
+}
+.begn{
+    background-color: var(--grey);
+
+}
+.theMovement h3{
+    margin-bottom: 2rem;
+}
+.card-body p{
+    color: var(--primary) ;
+}
+.theMovement .card{
+    background-color: var(--cardCol);
+}
+.txtCardMove{
+    max-height: fit-content;
+}
+.freeTrail{
+    padding: var(--worldPad);
+    background-color: var(--cardCol);
+    color: var(--primary);
+}
+.freeTrail div img{
+    width:75%;
+}
+.freeTrailBtn{
+    background-color: var(--primary);
+    color: var(--cardCol);
+}

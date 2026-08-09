@@ -1,0 +1,18 @@
+:root{
+    --primary: #fff;
+    --btnCol: #0F6B57;
+}
+.LoginButt{
+    border: solid 1px var(--btnCol);
+}
+.SignUpButt{
+    background-color: var(--btnCol);
+    color: var(--primary);
+}
+.browseTxt:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.header{
+    padding: 1rem;
+}
