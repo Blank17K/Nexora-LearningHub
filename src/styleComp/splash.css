@@ -68,3 +68,11 @@
     background-color: var(--primary);
     color: var(--cardCol);
 }
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

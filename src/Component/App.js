@@ -6,6 +6,7 @@ import { Header } from "./header.js";
 import { AboutUs } from "./AboutUs.js";
 import { Footer } from "./footer.js";
 import Login from "./Login.js"; 
+import SignUp from "./SignUp.js";
 
 function App() {
   return (
