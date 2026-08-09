@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styleComp/splash.css'
 import Header from "./header.js"; 
 
+
 export default class Splash extends React.Component{
     constructor(props){
         super(props);
@@ -11,7 +12,6 @@ export default class Splash extends React.Component{
     render(){
         return(
             <>
-            <Header />
             <div className="splashSec">
                 <div className="intro row">
                     <div className="text col-6 introText">

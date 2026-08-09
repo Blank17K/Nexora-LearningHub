@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";  
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styleComp/footer.css';
+import { Link } from "react-router-dom";
 
 export class Footer extends React.Component{
 
@@ -29,7 +30,7 @@ export class Footer extends React.Component{
                         <h6 className="headInfo col-4"><u><b>Company</b></u></h6>
                         <h6 className="headInfo col-4"><u><b>Support</b></u></h6>
                         <p className="textHelp col-4">Browse</p>
-                        <p className="textHelp col-4">About</p>
+                        <p className="textHelp col-4"><Link to={"/about"}>About</Link></p>
                         <p className="textHelp col-4">Help Center</p>
                         <p className="textHelp col-4">Categories</p>
                         <p className="textHelp col-4">Instructors</p>
