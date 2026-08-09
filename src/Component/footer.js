@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styleComp/footer.css';
 import { Link } from "react-router-dom";
 
-export class Footer extends React.Component{
+export default class Footer extends React.Component{
 
     constructor(props){
         super(props);
