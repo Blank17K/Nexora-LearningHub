@@ -18,7 +18,8 @@ export default class Header extends React.Component {
         <div className="col-2">
           <b>Nexora</b>
         </div>
-        <div className="col-6 browseTxt">Browse</div>
+        <div className="col-6 browseTxt"><Link to={"/aboutus"}>About us</Link></div>
+        {/* <div className="col-6 browseTxt">Browse</div> */}
         <button className="btn SignUpButt col-1 me-2">
           <Link to={"/signup"}>Sign Up</Link>
         </button>

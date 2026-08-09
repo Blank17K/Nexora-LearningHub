@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styleComp/about.css';
 
 
-export class AboutUs extends React.Component{
+export default class AboutUs extends React.Component{
     constructor(props){
         super(props);
     }
