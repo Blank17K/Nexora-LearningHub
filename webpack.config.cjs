@@ -18,7 +18,11 @@ module.exports = {
         {
             test: /\.css$/,  // ← ADD THIS RULE for CSS
             use: [MiniCssExtractPlugin.loader, "css-loader"]
-        }]
+        },
+    {
+        test: /\.(png|jpe?g|gif|svg|webp)$/i,
+        type: 'asset/resource',
+      },]
     },
     plugins: [  // ← ADD THIS PLUGINS SECTION
         new MiniCssExtractPlugin({

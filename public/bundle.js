@@ -20,6 +20,16 @@ eval("{__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-ext
 
 /***/ },
 
+/***/ "./src/styleComp/Login.css"
+/*!*********************************!*\
+  !*** ./src/styleComp/Login.css ***!
+  \*********************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("{__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://nexora/./src/styleComp/Login.css?\n}");
+
+/***/ },
+
 /***/ "./node_modules/react-dom/cjs/react-dom-client.development.js"
 /*!********************************************************************!*\
   !*** ./node_modules/react-dom/cjs/react-dom-client.development.js ***!
@@ -120,13 +130,33 @@ eval("{\n\nif (false) // removed by dead control flow\n{} else {\n  module.expor
 
 /***/ },
 
+/***/ "./src/Assets/Images/LoginHero.png"
+/*!*****************************************!*\
+  !*** ./src/Assets/Images/LoginHero.png ***!
+  \*****************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+eval("{module.exports = __webpack_require__.p + \"dfb304d716622b4343c5.png\";\n\n//# sourceURL=webpack://nexora/./src/Assets/Images/LoginHero.png?\n}");
+
+/***/ },
+
+/***/ "./src/Assets/Images/Logo.png"
+/*!************************************!*\
+  !*** ./src/Assets/Images/Logo.png ***!
+  \************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+eval("{module.exports = __webpack_require__.p + \"ee3d002eefc6fdbfc3a3.png\";\n\n//# sourceURL=webpack://nexora/./src/Assets/Images/Logo.png?\n}");
+
+/***/ },
+
 /***/ "./src/Component/App.js"
 /*!******************************!*\
   !*** ./src/Component/App.js ***!
   \******************************/
 (__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router/dist/development/chunk-62JRHF6Z.mjs\");\n/* harmony import */ var _splash_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./splash.js */ \"./src/Component/splash.js\");\n/* harmony import */ var _Login_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Login.js */ \"./src/Component/Login.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"./node_modules/react/jsx-dev-runtime.js\");\n\n\n\n\n\nfunction App() {\n  return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxDEV)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.BrowserRouter, {\n    children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxDEV)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Routes, {\n      children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxDEV)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {\n        path: \"/\",\n        element: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxDEV)(_splash_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {}, void 0, false)\n      }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxDEV)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {\n        path: \"/login\",\n        element: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxDEV)(_Login_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {}, void 0, false)\n      }, void 0, false)]\n    }, void 0, true)\n  }, void 0, false);\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);\n\n//# sourceURL=webpack://nexora/./src/Component/App.js?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router/dist/development/chunk-62JRHF6Z.mjs\");\n/* harmony import */ var _splash_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./splash.js */ \"./src/Component/splash.js\");\n/* harmony import */ var _Login_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Login.js */ \"./src/Component/Login.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"./node_modules/react/jsx-dev-runtime.js\");\n\n\n\n\n\nfunction App() {\n  return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxDEV)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.BrowserRouter, {\n    children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxDEV)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Routes, {\n      children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxDEV)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {\n        path: \"/\",\n        element: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxDEV)(_Login_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {}, void 0, false)\n      }, void 0, false)\n    }, void 0, false)\n  }, void 0, false);\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);\n\n//# sourceURL=webpack://nexora/./src/Component/App.js?\n}");
 
 /***/ },
 
@@ -136,7 +166,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
   \********************************/
 (__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Login)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"./node_modules/react/jsx-dev-runtime.js\");\n\n\nfunction Login() {\n  return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxDEV)(\"div\", {\n    children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxDEV)(\"h1\", {\n      children: \"Hello from log in\"\n    }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxDEV)(\"h1\", {\n      children: \"higgggggg\"\n    }, void 0, false)]\n  }, void 0, true);\n}\n\n//# sourceURL=webpack://nexora/./src/Component/Login.js?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Login)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router/dist/development/chunk-62JRHF6Z.mjs\");\n/* harmony import */ var _Assets_Images_Logo_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Assets/Images/Logo.png */ \"./src/Assets/Images/Logo.png\");\n/* harmony import */ var _Assets_Images_LoginHero_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Assets/Images/LoginHero.png */ \"./src/Assets/Images/LoginHero.png\");\n/* harmony import */ var _styleComp_Login_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../styleComp/Login.css */ \"./src/styleComp/Login.css\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"./node_modules/react/jsx-dev-runtime.js\");\n\n\n\n\n\n\nfunction Login() {\n  const [activeTab, setActiveTab] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(\"login\"); // 'login' | 'register'\n  const [showPassword, setShowPassword] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);\n  const [keepSignedIn, setKeepSignedIn] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);\n  const [form, setForm] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({\n    email: \"\",\n    password: \"\"\n  });\n  const handleChange = e => {\n    const {\n      name,\n      value\n    } = e.target;\n    setForm(prev => ({\n      ...prev,\n      [name]: value\n    }));\n  };\n  const handleSubmit = e => {\n    e.preventDefault();\n    console.log(\"Logging in with\", form, \"Keep signed in:\", keepSignedIn);\n  };\n  return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"div\", {\n    className: \"logInBody\",\n    children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"div\", {\n      className: \"navBar\",\n      children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"div\", {\n        className: \"loginNav\",\n        children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"div\", {\n          className: \"logo\",\n          children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"img\", {\n            src: _Assets_Images_Logo_png__WEBPACK_IMPORTED_MODULE_2__,\n            alt: \"Logo\"\n          }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"p\", {\n            children: \"Nexora\"\n          }, void 0, false)]\n        }, void 0, true), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"div\", {\n          className: \"backBtn\",\n          children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {\n            to: \"/log\",\n            children: \"Back to site\"\n          }, void 0, false)\n        }, void 0, false)]\n      }, void 0, true)\n    }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"div\", {\n      className: \"logInAndImage\",\n      children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"div\", {\n        className: \"loginLeft\",\n        children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"div\", {\n          className: \"loginContent\",\n          children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"h1\", {\n            className: \"welcomeTitle\",\n            children: \"Welcome back\"\n          }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"p\", {\n            className: \"welcomeSubtitle\",\n            children: \"Pick up where you left off.\"\n          }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"div\", {\n            className: \"tabSwitch\",\n            children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"button\", {\n              type: \"button\",\n              className: `tabBtn ${activeTab === \"login\" ? \"tabBtnActive\" : \"\"}`,\n              onClick: () => setActiveTab(\"login\"),\n              children: \"Log in\"\n            }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"button\", {\n              type: \"button\",\n              className: `tabBtn ${activeTab === \"register\" ? \"tabBtnActive\" : \"\"}`,\n              onClick: () => setActiveTab(\"register\"),\n              children: \"Register\"\n            }, void 0, false)]\n          }, void 0, true), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"form\", {\n            className: \"loginForm\",\n            onSubmit: handleSubmit,\n            children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"label\", {\n              className: \"fieldLabel\",\n              htmlFor: \"email\",\n              children: \"Email Address\"\n            }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"input\", {\n              id: \"email\",\n              name: \"email\",\n              type: \"email\",\n              placeholder: \"you@example.com\",\n              value: form.email,\n              onChange: handleChange,\n              className: \"textInput\"\n            }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"div\", {\n              className: \"passwordRow\",\n              children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"label\", {\n                className: \"fieldLabel\",\n                htmlFor: \"password\",\n                children: \"Password\"\n              }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"a\", {\n                href: \"#forgot\",\n                className: \"forgotLink\",\n                children: \"Forgot password?\"\n              }, void 0, false)]\n            }, void 0, true), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"div\", {\n              className: \"passwordWrapper\",\n              children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"input\", {\n                id: \"password\",\n                name: \"password\",\n                type: showPassword ? \"text\" : \"password\",\n                placeholder: \"Enter your password\",\n                value: form.password,\n                onChange: handleChange,\n                className: \"textInput\"\n              }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"button\", {\n                type: \"button\",\n                className: \"eyeBtn\",\n                onClick: () => setShowPassword(s => !s),\n                \"aria-label\": showPassword ? \"Hide password\" : \"Show password\",\n                children: showPassword ? \"🙈\" : \"👁\"\n              }, void 0, false)]\n            }, void 0, true), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"label\", {\n              className: \"keepSignedIn\",\n              children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"input\", {\n                type: \"checkbox\",\n                checked: keepSignedIn,\n                onChange: () => setKeepSignedIn(s => !s)\n              }, void 0, false), \"Keep me signed in\"]\n            }, void 0, true), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"button\", {\n              type: \"submit\",\n              className: \"primaryBtn\",\n              children: \"Log in\"\n            }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"div\", {\n              className: \"dividerRow\",\n              children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"span\", {\n                className: \"dividerLine\"\n              }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"span\", {\n                className: \"dividerText\",\n                children: \"or continue with\"\n              }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"span\", {\n                className: \"dividerLine\"\n              }, void 0, false)]\n            }, void 0, true), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"div\", {\n              className: \"oauthRow\",\n              children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"button\", {\n                type: \"button\",\n                className: \"oauthBtn\",\n                children: \"Google\"\n              }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"button\", {\n                type: \"button\",\n                className: \"oauthBtn\",\n                children: \"Github\"\n              }, void 0, false)]\n            }, void 0, true), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"p\", {\n              className: \"signupText\",\n              children: [\"New here?\", \" \", /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"a\", {\n                href: \"#register\",\n                className: \"signupLink\",\n                children: \"Create an account\"\n              }, void 0, false), \" \", \"— it takes about thirty seconds.\"]\n            }, void 0, true)]\n          }, void 0, true)]\n        }, void 0, true)\n      }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"div\", {\n        className: \"loginRight\",\n        children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxDEV)(\"img\", {\n          src: _Assets_Images_LoginHero_png__WEBPACK_IMPORTED_MODULE_3__,\n          alt: \"\",\n          className: \"loginHeroImg\"\n        }, void 0, false)\n      }, void 0, false)]\n    }, void 0, true)]\n  }, void 0, true);\n}\n\n//# sourceURL=webpack://nexora/./src/Component/Login.js?\n}");
 
 /***/ },
 
@@ -263,6 +293,18 @@ eval("{let react__WEBPACK_IMPORTED_MODULE_0___namespace_cache;\n__webpack_requir
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -286,6 +328,29 @@ eval("{let react__WEBPACK_IMPORTED_MODULE_0___namespace_cache;\n__webpack_requir
 /******/ 			if (!module.children) module.children = [];
 /******/ 			return module;
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		let scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		const document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript?.tagName.toUpperCase() === 'SCRIPT')
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				const scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) {
+/******/ 					let i = scripts.length - 1;
+/******/ 					while (i > -1 && (!scriptUrl || !/^http(s?):/.test(scriptUrl))) scriptUrl = scripts[i--].src;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/^blob:/, "").replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /************************************************************************/
