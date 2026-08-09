@@ -100,6 +100,54 @@
 .header{
     padding: 1rem;
 }
+/*!***************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/about.css ***!
+  \***************************************************************************/
+:root{
+    --primary: #fff;
+    --btnCol: #0F6B57;
+    --worldPad: 3rem;
+    --grey: #DDDDDD;
+    --cardCol: #004133;
+}
+.btnPos{
+    width: fit-content;
+}
+.aboutEngTxt{
+    text-align: right;
+    font-weight: bold;
+}
+.bannerAbt{
+    padding: var(--worldPad);
+    max-width: 100vw;
+}
+.bannerAbt img{
+    width: 100%;
+}
+.hold2{
+    max-width: 100vw;
+    padding: calc(var(--worldPad)*2);
+}
+.hold2 img{
+    width: 100%;
+}
+
+.whatWeHold h3{
+    padding: 0 var(--worldPad);
+}
+.theTeam{
+    padding: var(--worldPad);
+    text-align: center;
+}
+.freeCourse{
+    padding: var(--worldPad);
+}
+.vision{
+    padding: var(--worldPad);
+}
+.aboutIntro{
+    padding: var(--worldPad);
+}
 /*!****************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/footer.css ***!
   \****************************************************************************/
