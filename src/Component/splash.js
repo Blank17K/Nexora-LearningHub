@@ -1,14 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";  
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from "react-router-dom";
 
-export class Splash extends React.Component{
+export default class Splash extends React.Component{
     constructor(props){
         super(props);
     }
     render(){
         return(
             <div className="splashSec">
+
+                <Link to={"/login"} > Get Started </Link>
                 <div className="intro row">
                     <div className="text col-6">
                         <h1>Learn by building things that work.</h1>
