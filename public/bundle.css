@@ -109,89 +109,6 @@ a:hover {
     padding: 1rem;
 }
 /*!***************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/about.css ***!
-  \***************************************************************************/
-:root{
-    --primary: #fff;
-    --btnCol: #0F6B57;
-    --worldPad: 3rem;
-    --grey: #DDDDDD;
-    --cardCol: #004133;
-}
-.btnPos{
-    width: fit-content;
-}
-.aboutEngTxt{
-    text-align: right;
-    font-weight: bold;
-}
-.bannerAbt{
-    padding: var(--worldPad);
-    max-width: 100vw;
-}
-.bannerAbt img{
-    width: 100%;
-}
-.hold2{
-    max-width: 100vw;
-    padding: calc(var(--worldPad)*2);
-}
-.hold2 img{
-    width: 100%;
-}
-
-.whatWeHold h3{
-    padding: 0 var(--worldPad);
-}
-.theTeam{
-    padding: var(--worldPad);
-    text-align: center;
-}
-.freeCourse{
-    padding: var(--worldPad);
-}
-.vision{
-    padding: var(--worldPad);
-}
-.aboutIntro{
-    padding: var(--worldPad);
-}
-.freeCourse{
-    background-color: var(--cardCol);
-    color: var(--primary);
-}
-
-.btnCourse button{
-    background-color: var(--primary);
-    color: var(--cardCol);
-}
-/*!****************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/footer.css ***!
-  \****************************************************************************/
-:root{
-    --primary: #fff;
-    --btnCol: #0F6B57;
-    --padComp: 5vw;
-}
-.textHelp{
-    max-height: fit-content;
-    margin-bottom: 0;
-}
-.textHelp:hover{
-    text-decoration: underline;
-    cursor: pointer;
-}
-.signNewsP{
-    background-color: var(--btnCol);
-    color: var(--primary);
-}
-.footer{
-    padding: var(--padComp);
-}
-.logoFooter{
-    max-width: 100% ;
-}
-/*!***************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/Login.css ***!
   \***************************************************************************/
 :root {
@@ -499,4 +416,87 @@ a:hover {
     height: 100%;
     object-fit: cover;
     display: block;
+}
+/*!***************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/about.css ***!
+  \***************************************************************************/
+:root{
+    --primary: #fff;
+    --btnCol: #0F6B57;
+    --worldPad: 3rem;
+    --grey: #DDDDDD;
+    --cardCol: #004133;
+}
+.btnPos{
+    width: fit-content;
+}
+.aboutEngTxt{
+    text-align: right;
+    font-weight: bold;
+}
+.bannerAbt{
+    padding: var(--worldPad);
+    max-width: 100vw;
+}
+.bannerAbt img{
+    width: 100%;
+}
+.hold2{
+    max-width: 100vw;
+    padding: calc(var(--worldPad)*2);
+}
+.hold2 img{
+    width: 100%;
+}
+
+.whatWeHold h3{
+    padding: 0 var(--worldPad);
+}
+.theTeam{
+    padding: var(--worldPad);
+    text-align: center;
+}
+.freeCourse{
+    padding: var(--worldPad);
+}
+.vision{
+    padding: var(--worldPad);
+}
+.aboutIntro{
+    padding: var(--worldPad);
+}
+.freeCourse{
+    background-color: var(--cardCol);
+    color: var(--primary);
+}
+
+.btnCourse button{
+    background-color: var(--primary);
+    color: var(--cardCol);
+}
+/*!****************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/footer.css ***!
+  \****************************************************************************/
+:root{
+    --primary: #fff;
+    --btnCol: #0F6B57;
+    --padComp: 5vw;
+}
+.textHelp{
+    max-height: fit-content;
+    margin-bottom: 0;
+}
+.textHelp:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.signNewsP{
+    background-color: var(--btnCol);
+    color: var(--primary);
+}
+.footer{
+    padding: var(--padComp);
+}
+.logoFooter{
+    max-width: 100% ;
 }

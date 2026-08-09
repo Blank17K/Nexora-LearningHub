@@ -6,7 +6,7 @@ import logo from "../Assets/Images/Logo.png";
 import loginHero from "../Assets/Images/LoginHero.png";
 import { Link } from "react-router-dom";
 
-export class BackToSite extends React.Component {
+export default class BackToSite extends React.Component {
     constructor(props) {
         super(props);
     }

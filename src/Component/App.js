@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Splash from "./splash.js"; 
+import  BackToSite from "./backTosite.js";
 import  Header  from "./header.js";
 import  AboutUs  from "./AboutUs.js";
 import Footer  from "./footer.js";
@@ -21,7 +22,14 @@ function App() {
         } />}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/aboutus" element={
+            <>
+              <BackToSite />
+              <AboutUs />
+              <Footer/>
+            </>
+          
+          } />
 
       </Routes>
     </BrowserRouter>
