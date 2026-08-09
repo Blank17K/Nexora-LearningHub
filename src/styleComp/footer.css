@@ -1,0 +1,16 @@
+:root{
+    --primary: #fff;
+    --btnCol: #0F6B57;
+}
+.textHelp{
+    max-height: fit-content;
+    margin-bottom: 0;
+}
+.textHelp:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.signNewsP{
+    background-color: var(--btnCol);
+    color: var(--primary);
+}

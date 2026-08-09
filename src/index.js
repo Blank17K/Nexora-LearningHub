@@ -1,14 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";   
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+import { Header } from "./Component/header.js";
+import { Splash } from "./Component/splash.js";  
+import { Footer } from "./Component/footer.js";
 
-class Greeting extends React.Component{
+class IndexP extends React.Component{
     render(){
         return (
             <div>
-                Hey React
+                <Header />
+                <Splash />
+                <Footer />
             </div>
         );
     }
 }
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Greeting />);
+root.render(<IndexP />);
