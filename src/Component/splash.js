@@ -2,13 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";  
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styleComp/splash.css'
+import Header from "./header.js"; 
 
-export class Splash extends React.Component{
+export default class Splash extends React.Component{
     constructor(props){
         super(props);
     }
     render(){
         return(
+            <>
+            <Header />
             <div className="splashSec">
                 <div className="intro row">
                     <div className="text col-6 introText">
@@ -128,6 +131,8 @@ export class Splash extends React.Component{
                     </center>
                 </div>
             </div>
+
+            </>
         );
     }
 }
