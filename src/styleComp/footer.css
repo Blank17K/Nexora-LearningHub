@@ -1,6 +1,7 @@
 :root{
     --primary: #fff;
     --btnCol: #0F6B57;
+    --padComp: 5vw;
 }
 .textHelp{
     max-height: fit-content;
@@ -13,4 +14,10 @@
 .signNewsP{
     background-color: var(--btnCol);
     color: var(--primary);
+}
+.footer{
+    padding: var(--padComp);
+}
+.logoFooter{
+    max-width: 100% ;
 }

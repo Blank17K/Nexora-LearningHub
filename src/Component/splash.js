@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";  
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styleComp/splash.css'
 
 export class Splash extends React.Component{
     constructor(props){
@@ -10,26 +11,58 @@ export class Splash extends React.Component{
         return(
             <div className="splashSec">
                 <div className="intro row">
-                    <div className="text col-6">
+                    <div className="text col-6 introText">
                         <h1>Learn by building things that work.</h1>
                         <p>Short, practical courses in design, code and 3D — taught by people who ship. Start free, finish something real.</p>
-                        <button className="btn">Get Started for free</button>
-                        <button className="btn">Browse Categories <i className="lni lni-arrow-right"></i></button>
+                        <button className="btn strtBtn">Get Started for free</button>
+                        <button className="btn catBtn"><b>Browse Categories <i className="lni lni-arrow-right"></i></b></button>
                     </div>
-                    <div className="img col-6"></div>
+                    <img className="col-6 adImg" alt="advert Image" src="./media/imgs/Img1.svg"/>
                 </div>
                 <div className="banner">
-                    <img alt="banner"/>
+                    <img alt="banner" src="./media/imgs/banner1.svg"/>
                 </div>
                 <div className="popularClass">
                     <h3>Popular right now</h3>
                     <div className="popCards row">
-                        <div className="card col-4">
-                            <img src=".." className="card-img-top" alt="class picture"/>
+                        <div className="card col">
+                            <img src=".." className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
                             <div className="card-body">
                                 <div className="courseCat row">
-                                    <h6 className="card-subtitle mb-2 text-muted col-4">Bestseller</h6>
-                                    <h6 className="card-subtitle mb-2 text-muted col-4">Beginner</h6>
+                                    <h6 className="card-subtitle mb-2 text-muted col-4 best me-3">Bestseller</h6>
+                                    <h6 className="card-subtitle mb-2 text-muted col-4 begn">Beginner</h6>
+                                </div>
+                                <h5 className="card-title">RIZZ Masterclass 101</h5>
+                                <p className="card-text">Thabo Seripe</p>
+                                
+                            </div>
+                            <div className="row bottomText card-footer text-muted">
+                                <p className="col-9"><b>1.8</b> (1 204)</p>
+                                <p className="col-3">R3.50</p>
+                            </div>
+                        </div>
+                        <div className="card col ms-3 me-3">
+                            <img src=".." className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
+                            <div className="card-body">
+                                <div className="courseCat row">
+                                    <h6 className="card-subtitle mb-2 text-muted col-4 best me-3">Bestseller</h6>
+                                    <h6 className="card-subtitle mb-2 text-muted col-4 begn">Beginner</h6>
+                                </div>
+                                <h5 className="card-title">RIZZ Masterclass 101</h5>
+                                <p className="card-text">Thabo Seripe</p>
+                                
+                            </div>
+                            <div className="row bottomText card-footer text-muted">
+                                <p className="col-9"><b>1.8</b> (1 204)</p>
+                                <p className="col-3">R3.50</p>
+                            </div>
+                        </div>
+                        <div className="card col">
+                            <img src=".." className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
+                            <div className="card-body">
+                                <div className="courseCat row">
+                                    <h6 className="card-subtitle mb-2 text-muted col-4 best me-3">Bestseller</h6>
+                                    <h6 className="card-subtitle mb-2 text-muted col-4 begn">Beginner</h6>
                                 </div>
                                 <h5 className="card-title">RIZZ Masterclass 101</h5>
                                 <p className="card-text">Thabo Seripe</p>
@@ -43,16 +76,40 @@ export class Splash extends React.Component{
                     </div>
                 </div>
                 <div className="banner">
-                    <img alt="banner"/>
+                    <img alt="banner" src="./media/imgs/banner2.svg"/>
                 </div>
                 <div className="row theMovement">
                     <h3>Be part of a movement of learners changing their lives every day.</h3>
-                    <div className="card col-4">
+                    <div className="card col">
                         <div className=" card-body">
                             <p>Nexora gives you the ability to be persistent. I learned exactly what I needed to know in the real world. It helped me sell myself to get a new role.</p>
                             <div className=" row">
-                                <img className="col-4" alt="user"/>
-                                <div className="col-8">
+                                <img className="col-3" alt="user" src="./media/imgs/engLogo.svg"/>
+                                <div className="col-9 txtCardMove">
+                                    <p><b>Thabo Syrup</b></p>
+                                    <p><sub><i>Prompt engineer at UP</i></sub></p>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="card col ms-3 me-3">
+                        <div className=" card-body">
+                            <p>Nexora gives you the ability to be persistent. I learned exactly what I needed to know in the real world. It helped me sell myself to get a new role.</p>
+                            <div className=" row">
+                                <img className="col-3" alt="user" src="./media/imgs/engLogo.svg"/>
+                                <div className="col-9 txtCardMove">
+                                    <p><b>Thabo Syrup</b></p>
+                                    <p><sub><i>Prompt engineer at UP</i></sub></p>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="card col">
+                        <div className=" card-body">
+                            <p>Nexora gives you the ability to be persistent. I learned exactly what I needed to know in the real world. It helped me sell myself to get a new role.</p>
+                            <div className=" row">
+                                <img className="col-3" alt="user" src="./media/imgs/engLogo.svg"/>
+                                <div className="col-9 txtCardMove">
                                     <p><b>Thabo Syrup</b></p>
                                     <p><sub><i>Prompt engineer at UP</i></sub></p>
                             </div>
@@ -60,14 +117,14 @@ export class Splash extends React.Component{
                         </div>
                     </div>
                 </div>
-                <div className="row freeTrail">
-                    <div className="col-6">
-                        <img alt="freeTrail"/>
+                <div className="row freeTrail align-items-center justify-content-center">
+                    <div className="col-4 justify-item-end">
+                        <img alt="freeTrail" src="./media/imgs/free_course.svg"/>
                     </div>
-                    <center className="col-6">
+                    <center className="col-4">
                         <h2>Start with one free course.</h2>
                         <p>Create an account in under thirty seconds.</p>
-                        <button className="btn">Get Started for free</button>
+                        <button className="btn freeTrailBtn">Get Started for free</button>
                     </center>
                 </div>
             </div>
