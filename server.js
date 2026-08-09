@@ -16,7 +16,7 @@ app.get("/", (req,res)=>{
 });
 
 app.get('/{*splat}', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.join(ROOT, 'public', 'index.html'));
 });
 
 app.listen(PORT, ()=>{

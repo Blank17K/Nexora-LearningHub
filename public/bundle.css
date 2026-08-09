@@ -79,14 +79,6 @@
     background-color: var(--primary);
     color: var(--cardCol);
 }
-
-a {
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
 /*!****************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/header.css ***!
   \****************************************************************************/
@@ -107,6 +99,32 @@ a:hover {
 }
 .header{
     padding: 1rem;
+}
+/*!****************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/footer.css ***!
+  \****************************************************************************/
+:root{
+    --primary: #fff;
+    --btnCol: #0F6B57;
+    --padComp: 5vw;
+}
+.textHelp{
+    max-height: fit-content;
+    margin-bottom: 0;
+}
+.textHelp:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.signNewsP{
+    background-color: var(--btnCol);
+    color: var(--primary);
+}
+.footer{
+    padding: var(--padComp);
+}
+.logoFooter{
+    max-width: 100% ;
 }
 /*!***************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/Login.css ***!

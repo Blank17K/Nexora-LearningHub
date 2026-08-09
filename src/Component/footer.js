@@ -42,7 +42,7 @@ export class Footer extends React.Component{
                     <p className="col"><b>Terms</b></p>
                     <p className="col"><b>Privacy</b></p>
                     <p className="col"><b>Help</b></p>
-                    <p className="col"><b><i class="lni lni-globe-1"></i>English</b></p>
+                    <p className="col"><b><i className="lni lni-globe-1"></i>English</b></p>
                 </div>
             </div>
         );
