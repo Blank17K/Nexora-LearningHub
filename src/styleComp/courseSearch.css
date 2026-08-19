@@ -1,0 +1,50 @@
+:root{
+    --primary: #fff;
+    --btnCol: #0F6B57;
+    --worldPad: 3rem;
+    --grey: #DDDDDD;
+    --cardCol: #004133;
+}
+.corseT p{
+    color: #a9acab;
+}
+.corseT p span{
+    color: var(--btnCol);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.courseSearchComp{
+    padding: 2rem 5rem;
+}
+.active{
+    color: var(--primary) !important;
+    background-color: var(--cardCol) !important;
+}
+.catBtn{
+    border: solid 1px var(--cardCol);
+    border-radius:2rem;
+    margin: 0 .25rem;
+}
+.form-select{
+    max-width: fit-content;
+    border-radius: 2rem;
+    padding: .5rem 2rem;
+    border: solid 1px var(--cardCol);
+}
+.inputSearch{
+    margin-top: 1rem;
+}
+.inputSearch input{
+    padding: .5rem 1rem;
+    border-radius: 2rem;
+    border: solid 2px var(--cardCol);
+}
+.inputSearch p{
+    font-weight: bold;
+}
+.btnOrder{
+    margin-top: 1rem;
+}
+.btnOrder select{
+    margin: 0 0.5rem;
+}

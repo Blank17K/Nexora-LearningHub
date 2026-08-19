@@ -1,3 +1,6 @@
+*{
+    margin: 0;
+}
 :root{
     --primary: #fff;
     --btnCol: #0F6B57;

@@ -8,6 +8,7 @@ import  AboutUs  from "./AboutUs.js";
 import Footer  from "./footer.js";
 import Login from "./Login.js"; 
 import SignUp from "./SignUp.js";
+import Course from "./Course.js";
 
 function App() {
   return (
@@ -29,6 +30,13 @@ function App() {
               <Footer/>
             </>
           
+          } />
+          <Route path="/courses" element={
+            <>
+              <Header/>
+              <Course/>
+              <Footer/>
+            </>
           } />
 
       </Routes>
