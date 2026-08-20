@@ -1,0 +1,17 @@
+:root{
+    --primary: #fff;
+    --btnCol: #0F6B57;
+    --worldPad: 3rem;
+    --grey: #DDDDDD;
+    --cardCol: #004133;
+}
+.fill{
+    margin-top: 3rem;
+}
+.fill label{
+    padding-left: .5rem;
+}
+label sub{
+    color: var(--btnCol);
+    font-weight: bold;
+}

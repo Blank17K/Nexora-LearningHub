@@ -15,7 +15,7 @@ export default class CourseSearch extends React.Component{
 
     render(){
         return(
-            <div className="courseSearchComp">
+            <div className="">
                 <span className="row align-items-end corseT">
                     <h1 className="col-3">All Courses: </h1>
                     <p className="col"><span>{this.state.totalCourses+" courses   "}</span>every one ends with something you built</p>
@@ -39,7 +39,7 @@ export default class CourseSearch extends React.Component{
                         <option value="3">Three</option>
                     </select>
                 </div>
-                <div className="row btnOrder justify-content-end">
+                {/*<div className="row btnOrder justify-content-end">
                     <div className="col-3"></div>
                     <select className="col form-select" >
                         <option selected>Topic: All</option>
@@ -65,7 +65,7 @@ export default class CourseSearch extends React.Component{
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
-                </div>
+                </div>*/}
             </div>
         );
     }

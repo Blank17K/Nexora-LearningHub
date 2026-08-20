@@ -556,3 +556,23 @@ a:hover {
 .btnOrder select{
     margin: 0 0.5rem;
 }
+/*!********************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/sideFilter.css ***!
+  \********************************************************************************/
+:root{
+    --primary: #fff;
+    --btnCol: #0F6B57;
+    --worldPad: 3rem;
+    --grey: #DDDDDD;
+    --cardCol: #004133;
+}
+.fill{
+    margin-top: 3rem;
+}
+.fill label{
+    padding-left: .5rem;
+}
+label sub{
+    color: var(--btnCol);
+    font-weight: bold;
+}
