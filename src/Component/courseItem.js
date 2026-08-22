@@ -23,7 +23,7 @@ export default class CourseItem extends React.Component{
                         <div className="banner row">
                             <p className="ban">{this.course.banner.type}</p>
                             <p className="ban ms-2 me-2">{this.course.banner.courseClass}</p>
-                            <p className="ban">{this.course.banner.hours}</p>
+                            <p className="ban">{this.course.banner.hours}h</p>
                             <p className="col auth">{this.course.author}</p>
                         </div>
                     </div>
