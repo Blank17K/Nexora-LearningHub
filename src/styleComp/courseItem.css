@@ -1,0 +1,49 @@
+.courseList{
+    max-height:90rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin: 0;
+    padding-top: var(--worldPad);
+}
+:root{
+    --primary: #fff;
+    --btnCol: #0F6B57;
+    --worldPad: 3rem;
+    --grey: #c9c9c9;
+    --cardCol: #004133;
+}
+.courseItem{
+    margin-top: 2rem;
+}
+.courseItem img{
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    height: 9rem;
+    padding: .25rem .5rem;
+}
+.courseContent div h6{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.courseContent .descrip{
+    font-size: .75rem;
+}
+.rating{
+    font-weight: bold;
+    color: var(--cardCol);
+}
+.rating span{
+    color: var(--grey);
+}
+.ban{
+    width: fit-content;
+    text-align: center;
+    padding: .25rem 1rem;
+    font-size: .75rem;
+    background-color: var(--cardCol);
+    color: var(--primary);
+    border-radius: 3rem;
+}
+.priceItem{
+    font-weight: bold;
+}
