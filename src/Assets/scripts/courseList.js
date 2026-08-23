@@ -20,7 +20,7 @@ let coursesInfo = [
     },
     {
         name: "Python Data Science & Machine Learning",
-        author: "Dr. Michael Chen",
+        author: "Michael Chen",
         description: "Complete guide to data science using Python. Covers NumPy, Pandas, Matplotlib, and scikit-learn with real-world projects.",
         imgPath: python,
         rating: 4.9,
