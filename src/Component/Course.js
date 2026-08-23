@@ -11,7 +11,7 @@ export default class Course extends React.Component {
     super(props);
     this.state = {
       searchQuery: "",
-      filterArr: courseInfo,
+      // filterArr: courseInfo,
     };
     this.courses = coursesInfo;
   }
@@ -37,8 +37,8 @@ export default class Course extends React.Component {
   addCourses(filteredCourses) {
     return filteredCourses.map((course, index) => {
       return (
-        <div key={course.id || index}>
-          <Link to={`/course/${course.id}`}>
+        <div className="individualCourse" key={course.id || index}>
+          <Link to={`/course/${course.name}`}>
             <CourseItem course={course} />
             <hr />
           </Link>
@@ -71,7 +71,17 @@ export default class Course extends React.Component {
         <div className="row">
           <SideFilter />
           <div className="col courseList">
-            {filteredCourses.length > 0 (this.addCourses(filteredCourses))}
+            {filteredCourses.length > 0 ? (
+              this.addCourses(filteredCourses)
+            ) : (
+              <div>
+                <h4>No courses found matching "{this.state.searchQuery}"</h4>
+                <p>Try checking for typos </p>
+                <button className="clearSearch" onClick={() => this.handleSearchChange("")}>
+                  Clear Search
+                </button>
+              </div>
+            )}
             {/* {this.addCourses()} */}
           </div>
         </div>

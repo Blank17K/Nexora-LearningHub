@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import "../styleComp/coursecard.css"
 
-export default function CourseCard({ course }) {
+export default function CourseCard({ course, scrollToTop }) {
 
   return (
     <Link
       to={`/course/${encodeURIComponent(course.name)}`}
       className="CourseCard"
+      onClick={() => scrollToTop()}
     >
       <img className="CourseCardImg" src={course.imgPath} alt={course.name} />
 

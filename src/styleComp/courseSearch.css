@@ -48,3 +48,13 @@
 .btnOrder select{
     margin: 0 0.5rem;
 }
+
+.clearSearch{
+    background-color: #0f6b57;
+    border: none;
+    color: white;
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 5px 20px;
+}

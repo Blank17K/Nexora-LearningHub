@@ -44,9 +44,8 @@ export default class CourseSearch extends React.Component {
           <p className="col-1 ms-2">{`${totalResults} Results`}</p>
           <select className="col-3 ms-4 form-select">
             <option selected>Sort: Most Popular</option>
-            <option value="1">Highest Rated</option>
-            <option value="2">Newest</option>
-            <option value="3">Three</option>
+            <option value="high_rating">Highest Rated</option>
+            <option value="newest">Newest</option>
           </select>
         </div>
         {/*<div className="row btnOrder justify-content-end">

@@ -14,7 +14,7 @@ export default class CourseItem extends React.Component{
     render(){
         return(
             <div className="courseItem row">
-                <img src={this.course.imgPath} className="col-3 align-self-center" alt="courseImg"/>
+                <img src={this.course.imgPath} className="col-3 align-self-center courseItemImage" alt="courseImg" />
                 <div className="courseContent col row">
                     <div className="col-8">
                         <h6>{this.course.name}</h6>

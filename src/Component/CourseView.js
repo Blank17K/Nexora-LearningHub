@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import coursesInfo from "../Assets/scripts/courseList.js";
 import CourseCard from "./CourseCard.js";
 
-const seeds = ["Sophie", "Felix","Aneka" ,"Milo", "Luna"];
+const seeds = ["Sophie", "Felix", "Aneka", "Milo", "Luna"];
 
 const profileLink = "https://api.dicebear.com/10.x/lorelei/svg?seed=";
 
@@ -21,6 +21,14 @@ export default function CourseView() {
 
   //   const relatedCourses = getRandomCourses(coursesInfo, 4, course.name);
   //   const instructorCourses = getRandomCourses(coursesInfo, 4, course.name);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 10,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
     const currentCourse = coursesInfo.find(
@@ -153,7 +161,10 @@ export default function CourseView() {
 
             <div className="InstructorCard">
               <div className="InstructorAvatar">
-                <img src={profileLink + seeds[Math.floor(Math.random() * 5)]} alt={seeds[Math.floor(Math.random() * 5)]}/>
+                <img
+                  src={profileLink + seeds[Math.floor(Math.random() * 5)]}
+                  alt={seeds[Math.floor(Math.random() * 5)]}
+                />
               </div>
               <div>
                 <h4>{course.author}</h4>
@@ -254,7 +265,7 @@ export default function CourseView() {
             .filter((c) => c.name !== course.name)
             .splice(0, 4)
             .map((c) => (
-              <CourseCard key={c.name} course={c} />
+              <CourseCard key={c.name} course={c} scrollToTop={scrollToTop} />
             ))}
         </div>
       </div>
@@ -269,7 +280,7 @@ export default function CourseView() {
             .filter((c) => c.name !== course.name)
             .splice(5, 9)
             .map((c) => (
-              <CourseCard key={c.name} course={c} />
+              <CourseCard key={c.name} course={c} scrollToTop={scrollToTop} />
             ))}
         </div>
       </div>
