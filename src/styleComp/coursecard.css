@@ -1,0 +1,121 @@
+.RelatedCoursesSection,
+.OtherByInstructorSection {
+    margin-top: 48px;
+}
+
+.SectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+
+    h2 {
+        margin: 0;
+    }
+
+    a {
+        color: #0f6b57;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+    }
+}
+
+.CourseCardGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.CourseCard {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #a4bba8;
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.15s ease;
+}
+
+.CourseCard:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.CourseCardImg {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
+.CourseCardBody {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.CourseCardBadges {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.BadgeBestseller,
+.BadgeClass {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 50px;
+}
+
+.BadgeBestseller {
+    background-color: #0f6b57;
+    color: white;
+}
+
+.BadgeClass {
+    background-color: #ddd697;
+    color: #575337;
+}
+
+.CourseCard h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.3;
+}
+
+.CourseCardDescr {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #666;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.CourseCardAuthor {
+    margin: 4px 0 0;
+    font-size: 0.8rem;
+    color: #444;
+}
+
+.CourseCardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+    font-size: 0.85rem;
+}
+
+.CourseCardRating {
+    color: #0f6b57;
+    font-weight: 600;
+}
+
+.CourseCardPrice {
+    font-weight: 700;
+}

@@ -18,7 +18,7 @@ export default class CourseItem extends React.Component{
                 <div className="courseContent col row">
                     <div className="col-8">
                         <h6>{this.course.name}</h6>
-                        <p className="descrip">{this.course.description}</p>
+                        <p className="descrip">{this.course.description.slice(0, 122)}...</p>
                         <p className="rating">{this.course.rating} <span>({this.course.userNo})</span></p>
                         <div className="banner row">
                             <p className="ban">{this.course.banner.type}</p>
