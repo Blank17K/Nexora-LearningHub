@@ -9,6 +9,7 @@ import Footer  from "./footer.js";
 import Login from "./Login.js"; 
 import SignUp from "./SignUp.js";
 import Course from "./Course.js";
+import CourseView from "./CourseView.js";
 
 function App() {
   return (
@@ -35,6 +36,13 @@ function App() {
             <>
               <Header/>
               <Course/>
+              <Footer/>
+            </>
+          } />
+          <Route path="/course/:name" element={
+            <>
+              <Header/>
+              <CourseView/>
               <Footer/>
             </>
           } />

@@ -1,0 +1,504 @@
+.CourseView {
+    padding: 0 100px;
+}
+
+.CourseViewDescr {
+    display: flex;
+    gap: 20px;
+    font-weight: 600;
+
+    p {
+        background-color: #0f6b57;
+        padding: 5px 10px;
+        border-radius: 50px;
+        color: white;
+    }
+
+    p:nth-child(2) {
+        background-color: #ddd697;
+        color: #575337;
+
+    }
+
+    p:nth-child(3) {
+        background-color: #77d3bf;
+        color: #1c5b4e;
+    }
+
+}
+
+.CourseViewColumn {
+    /* border: 1px red solid; */
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    position: relative;
+    gap: 50px;
+}
+
+.leftColumn {
+    /* background-color: rgb(8, 16, 124); */
+    /* height: 1000px; */
+
+    h1 {
+        font-weight: 700;
+    }
+
+}
+
+.rightColumn {
+    /* background-color: rgb(0, 126, 19); */
+}
+
+.StickyCard {
+    position: sticky;
+    margin: 0 auto;
+    top: 20px;
+    /* width: 100%; */
+    max-width: 90%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #a4bba8;
+    border-radius: 24px;
+    padding: 20px;
+
+    img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 16px;
+        background-color: #222;
+        margin-bottom: 8px;
+    }
+}
+
+.StickyCardPrice {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+
+    h3 {
+        margin: 0;
+        font-size: 2.5rem;
+        color: #004133;
+        font-weight: 800;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #666;
+        font-weight: 500;
+    }
+}
+
+.StickyCarDBtn {
+    background-color: #004133;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.StickyCarDBtn:hover {
+    opacity: 0.9;
+}
+
+.StickyCardBtn2 {
+    background-color: white;
+    color: black;
+    text-align: center;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #b3b3b3;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.StickyCardBtn2:hover {
+    background-color: #f5f5f5;
+}
+
+.StickyCardDescr {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 8px;
+    padding-top: 20px;
+    font-size: 0.85rem;
+    line-height: 2;
+
+    div:first-child p {
+        margin: 0;
+        font-weight: 700;
+        color: #000;
+    }
+
+    div:last-child p {
+        margin: 0;
+        color: #666;
+        text-align: right;
+    }
+}
+
+.whitespace {
+    height: 1500px;
+    background-color: #675b5b;
+}
+
+.CourseViewAuthorDescr {
+    display: flex;
+    flex-direction: row;
+
+    h4 {
+        color: #004133;
+    }
+
+    p {}
+}
+
+.CourseViewSubtitle {
+    color: #555;
+    font-size: 20px;
+    line-height: 1.5;
+    margin: 8px 0 16px;
+    font-weight: 400;
+}
+
+.CourseViewAuthorDescr {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #000000;
+
+    span::nth-child(2) {
+        color: #444;
+    }
+
+
+
+}
+
+.RatingBadge {
+    font-weight: 700;
+    color: #0f6b57;
+}
+
+.CourseBanner {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 28px;
+}
+
+.WhatYoullLearn {
+    margin-bottom: 24px;
+
+    h2 {
+        margin-bottom: 12px;
+    }
+}
+
+.LearnGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+
+    p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+
+    .Check {
+        color: #0f6b57;
+        font-weight: 700;
+    }
+}
+
+.WhatYoullBuild {
+    display: flex;
+    gap: 14px;
+    background-color: #004133;
+    color: white;
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-bottom: 28px;
+
+    h4 {
+        margin: 0 0 4px;
+        color: white;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+}
+
+.WhatYoullBuildIcon {
+    font-size: 1.6rem;
+}
+
+.CourseContentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+
+    p {
+        color: #666;
+        font-size: 0.85rem;
+    }
+}
+
+.CourseModule {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+.CourseModuleHeader {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background: #cee8e2;
+    border: none;
+    padding: 14px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.Arrow {
+    display: inline-block;
+    transition: transform 0.15s ease;
+}
+
+.Arrow.open {
+    transform: rotate(180deg);
+}
+
+.CourseModuleLessons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 16px 10px 32px;
+        font-size: 0.85rem;
+        color: #444;
+        border-top: 1px solid #eee;
+    }
+}
+
+.SeeAllContent {
+    text-align: center;
+    background-color: #004133;
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 20px auto;
+    width: 20%;
+
+}
+
+.CourseExtras {
+    margin-top: 32px;
+}
+
+.ForAndBefore {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #e0e0e0;
+
+    h3 {
+        margin: 0 0 12px;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        position: relative;
+        padding-left: 18px;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        color: #333;
+    }
+
+    li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #333;
+    }
+}
+
+.InstructorCard {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 28px 0;
+    border-bottom: 1px solid #e0e0e0;
+
+    h4 {
+        margin: 0 0 4px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #555;
+    }
+}
+
+.InstructorAvatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #e5e5e5;
+    flex-shrink: 0;
+}
+
+.InstructorStats {
+    margin-top: 4px !important;
+    color: #777 !important;
+}
+
+.RatingBreakdown {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    padding: 28px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.RatingBig {
+    text-align: center;
+    flex-shrink: 0;
+
+    h2 {
+        font-size: 3rem;
+        margin: 0;
+        color: #004133;
+    }
+
+    p {
+        margin: 0;
+        color: #666;
+        font-size: 0.85rem;
+    }
+}
+
+.RatingBars {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.RatingBarRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+
+    span {
+        width: 32px;
+        flex-shrink: 0;
+    }
+}
+
+.RatingBarTrack {
+    flex: 1;
+    height: 8px;
+    background-color: #e8e3d3;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.RatingBarFill {
+    height: 100%;
+    background-color: #0f6b57;
+    border-radius: 4px;
+}
+
+.ReviewsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 28px 0 16px;
+
+    a {
+        color: #0f6b57;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+    }
+}
+
+.ReviewsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.ReviewCard {
+    border: 1px solid #0f6b57;
+    border-radius: 12px;
+    padding: 16px;
+
+    p {
+        margin: 8px 0 0;
+        font-size: 0.85rem;
+        color: #333;
+    }
+}
+
+.ReviewCardHeader {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    h4 {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+}
+
+.ReviewAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #e5e5e5;
+    flex-shrink: 0;
+}
+
+.ReviewStars {
+    color: #0f6b57;
+    font-size: 0.85rem;
+}
