@@ -33,7 +33,7 @@ This project includes several npm scripts to help you develop and run the applic
 ### Start the Application (Build & Run)
 To compile the frontend/backend code and start the Express server, run:
 ```bash
-npm start
+npm run start
 ```
 *Behind the scenes: This runs Webpack to bundle your client-side code, uses Babel to compile `server.js` into the `dist` directory, and then executes `node dist/server.js`.*
 
