@@ -39,7 +39,7 @@ function App() {
               <Footer/>
             </>
           } />
-          <Route path="/course/:name" element={
+          <Route path="/course/:id" element={
             <>
               <Header/>
               <CourseView/>

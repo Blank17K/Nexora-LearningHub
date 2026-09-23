@@ -11,13 +11,15 @@ export default class Course extends React.Component {
     super(props);
     this.state = {
       searchQuery: "",
-      filterArr: courseInfo,
+      filterArr: coursesInfo,
+      showAll:false,
+
     };
     this.courses = coursesInfo;
   }
 
   handleSearchChange = (query) => {
-    this.setState({ searchQuery: query });
+    this.setState({ searchQuery: query,showAll:false });
   };
 
   getFilteredCourses = () => {
@@ -35,16 +37,30 @@ export default class Course extends React.Component {
   };
 
   addCourses(filteredCourses) {
-    return filteredCourses.map((course, index) => {
-      return (
-        <div key={course.id || index}>
-          <Link to={`/course/${course.id}`}>
-            <CourseItem course={course} />
-            <hr />
-          </Link>
-        </div>
-      );
-    });
+
+    if(this.state.showAll == true )
+      return filteredCourses.map((course, index) => {
+        return (
+          <div key={index}>
+            <Link to={`/course/${course.id}`}>
+              <CourseItem course={course} />
+              <hr />
+            </Link>
+          </div>
+        );
+      });
+    else
+      return filteredCourses.map((course, index) => {
+        if(index<filteredCourses.length/2)
+        return (
+          <div key={index}>
+            <Link to={`/course/${course.id}`}>
+              <CourseItem course={course} />
+              <hr />
+            </Link>
+          </div>
+        );
+      });
     // let courseReturn = this.courses.map((course, index) => {
     //   return (
     //     <>
@@ -71,9 +87,10 @@ export default class Course extends React.Component {
         <div className="row">
           <SideFilter />
           <div className="col courseList">
-            {filteredCourses.length > 0 (this.addCourses(filteredCourses))}
-            {/* {this.addCourses()} */}
+            {filteredCourses.length > 0 ?(this.addCourses(filteredCourses)):''}
+            {/*this.addCourses(this.state.filterArr) */}
           </div>
+          {this.state.showAll == false?<center><button className="btn showAll" onClick={()=>{this.setState({showAll:true})}}>Show All:{this.state.filterArr.length}</button></center>:''}
         </div>
       </div>
     );

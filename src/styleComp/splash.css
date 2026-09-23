@@ -76,3 +76,17 @@ a {
 a:hover {
   text-decoration: underline;
 }
+center{
+    height: 4rem;
+}
+.showAll{
+    background-color: var(--cardCol);
+    color: var(--primary);
+    width: fit-content;
+    transition: .35s;
+}
+.showAll:hover{
+    background-color: var(--primary);
+    color: var(--cardCol);
+    border: solid 3px var(--cardCol);
+}

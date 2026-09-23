@@ -87,6 +87,20 @@ a {
 a:hover {
   text-decoration: underline;
 }
+center{
+    height: 4rem;
+}
+.showAll{
+    background-color: var(--cardCol);
+    color: var(--primary);
+    width: fit-content;
+    transition: .35s;
+}
+.showAll:hover{
+    background-color: var(--primary);
+    color: var(--cardCol);
+    border: solid 3px var(--cardCol);
+}
 /*!****************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/header.css ***!
   \****************************************************************************/
@@ -580,8 +594,6 @@ label sub{
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/courseItem.css ***!
   \********************************************************************************/
 .courseList{
-    max-height:90rem;
-    overflow-y: scroll;
     overflow-x: hidden;
     margin: 0;
     padding-top: var(--worldPad);

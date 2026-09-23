@@ -9,7 +9,7 @@ const seeds = ["Sophie", "Felix","Aneka" ,"Milo", "Luna"];
 const profileLink = "https://api.dicebear.com/10.x/lorelei/svg?seed=";
 
 export default function CourseView() {
-  const { name } = useParams();
+  const { id } = useParams();
   const [course, setCourse] = useState(null);
   const [openModule, setOpenModule] = useState(0);
 
@@ -23,11 +23,9 @@ export default function CourseView() {
   //   const instructorCourses = getRandomCourses(coursesInfo, 4, course.name);
 
   useEffect(() => {
-    const currentCourse = coursesInfo.find(
-      (c) => c.name === decodeURIComponent(name),
-    );
+    const currentCourse = coursesInfo[id-1]
     setCourse(currentCourse);
-  }, [name]);
+  }, [id, coursesInfo]);
 
   if (!course) {
     return <div>Loading or Course Not Found...</div>;

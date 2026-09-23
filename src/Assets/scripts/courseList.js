@@ -94,13 +94,8 @@ let coursesInfo = [
     {
         id: 2,
         name: "Python Data Science & Machine Learning",
-<<<<<<< HEAD
         author: "Michael Chen",
         description: "Complete guide to data science using Python. Covers NumPy, Pandas, Matplotlib, and scikit-learn with real-world projects.",
-=======
-        author: "Dr. Michael Chen",
-        description: "Complete guide to data science using Python. Covers NumPy, Pandas, Matplotlib, and scikit-learn with real-world projects. You'll start with the fundamentals of array-based computing and dataframe manipulation before moving into exploratory data analysis, feature engineering, and model evaluation. Along the way you'll train classification and regression models, tune hyperparameters, and learn how to avoid common pitfalls like data leakage and overfitting. The course finishes with a capstone project where you clean a messy real-world dataset, build a predictive model, and present your findings with clear, well-designed visualizations.",
->>>>>>> b76864de785433391a1a652aac901cac32e8a239
         imgPath: python,
         rating: 4.9,
         userNo: 18320,
