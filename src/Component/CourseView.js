@@ -249,10 +249,10 @@ export default function CourseView() {
         </div>
         <div className="CourseCardGrid">
           {coursesInfo
-            .filter((c) => c.name !== course.name)
+            .filter((c) => c.id !== course.id)
             .splice(0, 4)
             .map((c) => (
-              <CourseCard key={c.name} course={c} />
+              <CourseCard key={c.id} course={c} />
             ))}
         </div>
       </div>
@@ -264,10 +264,10 @@ export default function CourseView() {
         </div>
         <div className="CourseCardGrid">
           {coursesInfo
-            .filter((c) => c.name !== course.name)
+            .filter((c) => c.id !== course.id)
             .splice(5, 9)
             .map((c) => (
-              <CourseCard key={c.name} course={c} />
+              <CourseCard key={c.id} course={c} />
             ))}
         </div>
       </div>

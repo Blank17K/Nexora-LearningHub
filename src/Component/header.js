@@ -7,6 +7,31 @@ import { Link } from "react-router-dom";
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
+
+  }
+  getIfLoggedIn(){
+    if(this.props.user == null){
+      return (
+        <>  
+          <button className="btn SignUpButt col-1 me-2">
+            <Link to={"/signup"}>Sign Up</Link>
+          </button>
+          <button className="btn LoginButt col-1 ">
+            <Link to={"/login"}>Login</Link>
+          </button>
+        </>
+      );
+    }
+    else{
+      return(
+        <>
+          <div className="user col">
+            <div className="userImg"></div>
+            <p>{this.props.user.name}</p>
+          </div>
+        </>
+      );
+    }
   }
 
   render() {
@@ -20,12 +45,8 @@ export default class Header extends React.Component {
         </div>
         <div className="col-6 browseTxt"><Link to={"/courses"}>Browse</Link></div>
         {/* <div className="col-6 browseTxt">Browse</div> */}
-        <button className="btn SignUpButt col-1 me-2">
-          <Link to={"/signup"}>Sign Up</Link>
-        </button>
-        <button className="btn LoginButt col-1 ">
-          <Link to={"/login"}>Login</Link>
-        </button>
+        
+        {this.getIfLoggedIn()}
       </div>
     );
   }

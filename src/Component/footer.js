@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";  
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styleComp/footer.css';
+import logo from '../media/imgs/Banners/Sign Up/Logo.png'
 import { Link } from "react-router-dom";
 
 export default class Footer extends React.Component{
@@ -14,7 +15,7 @@ export default class Footer extends React.Component{
         return(
             <div className="footer row">
                 <div className="col-6">
-                    <span className="row align-items-center"><img alt="logo" src="./media/imgs/logo.svg" className="col-2 logoFooter"/><p className="col">Nexora</p></span>
+                    <span className="row align-items-center"><img alt="logo" src={logo} className="col-2 logoFooter"/><p className="col">Nexora</p></span>
                     <p>Practical courses for people who'd rather build than watch.</p>
                     <h5>Sign up to our newsletter</h5>
                     <p>Email Address</p>

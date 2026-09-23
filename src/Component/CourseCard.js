@@ -5,7 +5,7 @@ export default function CourseCard({ course }) {
 
   return (
     <Link
-      to={`/course/${encodeURIComponent(course.name)}`}
+      to={`/course/${encodeURIComponent(course.id)}`}
       className="CourseCard"
     >
       <img className="CourseCardImg" src={course.imgPath} alt={course.name} />
