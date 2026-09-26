@@ -25,9 +25,10 @@ export default class Header extends React.Component {
     else{
       return(
         <>
-          <div className="user col">
-            <div className="userImg"></div>
-            <p>{this.props.user.name}</p>
+          <div className="user col row align-items-center">
+            <p className="col-6 userName">{this.props.user.name}</p>
+            <div className="userImg col"></div>
+            <button className="btn logout col ms-2" onClick={this.props.logout}>Logout</button>
           </div>
         </>
       );

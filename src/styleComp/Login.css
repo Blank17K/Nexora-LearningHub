@@ -95,6 +95,11 @@
     color: var(--nexora-muted);
     font-size: 14px;
 }
+.erorrSub{
+    argin: 0 0 24px;
+    color: red;
+    font-size: 14px;
+}
 
 .tabSwitch {
     display: flex;

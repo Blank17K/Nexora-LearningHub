@@ -4,17 +4,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styleComp/courseSearch.css";
 
 export default class CourseSearch extends React.Component {
-  // constructor(props){
-  //     super(props);
-  //     this.state = {
-  //         totalCourses: 0,
-  //         active: ["active","","","","",""]
-  //     };
+  constructor(props){
+       super(props);
+       this.state = {
+          sortBy:''
+      };
+    }
 
-  // }
-
+  handleChange(e){
+    const value = e.target.value;
+    console.log(value);
+    this.setState({sortBy:value});
+    //onSortChange?.(value); // notify parent if needed
+  }
   render() {
-    const { searchQuery, onSearchChange, totalResults } = this.props;
+    const { searchQuery, onSearchChange, totalResults, onSort,fillArray } = this.props;
     return (
       <div className="">
         <span className="row align-items-end corseT">
@@ -42,11 +46,16 @@ export default class CourseSearch extends React.Component {
             onChange={(e) => onSearchChange(e.target.value)}
           />
           <p className="col-1 ms-2">{`${totalResults} Results`}</p>
-          <select className="col-3 ms-4 form-select">
-            <option selected>Sort: Most Popular</option>
-            <option value="1">Highest Rated</option>
-            <option value="2">Newest</option>
-            <option value="3">Three</option>
+          <select
+            className="col-3 ms-4 form-select"
+            //value={this.state.sortBy}
+            onChange={async (e)=>{ await this.handleChange(e)
+              onSort(this.state.sortBy);
+            }}
+          >
+            <option value="MP">Sort: Most Popular</option>
+            <option value="HR">Highest Rated</option>
+            <option value="P">Price</option>
           </select>
         </div>
         {/*<div className="row btnOrder justify-content-end">

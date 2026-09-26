@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../Assets/Images/Logo.png";
 import loginHero from "../Assets/Images/LoginHero.png";
 import "../styleComp/Login.css";
 
-export default function Login() {
+export default function Login(props) {
+  console.log(props);
   const [activeTab, setActiveTab] = useState("login"); // 'login' | 'register'
   const [showPassword, setShowPassword] = useState(false);
   const [keepSignedIn, setKeepSignedIn] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
-
+  const [error, setError] = useState('');
+  const logIn = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -20,6 +23,21 @@ export default function Login() {
 
     console.log("Logging in with", form, "Keep signed in:", keepSignedIn);
   };
+
+  const validate = (email,password)=>{
+    const valU = (props.users.find((user)=> email == user.email));
+    if(email != valU.email || password != valU.password){
+        setError('*Check password or email if correct');
+        return;
+      }
+    else{
+      setError('');
+    }
+    const activeU = props.users.find((user)=> email == user.email);
+    console.log("Made It");
+    props.updateU(activeU);
+    logIn('/courses');
+  }
 
   return (
     <div className="logInBody">
@@ -39,7 +57,7 @@ export default function Login() {
           <div className="loginContent">
             <h1 className="welcomeTitle">Welcome back</h1>
             <p className="welcomeSubtitle">Pick up where you left off.</p>
-
+            {error==''?'':<p className="erorrSub">{error}</p>}
             <div className="tabSwitch">
               <button
                 type="button"
@@ -108,7 +126,9 @@ export default function Login() {
                 Keep me signed in
               </label>
 
-              <button type="submit" className="primaryBtn">
+              <button type="submit" className="primaryBtn" onClick={()=>{
+                validate(form.email, form.password)
+              }}>
                 Log in
               </button>
 

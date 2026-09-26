@@ -11,68 +11,74 @@ export default class Course extends React.Component {
     super(props);
     this.state = {
       searchQuery: "",
-      filterArr: coursesInfo,
-      showAll:false,
-
+      showAll: false,
+      sortC: "MP" // MP -> Most Pop, HR -> Highrated, N -> Newest (price)
     };
     this.courses = coursesInfo;
+    this.changeSort = this.changeSort.bind(this);
   }
 
   handleSearchChange = (query) => {
-    this.setState({ searchQuery: query,showAll:false });
+    this.setState({ searchQuery: query, showAll: false });
   };
 
-  getFilteredCourses = () => {
-    const { searchQuery } = this.state;
-    if (!searchQuery.trim()) return this.courses;
+  changeSort(sortVal) {
+    this.setState({ sortC: sortVal });
+  }
 
-    const query = searchQuery.toLowerCase();
-    return this.courses.filter((course) => {
-      return (
-        course.name.toLowerCase().includes(query) ||
-        course.author.toLowerCase().includes(query) ||
-        course.description.toLocaleLowerCase().includes(query)
-      );
-    });
+  getFilteredCourses = () => {
+    const { searchQuery, sortC } = this.state;
+
+    // Start from the source list (never mutate state/source)
+    let result = [...this.courses];
+
+    // 1. Apply search filter
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter((course) => {
+        return (
+          course.name.toLowerCase().includes(query) ||
+          course.author.toLowerCase().includes(query) ||
+          course.description.toLowerCase().includes(query)
+        );
+      });
+    }
+
+    // 2. Apply sorting on the filtered result
+    switch (sortC) {
+      case "MP":
+        result.sort((a, b) => b.userNo - a.userNo);
+        break;
+      case "HR":
+        result.sort((a, b) => b.rating - a.rating);
+        break;
+      case "P":
+        result.sort((a, b) => a.price - b.price);
+        break;
+      default:
+        break;
+    }
+    console.log(result.map((res)=>{
+      return res.price;
+    }));
+    return result;
   };
 
   addCourses(filteredCourses) {
+    const list = this.state.showAll
+      ? filteredCourses
+      : filteredCourses.slice(0, Math.ceil(filteredCourses.length / 2));
 
-    if(this.state.showAll == true )
-      return filteredCourses.map((course, index) => {
-        return (
-          <div key={index}>
-            <Link to={`/course/${course.id}`}>
-              <CourseItem course={course} />
-              <hr />
-            </Link>
-          </div>
-        );
-      });
-    else
-      return filteredCourses.map((course, index) => {
-        if(index<filteredCourses.length/2)
-        return (
-          <div key={index}>
-            <Link to={`/course/${course.id}`}>
-              <CourseItem course={course} />
-              <hr />
-            </Link>
-          </div>
-        );
-      });
-    // let courseReturn = this.courses.map((course, index) => {
-    //   return (
-    //     <>
-    //       <Link to={`/course/${course.name}`}>
-    //         <CourseItem key={index} course={course} />
-    //         <hr />
-    //       </Link>
-    //     </>
-    //   );
-    // });
-    // return courseReturn;
+    return list.map((course, index) => (
+      <div key={course.id ?? index}>
+        <Link to={`/course/${course.id}`}>
+          <CourseItem course={course} />
+          <hr />
+        </Link>
+      </div>
+    ));
   }
+
   render() {
     const filteredCourses = this.getFilteredCourses();
 
@@ -83,14 +89,27 @@ export default class Course extends React.Component {
           searchQuery={this.state.searchQuery}
           onSearchChange={this.handleSearchChange}
           totalResults={filteredCourses.length}
+          onSort={this.changeSort}
         />
         <div className="row">
           <SideFilter />
           <div className="col courseList">
-            {filteredCourses.length > 0 ?(this.addCourses(filteredCourses)):''}
-            {/*this.addCourses(this.state.filterArr) */}
+            {filteredCourses.length > 0 ? this.addCourses(filteredCourses) : ""}
           </div>
-          {this.state.showAll == false?<center><button className="btn showAll" onClick={()=>{this.setState({showAll:true})}}>Show All:{this.state.filterArr.length}</button></center>:''}
+          {this.state.showAll === false ? (
+            <center>
+              <button
+                className="btn showAll"
+                onClick={() => {
+                  this.setState({ showAll: true });
+                }}
+              >
+                Show All: {filteredCourses.length}
+              </button>
+            </center>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     );

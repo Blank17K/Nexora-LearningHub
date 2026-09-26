@@ -27,21 +27,28 @@ function App() {
         cards: [],
         purchasedCourses: []
     }
+
+    setUser(user);
+  }
+  const logOut = ()=>{
+    setUser(null);
+    return;
   }
   return (
     <BrowserRouter>
       <Routes>
         {<Route path="/" element={
         <>
-          <Header user={user}/>
+          <Header user={user} logout={logOut}/>
           <Splash />
           <Footer/>
         </>
         } />}
-        <Route path="/login" element={<Login updateU = {updateUser}/>} />
+        <Route path="/login" element={<Login updateU = {updateUser} users={userList}/>} />
         <Route path="/signup" element={<SignUp addU = {adduserData}/>} />
         <Route path="/aboutus" element={
             <>
+              <ScrollToTop/>
               <BackToSite />
               <AboutUs />
               <Footer/>
@@ -50,14 +57,14 @@ function App() {
           } />
           <Route path="/courses" element={
             <>
-              <Header user={user}/>
+              <Header user={user} logout={logOut}/>
               <Course/>
               <Footer/>
             </>
           } />
           <Route path="/course/:id" element={
             <>
-              <Header user={user}/>
+              <Header user={user} logout={logOut}/>
               <ScrollToTop/>{/*just scrolls to top */}
               <CourseView/>
               <Footer/>

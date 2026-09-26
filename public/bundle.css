@@ -110,6 +110,7 @@ center{
 :root{
     --primary: #fff;
     --btnCol: #0F6B57;
+    --boxR: 3.5rem;
 }
 .LoginButt{
     border: solid 1px var(--btnCol);
@@ -124,6 +125,22 @@ center{
 }
 .header{
     padding: 1rem;
+}.userImg{
+    aspect-ratio: 1/1;
+    height: var(--boxR);
+    width: var(--boxR);
+    max-width: var(--boxR);
+    max-height: var(--boxR);
+    background-color: #0F6B57;
+    border-radius: 100%;
+}
+.userName{
+    margin: 0;
+}
+.logout{
+    width: fit-content;
+    color: var(--primary);
+    background-color: var(--btnCol);
 }
 /*!***************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/Login.css ***!
@@ -223,6 +240,11 @@ center{
 .welcomeSubtitle {
     margin: 0 0 24px;
     color: var(--nexora-muted);
+    font-size: 14px;
+}
+.erorrSub{
+    argin: 0 0 24px;
+    color: red;
     font-size: 14px;
 }
 
