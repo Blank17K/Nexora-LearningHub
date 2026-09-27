@@ -12,6 +12,7 @@ import Course from "./Course.js";
 import CourseView from "./CourseView.js";
 import usersInfo from '../Assets/scripts/userList.js'
 import Checkout from "./Checkout.js";
+import CoursePlayer from "./coursePlayer.js";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -80,6 +81,13 @@ function App() {
             <>
               <Header user={user} logout={logOut}/>
               <Checkout checkOut={checkingOut} user={user}/>
+            </>
+          }
+          
+          />
+          <Route path="/courseplayer" element={
+            <>
+              <CoursePlayer/>
             </>
           }
           

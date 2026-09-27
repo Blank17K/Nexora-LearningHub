@@ -5,6 +5,9 @@
     --grey: #DDDDDD;
     --cardCol: #004133;
 }
+#root{
+    min-height: 100vh;
+}
 .intro{
     padding: 5rem;
 }

@@ -46,7 +46,6 @@ export default function Login(props) {
 
   return (
     <div className="logInBody">
-      {console.log("The id Selected is: "+props.check)}
       <div className="navBar">
         <div className="loginNav">
           <div className="logo">

@@ -39,3 +39,8 @@
 .logoHead{
     max-width: 90%;
 }
+.loaderN{
+    height: .5rem;
+    background-color: lightgray;
+    border-radius: 5rem;
+}
