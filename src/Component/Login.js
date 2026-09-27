@@ -36,11 +36,17 @@ export default function Login(props) {
     const activeU = props.users.find((user)=> email == user.email);
     console.log("Made It");
     props.updateU(activeU);
-    logIn('/courses');
+    if(props.check > 0){
+      logIn(`/checkout/${props.check}`);
+      return;
+    }
+    else
+      logIn('/courses');
   }
 
   return (
     <div className="logInBody">
+      {console.log("The id Selected is: "+props.check)}
       <div className="navBar">
         <div className="loginNav">
           <div className="logo">

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "../styleComp/courseview.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import coursesInfo from "../Assets/scripts/courseList.js";
 import CourseCard from "./CourseCard.js";
 
@@ -8,10 +8,11 @@ const seeds = ["Sophie", "Felix","Aneka" ,"Milo", "Luna"];
 
 const profileLink = "https://api.dicebear.com/10.x/lorelei/svg?seed=";
 
-export default function CourseView() {
+export default function CourseView(props) {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const [openModule, setOpenModule] = useState(0);
+  const navigateToCheckOut = useNavigate();
 
   //   function getRandomCourses(courses, count, excludeName) {
   //     const pool = courses.filter((c) => c.name !== excludeName);
@@ -35,6 +36,14 @@ export default function CourseView() {
     (sum, m) => sum + m.lessons,
     0,
   );
+  const checkOutTime = ()=>{
+     if(props.user == null){
+        props.check(id);
+        navigateToCheckOut('/login');
+     }
+     else
+      navigateToCheckOut(`/checkout/${id}`);
+  }
 
   return (
     <div className="CourseView">
@@ -224,7 +233,7 @@ export default function CourseView() {
               <h3>R{course.price} </h3>
               <p>once-off · lifetime access</p>
             </div>
-            <div className="StickyCarDBtn">Enroll now</div>
+            <div className="StickyCarDBtn" onClick={checkOutTime}>Enroll now</div>
             <div className="StickyCardBtn2">Try the first lesson free</div>
             <div className="StickyCardDescr">
               <div>

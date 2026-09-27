@@ -11,24 +11,29 @@ import SignUp from "./SignUp.js";
 import Course from "./Course.js";
 import CourseView from "./CourseView.js";
 import usersInfo from '../Assets/scripts/userList.js'
+import Checkout from "./Checkout.js";
 
 function App() {
   const [user, setUser] = useState(null);
   const [userList, setUserList] = useState(usersInfo)
+  const [wasCheckingOut, setCheck] = useState(-1);
   const updateUser =(userData)=>{
     setUser(userData);
   }
   const adduserData = (uId, fullName,email,password)=>{
     let user = {
-        id: uId,
-        name: fullName,
-        email: email,
-        password: password,
-        cards: [],
-        purchasedCourses: []
+      id: uId,
+      name: fullName,
+      email: email,
+      password: password,
+      cards: [],
+      purchasedCourses: []
     }
-
+    
     setUser(user);
+  }
+  const checkingOut = (id)=>{
+    setCheck(id);
   }
   const logOut = ()=>{
     setUser(null);
@@ -39,12 +44,13 @@ function App() {
       <Routes>
         {<Route path="/" element={
         <>
+          <ScrollToTop/>
           <Header user={user} logout={logOut}/>
           <Splash />
           <Footer/>
         </>
         } />}
-        <Route path="/login" element={<Login updateU = {updateUser} users={userList}/>} />
+        <Route path="/login" element={<Login updateU = {updateUser} users={userList} check={wasCheckingOut}/>} />
         <Route path="/signup" element={<SignUp addU = {adduserData}/>} />
         <Route path="/aboutus" element={
             <>
@@ -66,10 +72,18 @@ function App() {
             <>
               <Header user={user} logout={logOut}/>
               <ScrollToTop/>{/*just scrolls to top */}
-              <CourseView/>
+              <CourseView user={user} check={checkingOut} />
               <Footer/>
             </>
           } />
+          <Route path="/checkout/:id" element={
+            <>
+              <Header user={user} logout={logOut}/>
+              <Checkout checkOut={checkingOut} user={user}/>
+            </>
+          }
+          
+          />
 
       </Routes>
     </BrowserRouter>

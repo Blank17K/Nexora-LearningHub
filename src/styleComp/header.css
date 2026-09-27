@@ -36,3 +36,6 @@
     color: var(--primary);
     background-color: var(--btnCol);
 }
+.logoHead{
+    max-width: 90%;
+}

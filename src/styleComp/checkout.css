@@ -1,0 +1,119 @@
+:root{
+    --primary: #fff;
+    --btnCol: #0F6B57;
+    --worldPad: 3rem;
+    --grey: #c9c9c9;
+    --cardCol: #004133;
+}
+.CoursePayCard{
+    background-color: var(--primary);
+}
+.footPayC{
+    padding: 1rem;
+}
+.loader{
+    height: .5rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: var(--grey);
+    border-radius: 5rem;
+}
+.justS{
+    text-align: right;
+}
+.payArea{
+    padding: 0 60px;
+}
+.imgTick{
+    width: 10%;
+    max-width: 10%;
+}
+.input{
+    border: solid 2px grey;
+}
+.input:focus{
+    border: solid 3px var(--cardCol) !important;
+}
+.submitBtn{
+    background-color: var(--cardCol);
+    color: var(--primary);
+    width: 100% !important;
+}
+.checkoutBack {
+  min-height: 100%;
+  position: relative;
+  background: transparent; /* or your default bg */
+  transition: background-color .5s ease .5s;
+}
+
+.checkoutBack::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, #0F6B57, #004133);
+  opacity: 0;
+  transition: opacity .5s ease;
+  z-index: -1; /* keep it behind content */
+  pointer-events: none;
+}
+
+.checkoutBack.changeBack::before {
+  opacity: 1;
+}
+.cardPayment{
+    transition: .5s;
+}
+.slideOut{
+    transform: translateX(-150%);   
+}
+.paidRec{
+    position: absolute;
+    left: 0%;
+    max-width: 45%;
+    padding: 2rem;
+    color: var(--primary);
+    transition: .5s .5s;
+}
+.slideoutIn{
+    transform: translateX(-150%);
+}
+.back{
+    padding-top: 1rem;
+    color: var(--cardCol);
+    transition: .5s;
+}
+.backInv{
+    padding-top: 1rem;
+    color: var(--primary);
+}
+.buttons button{
+    width: fit-content;
+}
+.solidBtn{
+    background-color: var(--primary);
+    color: var(--cardCol);
+    transition: .5s;
+}
+.solidBtn:hover{
+    color: var(--primary);
+    background: none;
+    border: solid 2px var(--primary);
+}
+.outlineBtn{
+    color: var(--primary);
+    border: solid 2px var(--primary);
+    transition: .5s;
+}
+.outlineBtn:hover{
+    background-color: var(--primary);
+    color: var(--cardCol);
+    border: none;
+}
+
+.is-invalid {
+  border-color: #dc3545 !important;
+  background-image: none;
+}
+.is-invalid:focus {
+  box-shadow: 0 0 0 .25rem rgba(220, 53, 69, .25);
+}
