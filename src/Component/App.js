@@ -21,18 +21,24 @@ function App() {
   const updateUser =(userData)=>{
     setUser(userData);
   }
-  const adduserData = (uId, fullName,email,password)=>{
-    let user = {
-      id: uId,
-      name: fullName,
-      email: email,
-      password: password,
-      cards: [],
-      purchasedCourses: []
-    }
-    
-    setUser(user);
-  }
+  const adduserData = (fullName, email, password) => {
+  // Safer ID: max existing + 1
+  const nextId = userList.length
+    ? Math.max(...userList.map(u => u.id)) + 1
+    : 1;
+
+  const newUser = {
+    id: nextId,
+    name: fullName,
+    email,
+    password,
+    cards: [],
+    purchasedCourses: [],
+  };
+
+  setUserList(prev => [...prev, newUser]);
+  setUser(newUser);                       // optional: auto-login
+};
   const checkingOut = (id)=>{
     setCheck(id);
   }

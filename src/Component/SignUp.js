@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import logo from "../Assets/Images/Logo.png";
 import loginHero from "../Assets/Images/LoginHeroSignUp.png";
 import "../styleComp/Login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function SignUp() {
+export default function SignUp(props) {
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ fullName: "", email: "", password: "" });
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -116,7 +116,10 @@ export default function SignUp() {
                 </li>
               </ul>
 
-              <button type="submit" className="primaryBtn">
+              <button type="submit" className="primaryBtn" onClick={()=>{
+                props.addU(form.fullName, form.email,form.password);
+                navigate('/courses');
+              }}>
                 Create Account
               </button>
 
