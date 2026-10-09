@@ -4,8 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import coursesInfo from "../Assets/scripts/courseList.js";
 import CourseCard from "./CourseCard.js";
 
-const seeds = ["Sophie", "Felix","Aneka" ,"Milo", "Luna"];
-
+const seeds = ["Sophie", "Felix", "Aneka", "Milo", "Luna"];
 const profileLink = "https://api.dicebear.com/10.x/lorelei/svg?seed=";
 
 export default function CourseView(props) {
@@ -14,19 +13,10 @@ export default function CourseView(props) {
   const [openModule, setOpenModule] = useState(0);
   const navigateToCheckOut = useNavigate();
 
-  //   function getRandomCourses(courses, count, excludeName) {
-  //     const pool = courses.filter((c) => c.name !== excludeName);
-  //     const shuffled = [...pool].sort(() => Math.random() - 0.5);
-  //     return shuffled.slice(0, count);
-  //   }
-
-  //   const relatedCourses = getRandomCourses(coursesInfo, 4, course.name);
-  //   const instructorCourses = getRandomCourses(coursesInfo, 4, course.name);
-
   useEffect(() => {
-    const currentCourse = coursesInfo[id-1]
+    const currentCourse = coursesInfo[id - 1];
     setCourse(currentCourse);
-  }, [id, coursesInfo]);
+  }, [id]);
 
   if (!course) {
     return <div>Loading or Course Not Found...</div>;
@@ -36,14 +26,20 @@ export default function CourseView(props) {
     (sum, m) => sum + m.lessons,
     0,
   );
-  const checkOutTime = ()=>{
-     if(props.user == null){
-        props.check(id);
-        navigateToCheckOut('/login');
-     }
-     else
+
+  const numericId = Number(id);
+  const alreadyOwned = props.user?.purchasedCourses?.includes(numericId);
+
+  const checkOutTime = () => {
+    if (props.user == null) {
+      props.check(id);
+      navigateToCheckOut('/login');
+    } else if (alreadyOwned) {
+      navigateToCheckOut('/courseplayer');
+    } else {
       navigateToCheckOut(`/checkout/${id}`);
-  }
+    }
+  };
 
   return (
     <div className="CourseView">
@@ -67,11 +63,7 @@ export default function CourseView(props) {
             <span>Updated May 2026</span>
           </div>
 
-          <img
-            className="CourseBanner"
-            src={course.imgPath}
-            alt={course.name}
-          />
+          <img className="CourseBanner" src={course.imgPath} alt={course.name} />
 
           <div className="WhatYoullLearn">
             <h2>What you'll learn</h2>
@@ -160,7 +152,10 @@ export default function CourseView(props) {
 
             <div className="InstructorCard">
               <div className="InstructorAvatar">
-                <img src={profileLink + seeds[Math.floor(Math.random() * 5)]} alt={seeds[Math.floor(Math.random() * 5)]}/>
+                <img
+                  src={profileLink + seeds[Math.floor(Math.random() * 5)]}
+                  alt={seeds[Math.floor(Math.random() * 5)]}
+                />
               </div>
               <div>
                 <h4>{course.author}</h4>
@@ -233,7 +228,9 @@ export default function CourseView(props) {
               <h3>R{course.price} </h3>
               <p>once-off · lifetime access</p>
             </div>
-            <div className="StickyCarDBtn" onClick={checkOutTime}>Enroll now</div>
+            <div className="StickyCarDBtn" onClick={checkOutTime}>
+              {alreadyOwned ? "Go to Course" : "Enroll now"}
+            </div>
             <div className="StickyCardBtn2">Try the first lesson free</div>
             <div className="StickyCardDescr">
               <div>
