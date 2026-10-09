@@ -1,0 +1,109 @@
+[
+    {
+        "id": 1,
+        "name": "John Smith",
+        "email": "john.smith@example.com",
+        "password": "hashed_pw_1a2b3c",
+        "cards": [
+            { "cardNumber": "4532-1234-5678-9012", "cardHolder": "John Smith", "expiry": "08/27", "cvv": "123", "type": "Visa" }
+        ],
+        "purchasedCourses": [1, 3, 8]
+    },
+    {
+        "id": 2,
+        "name": "Emily Davis",
+        "email": "emily.davis@example.com",
+        "password": "hashed_pw_4d5e6f",
+        "cards": [
+            { "cardNumber": "5412-9876-5432-1098", "cardHolder": "Emily Davis", "expiry": "11/26", "cvv": "456", "type": "Mastercard" },
+            { "cardNumber": "6011-2233-4455-6677", "cardHolder": "Emily Davis", "expiry": "03/28", "cvv": "789", "type": "Discover" }
+        ],
+        "purchasedCourses": [2, 4, 5, 9]
+    },
+    {
+        "id": 3,
+        "name": "Carlos Martinez",
+        "email": "carlos.martinez@example.com",
+        "password": "hashed_pw_7g8h9i",
+        "cards": [
+            { "cardNumber": "3782-822463-10005", "cardHolder": "Carlos Martinez", "expiry": "05/27", "cvv": "321", "type": "Amex" }
+        ],
+        "purchasedCourses": [1, 10]
+    },
+    {
+        "id": 4,
+        "name": "Aisha Patel",
+        "email": "aisha.patel@example.com",
+        "password": "hashed_pw_1j2k3l",
+        "cards": [
+            { "cardNumber": "4539-8765-4321-0987", "cardHolder": "Aisha Patel", "expiry": "09/26", "cvv": "654", "type": "Visa" },
+            { "cardNumber": "5425-1122-3344-5566", "cardHolder": "Aisha Patel", "expiry": "12/28", "cvv": "987", "type": "Mastercard" },
+            { "cardNumber": "6011-8899-7766-5544", "cardHolder": "Aisha Patel", "expiry": "02/29", "cvv": "147", "type": "Discover" }
+        ],
+        "purchasedCourses": [2, 3, 6, 7, 8, 9]
+    },
+    {
+        "id": 5,
+        "name": "Liam O'Brien",
+        "email": "liam.obrien@example.com",
+        "password": "hashed_pw_4m5n6o",
+        "cards": [
+            { "cardNumber": "3714-496353-98431", "cardHolder": "Liam O'Brien", "expiry": "06/27", "cvv": "258", "type": "Amex" }
+        ],
+        "purchasedCourses": [5]
+    },
+    {
+        "id": 6,
+        "name": "Sofia Rossi",
+        "email": "sofia.rossi@example.com",
+        "password": "hashed_pw_7p8q9r",
+        "cards": [
+            { "cardNumber": "4485-2736-1928-3746", "cardHolder": "Sofia Rossi", "expiry": "10/26", "cvv": "369", "type": "Visa" },
+            { "cardNumber": "5599-8877-6655-4433", "cardHolder": "Sofia Rossi", "expiry": "01/28", "cvv": "741", "type": "Mastercard" }
+        ],
+        "purchasedCourses": [1, 4, 7, 10]
+    },
+    {
+        "id": 7,
+        "name": "Kenji Tanaka",
+        "email": "kenji.tanaka@example.com",
+        "password": "hashed_pw_1s2t3u",
+        "cards": [
+            { "cardNumber": "4024-0071-2345-6789", "cardHolder": "Kenji Tanaka", "expiry": "04/27", "cvv": "852", "type": "Visa" }
+        ],
+        "purchasedCourses": [2, 6]
+    },
+    {
+        "id": 8,
+        "name": "Fatima Al-Rashid",
+        "email": "fatima.alrashid@example.com",
+        "password": "hashed_pw_4v5w6x",
+        "cards": [
+            { "cardNumber": "5425-8899-0011-2233", "cardHolder": "Fatima Al-Rashid", "expiry": "07/26", "cvv": "963", "type": "Mastercard" },
+            { "cardNumber": "6011-4455-6677-8899", "cardHolder": "Fatima Al-Rashid", "expiry": "11/29", "cvv": "159", "type": "Discover" }
+        ],
+        "purchasedCourses": [3, 8, 9]
+    },
+    {
+        "id": 9,
+        "name": "Lucas Silva",
+        "email": "lucas.silva@example.com",
+        "password": "hashed_pw_7y8z9a",
+        "cards": [
+            { "cardNumber": "3782-822463-10006", "cardHolder": "Lucas Silva", "expiry": "08/28", "cvv": "357", "type": "Amex" }
+        ],
+        "purchasedCourses": [1, 2, 5, 10]
+    },
+    {
+        "id": 10,
+        "name": "Hannah Müller",
+        "email": "hannah.muller@example.com",
+        "password": "hashed_pw_1b2c3d",
+        "cards": [
+            { "cardNumber": "4539-1122-3344-5566", "cardHolder": "Hannah Müller", "expiry": "03/27", "cvv": "486", "type": "Visa" },
+            { "cardNumber": "5412-6677-8899-0011", "cardHolder": "Hannah Müller", "expiry": "09/29", "cvv": "624", "type": "Mastercard" },
+            { "cardNumber": "6011-2233-4455-6677", "cardHolder": "Hannah Müller", "expiry": "05/28", "cvv": "813", "type": "Discover" }
+        ],
+        "purchasedCourses": [4, 6, 7, 8, 9, 10]
+    }
+]

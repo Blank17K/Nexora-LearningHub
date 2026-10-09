@@ -29,7 +29,7 @@ export default class Splash extends React.Component{
                     <h3>Popular right now</h3>
                     <div className="popCards row">
                         <div className="card col">
-                            <img src=".." className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
+                            <img className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
                             <div className="card-body">
                                 <div className="courseCat row">
                                     <h6 className="card-subtitle mb-2 text-muted col-4 best me-3">Bestseller</h6>
@@ -45,7 +45,7 @@ export default class Splash extends React.Component{
                             </div>
                         </div>
                         <div className="card col ms-3 me-3">
-                            <img src=".." className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
+                            <img className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
                             <div className="card-body">
                                 <div className="courseCat row">
                                     <h6 className="card-subtitle mb-2 text-muted col-4 best me-3">Bestseller</h6>
@@ -61,7 +61,7 @@ export default class Splash extends React.Component{
                             </div>
                         </div>
                         <div className="card col">
-                            <img src=".." className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
+                            <img className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
                             <div className="card-body">
                                 <div className="courseCat row">
                                     <h6 className="card-subtitle mb-2 text-muted col-4 best me-3">Bestseller</h6>
