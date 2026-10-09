@@ -17,8 +17,9 @@ export default class Splash extends React.Component{
                     <div className="text col-6 introText">
                         <h1>Learn by building things that work.</h1>
                         <p>Short, practical courses in design, code and 3D — taught by people who ship. Start free, finish something real.</p>
-                        <button className="btn strtBtn">Get Started for free</button>
-                        <button className="btn catBtn"><b>Browse Categories <i className="lni lni-arrow-right"></i></b></button>
+                        <button className="strtBtn">Get Started for free</button>
+                        <button className="catBtn"><b>Browse Categories <i className="lni lni-arrow-right"></i></b></button>
+                        <p className="NoCardReq">No card required · 7-day full access</p>
                     </div>
                     <img className="col-6 adImg" alt="advert Image" src="./media/imgs/Img1.svg"/>
                 </div>
@@ -29,7 +30,7 @@ export default class Splash extends React.Component{
                     <h3>Popular right now</h3>
                     <div className="popCards row">
                         <div className="card col">
-                            <img src=".." className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
+                            <img className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
                             <div className="card-body">
                                 <div className="courseCat row">
                                     <h6 className="card-subtitle mb-2 text-muted col-4 best me-3">Bestseller</h6>
@@ -45,7 +46,7 @@ export default class Splash extends React.Component{
                             </div>
                         </div>
                         <div className="card col ms-3 me-3">
-                            <img src=".." className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
+                            <img className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
                             <div className="card-body">
                                 <div className="courseCat row">
                                     <h6 className="card-subtitle mb-2 text-muted col-4 best me-3">Bestseller</h6>
@@ -61,7 +62,7 @@ export default class Splash extends React.Component{
                             </div>
                         </div>
                         <div className="card col">
-                            <img src=".." className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
+                            <img className="card-img-top" alt="class picture" src="./media/imgs/card-img.svg"/>
                             <div className="card-body">
                                 <div className="courseCat row">
                                     <h6 className="card-subtitle mb-2 text-muted col-4 best me-3">Bestseller</h6>
@@ -78,7 +79,7 @@ export default class Splash extends React.Component{
                         </div>
                     </div>
                 </div>
-                <div className="banner">
+                {/* <div className="banner">
                     <img alt="banner" src="./media/imgs/banner2.svg"/>
                 </div>
                 <div className="row theMovement">
@@ -129,7 +130,7 @@ export default class Splash extends React.Component{
                         <p>Create an account in under thirty seconds.</p>
                         <button className="btn freeTrailBtn">Get Started for free</button>
                     </center>
-                </div>
+                </div> */}
             </div>
 
             </>

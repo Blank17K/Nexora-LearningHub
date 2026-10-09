@@ -1,32 +1,28 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../styleComp/header.css";
 import { Link } from "react-router-dom";
+import "../styleComp/header.css";
 
-export default class Header extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+export default function Header() {
+  return (
+    <div className="HeaderDiv">
+      <div className="Logo">
+        <Link to="/" >
+          <img alt="logo" src="/media/imgs/logo.svg" />
+        </Link>
+        <p>Nexora</p>
+      </div>
 
-  render() {
-    return (
-      <div className="row align-items-center header">
-        <div className="col-1">
-          <img alt="logo" src="./media/imgs/logo.svg" />
-        </div>
-        <div className="col-2">
-          <b>Nexora</b>
-        </div>
-        <div className="col-6 browseTxt"><Link to={"/courses"}>Browse</Link></div>
-        {/* <div className="col-6 browseTxt">Browse</div> */}
-        <button className="btn SignUpButt col-1 me-2">
-          <Link to={"/signup"}>Sign Up</Link>
+      <div className="HeaderButtonDiv">
+        <Link to="/courses">Browse</Link>
+      </div>
+
+      <div className="HeaderAuthDiv">
+        <button className="SignUpButt">
+          <Link to="/signup">Sign up</Link>
         </button>
-        <button className="btn LoginButt col-1 ">
-          <Link to={"/login"}>Login</Link>
+        <button className="LoginButt">
+          <Link to="/login">Log in</Link>
         </button>
       </div>
-    );
-  }
+    </div>
+  );
 }

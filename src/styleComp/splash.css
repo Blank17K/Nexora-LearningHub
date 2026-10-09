@@ -1,24 +1,66 @@
 :root{
     --primary: #fff;
-    --btnCol: #0F6B57;
+    --btnCol: #0f6b57;
     --worldPad: 3rem;
     --grey: #DDDDDD;
     --cardCol: #004133;
+    --fadedText: #6E6B66;
 }
-.intro{
-    padding: 5rem;
+
+.splashSec{
+    padding:1rem 5rem;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    /* border: 1px red solid; */
 }
-.introText h1{
-    font-size: 6vw;
-    margin-bottom: 1rem;
+
+.introText{
+    /* border: 1px rgb(0, 255, 76) solid; */
+    h1{
+        font-size: 6.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 7rem;
+    }
+
+    p{
+        font-size: 2.3rem;
+        color: var(--fadedText);
+        font-weight: 400;
+        line-height: 2.5rem;
+    }
+
+    .strtBtn{
+        font-size: 1rem;
+        background-color: var(--btnCol);
+        color: var(--primary);
+        border-radius: 10px;
+        padding: 1rem 2.5rem;
+        border: none;
+        margin-right: 20px;
+        font-weight: 500;
+    }
+
+    .catBtn{
+        font-size: 1rem;
+        color: var(--btnCol);
+        background-color: white;
+        border-radius: 10px;
+        padding: 1rem 2.5rem;
+        border: none;
+        font-weight: 500;
+    }
+
+    .NoCardReq{
+        margin-top: 1rem;
+        font-size: 1.5rem;
+    }
+
+    .adImg{
+        width: 100%;
+    }
 }
-.strtBtn{
-    background-color: var(--btnCol);
-    color: var(--primary);
-}
-.catBtn{
-    color: var(--btnCol);
-}
+
+
 .banner{
     max-width: 100vw;
 }
@@ -26,9 +68,20 @@
     width: 100%;
 }
 .popularClass, .theMovement{
+
+    h3{
+        font-size: 1.5rem;
+    }
+
     padding: var(--worldPad);
 }
-.card-img-top{
+
+.popularClass{
+    .card{
+        border-radius: 25px;
+    }
+}
+/* .card-img-top{
     border-bottom: solid 2px var(--btnCol);
 }
 .card-subtitle{
@@ -75,4 +128,4 @@ a {
 
 a:hover {
   text-decoration: underline;
-}
+} */

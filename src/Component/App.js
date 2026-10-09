@@ -19,7 +19,7 @@ function App() {
         <>
           <Header/>
           <Splash />
-          <Footer/>
+          {/* <Footer/> */}
         </>
         } />}
         <Route path="/login" element={<Login />} />
