@@ -39,6 +39,22 @@ function App() {
   setUserList(prev => [...prev, newUser]);
   setUser(newUser);                       // optional: auto-login
 };
+  const updatePurchasedCourses = (userId, courseId) => {
+    setUserList(prevUsers => {
+      return prevUsers.map(user => {
+        if (user.id === userId) {
+          // Check if the course is already purchased
+          if (!user.purchasedCourses.includes(courseId)) {
+            return {
+              ...user,
+              purchasedCourses: [...user.purchasedCourses, courseId]
+            };
+          }
+        }
+        return user;
+      });
+    });
+  }
   const checkingOut = (id)=>{
     setCheck(id);
   }
@@ -86,7 +102,7 @@ function App() {
           <Route path="/checkout/:id" element={
             <>
               <Header user={user} logout={logOut}/>
-              <Checkout checkOut={checkingOut} user={user}/>
+              <Checkout checkOut={checkingOut} user={user} paycheck={updatePurchasedCourses}/>
             </>
           }
           

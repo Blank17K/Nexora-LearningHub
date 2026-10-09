@@ -153,7 +153,7 @@ function Checkout(props) {
                 <h1>Let's build the thing.</h1>
                 <p>{`Lesson one takes ${course.courseModules[0].duration}. By the end of module one you'll know ${course.courseModules[0].title}.`}</p>
                 <div className="buttons row">
-                    <button className="btn col solidBtn">Start Lesson <i className="lni lni-arrow-right"></i> </button>
+                    <button className="btn col solidBtn" onClick={()=>{navigate("/courseplayer")}}>Start Lesson <i className="lni lni-arrow-right"></i> </button>
                     <button className="btn outlineBtn col ms-4">View Recipt</button>
                 </div>
             </div>
