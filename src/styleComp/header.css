@@ -1,46 +1,477 @@
-*{
+* {
     margin: 0;
 }
-:root{
+
+:root {
     --primary: #fff;
     --btnCol: #0F6B57;
+    --btnColDark: #0b5545;
+    --cardCol: #004133;
     --boxR: 3.5rem;
+    --ease: cubic-bezier(.22, 1, .36, 1);
+    --headerH: 4.5rem;
 }
-.LoginButt{
-    border: solid 1px var(--btnCol);
+
+/* ───────── Header shell ───────── */
+.siteHeader {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    padding: 0 3rem;
+    background: rgba(255, 255, 255, .82);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    backdrop-filter: saturate(160%) blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: background .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
-.SignUpButt{
-    background-color: var(--btnCol);
-    color: var(--primary);
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .siteHeader {
+        background: #fff;
+    }
 }
-.browseTxt:hover{
-    text-decoration: underline;
-    cursor: pointer;
+
+.siteHeader.scrolled {
+    background: rgba(255, 255, 255, .92);
+    border-bottom-color: rgba(0, 65, 51, .08);
+    box-shadow: 0 6px 24px rgba(0, 65, 51, .08);
 }
-.header{
-    padding: 1rem;
-}.userImg{
-    aspect-ratio: 1/1;
-    height: var(--boxR);
-    width: var(--boxR);
-    max-width: var(--boxR);
-    max-height: var(--boxR);
-    background-color: #0F6B57;
-    border-radius: 100%;
+
+.headerInner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    min-height: var(--headerH);
 }
-.userName{
-    margin: 0;
+
+/* ───────── Brand ───────── */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    color: #0e1f1a;
+    text-decoration: none !important;
+    flex-shrink: 0;
 }
-.logout{
-    width: fit-content;
-    color: var(--primary);
-    background-color: var(--btnCol);
-}
-.logoHead{
+
+.logoHead {
     max-width: 90%;
 }
-.loaderN{
-    height: .5rem;
-    background-color: lightgray;
-    border-radius: 5rem;
+
+.siteHeader .logoHead {
+    width: 2.75rem;
+    height: 2.75rem;
+    max-width: none;
+    object-fit: contain;
+    transition: transform .5s var(--ease);
+}
+
+.brand:hover .logoHead {
+    transform: rotate(-6deg) scale(1.08);
+}
+
+.brandName {
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -.02em;
+}
+
+/* ───────── Nav + actions container ───────── */
+.navPanel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.mainNav {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.navLinkN {
+    position: relative;
+    padding: .55rem .9rem;
+    font-weight: 500;
+    font-size: .95rem;
+    color: #3b4a45;
+    text-decoration: none !important;
+    border-radius: .6rem;
+    transition: color .25s var(--ease), background-color .25s var(--ease);
+}
+
+.navLinkN::after {
+    content: "";
+    position: absolute;
+    left: .9rem;
+    right: .9rem;
+    bottom: .2rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--btnCol);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform .35s var(--ease);
+}
+
+.navLinkN:hover {
+    color: var(--btnCol);
+}
+
+.navLinkN:hover::after,
+.navLinkN.isCurrent::after {
+    transform: scaleX(1);
+}
+
+.navLinkN.isCurrent {
+    color: var(--btnCol);
+    font-weight: 600;
+}
+
+/* ───────── Buttons ───────── */
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+.hBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .55rem 1.3rem;
+    font-size: .92rem;
+    font-weight: 600;
+    line-height: 1.2;
+    border-radius: 8px;
+    border: 2px solid var(--btnCol);
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease), background-color .25s var(--ease), color .25s var(--ease);
+}
+
+.hBtnGhost {
+    color: var(--btnCol);
+    background: transparent;
+}
+
+.hBtnGhost:hover {
+    background: rgba(15, 107, 87, .08);
+    color: var(--btnColDark);
+    transform: translateY(-1px);
+}
+
+.hBtnSolid {
+    color: var(--primary);
+    background: var(--btnCol);
+}
+
+.hBtnSolid:hover {
+    color: var(--primary);
+    background: var(--btnColDark);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(15, 107, 87, .28);
+}
+
+.hBtn:active {
+    transform: translateY(0) scale(.98);
+}
+
+.hBtn:focus-visible,
+.navLinkN:focus-visible,
+.userChip:focus-visible,
+.navToggle:focus-visible,
+.dropItem:focus-visible,
+.brand:focus-visible {
+    outline: 2px solid var(--btnCol);
+    outline-offset: 2px;
+}
+
+/* ───────── Logged-in user ───────── */
+.userMenu {
+    position: relative;
+}
+
+.userChip {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .3rem .75rem .3rem .3rem;
+    background: #fff;
+    border: 1px solid rgba(0, 65, 51, .15);
+    border-radius: 999px;
+    color: #0e1f1a;
+    cursor: pointer;
+    transition: box-shadow .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
+}
+
+.userChip:hover,
+.userMenu.open .userChip {
+    border-color: var(--btnCol);
+    box-shadow: 0 6px 18px rgba(0, 65, 51, .12);
+}
+
+.userAvatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0F6B57, #1fa588);
+    color: #fff;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+    flex-shrink: 0;
+}
+
+.userAvatar.lg {
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: .95rem;
+}
+
+.userName {
+    margin: 0;
+    font-size: .92rem;
+    font-weight: 600;
+    max-width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.chev {
+    color: #5b6b66;
+    transition: transform .3s var(--ease);
+}
+
+.userMenu.open .chev {
+    transform: rotate(180deg);
+}
+
+.userDropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + .6rem);
+    min-width: 15rem;
+    padding: .5rem;
+    background: #fff;
+    border: 1px solid rgba(0, 65, 51, .1);
+    border-radius: 1rem;
+    box-shadow: 0 20px 48px rgba(0, 65, 51, .18);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px) scale(.97);
+    transform-origin: top right;
+    transition: opacity .22s var(--ease), transform .22s var(--ease), visibility 0s linear .22s;
+}
+
+.userMenu.open .userDropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+}
+
+.userDropHead {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .6rem .6rem .8rem;
+    margin-bottom: .35rem;
+    border-bottom: 1px solid rgba(0, 65, 51, .08);
+}
+
+.userDropText {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.userDropText strong {
+    font-size: .92rem;
+    color: #0e1f1a;
+}
+
+.userDropText small {
+    font-size: .78rem;
+    color: #6b7b76;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dropItem {
+    display: block;
+    width: 100%;
+    padding: .6rem .7rem;
+    font-size: .9rem;
+    font-weight: 500;
+    text-align: left;
+    color: #2b3a35;
+    background: transparent;
+    border: 0;
+    border-radius: .6rem;
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: background-color .2s var(--ease), color .2s var(--ease), padding-left .2s var(--ease);
+}
+
+.dropItem:hover {
+    background: rgba(15, 107, 87, .08);
+    color: var(--btnCol);
+    padding-left: .95rem;
+}
+
+.dropLogout:hover {
+    background: rgba(190, 40, 40, .08);
+    color: #b42323;
+}
+
+/* ───────── Mobile toggle (hidden on desktop) ───────── */
+.navToggle {
+    display: none;
+    margin-left: auto;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    background: transparent;
+    border: 1px solid rgba(0, 65, 51, .15);
+    border-radius: .75rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.navToggle span {
+    position: absolute;
+    left: 50%;
+    width: 1.15rem;
+    height: 2px;
+    margin-left: -.575rem;
+    background: #0e1f1a;
+    border-radius: 2px;
+    transition: transform .35s var(--ease), opacity .2s var(--ease), top .35s var(--ease);
+}
+
+.navToggle span:nth-child(1) {
+    top: calc(50% - 6px);
+}
+
+.navToggle span:nth-child(2) {
+    top: 50%;
+    margin-top: -1px;
+}
+
+.navToggle span:nth-child(3) {
+    top: calc(50% + 5px);
+}
+
+.navToggle.open span:nth-child(1) {
+    top: 50%;
+    transform: rotate(45deg);
+}
+
+.navToggle.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.navToggle.open span:nth-child(3) {
+    top: 50%;
+    transform: rotate(-45deg);
+}
+
+/* ───────── Responsive ───────── */
+@media (max-width: 991.98px) {
+    .siteHeader {
+        padding: 0 1.25rem;
+    }
+
+    .navToggle {
+        display: block;
+    }
+
+    .navPanel {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding: 1rem 1.25rem 1.5rem;
+        background: #fff;
+        border-bottom: 1px solid rgba(0, 65, 51, .08);
+        box-shadow: 0 24px 40px rgba(0, 65, 51, .12);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity .3s var(--ease), transform .3s var(--ease), visibility 0s linear .3s;
+    }
+
+    .navPanel.open {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        transition-delay: 0s;
+    }
+
+    .mainNav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: .15rem;
+    }
+
+    .navLinkN {
+        padding: .8rem .9rem;
+    }
+
+    .navLinkN::after {
+        display: none;
+    }
+
+    .navLinkN.isCurrent {
+        background: rgba(15, 107, 87, .08);
+    }
+
+    .headerActions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hBtn {
+        width: 100%;
+        padding: .75rem 1.3rem;
+    }
+
+    .userMenu {
+        width: 100%;
+    }
+
+    .userChip {
+        width: 100%;
+    }
+
+    .userDropdown {
+        position: static;
+        margin-top: .5rem;
+        box-shadow: none;
+        display: none;
+    }
+
+    .userMenu.open .userDropdown {
+        display: block;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .siteHeader,
+    .siteHeader * {
+        transition-duration: .01ms !important;
+    }
 }

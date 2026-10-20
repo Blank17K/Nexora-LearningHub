@@ -1,91 +1,94 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styleComp/courseSearch.css";
 
-export default class CourseSearch extends React.Component {
-  constructor(props){
-       super(props);
-       this.state = {
-          sortBy:''
-      };
-    }
+export default function CourseSearch({
+  searchQuery,
+  onSearchChange,
+  totalResults,
+  sortValue,
+  onSort,
+  topics = [],
+  activeTopics = [],
+  onPickTopic,
+}) {
+  return (
+    <div className="courseSearchHead">
+      <div className="corseT">
+        <h1>All Courses</h1>
+        <p>
+          <span>{`${totalResults} ${totalResults === 1 ? "course" : "courses"}`}</span>
+          every one ends with something you built
+        </p>
+      </div>
 
-  handleChange(e){
-    const value = e.target.value;
-    console.log(value);
-    this.setState({sortBy:value});
-    //onSortChange?.(value); // notify parent if needed
-  }
-  render() {
-    const { searchQuery, onSearchChange, totalResults, onSort,fillArray } = this.props;
-    return (
-      <div className="">
-        <span className="row align-items-end corseT">
-          <h1 className="col-3">All Courses: </h1>
-          <p className="col">
-            <span>{`${totalResults} courses `}</span>
-            every one ends with something you built
-          </p>
-        </span>
-        <div>
-          <button className={`btn catBtn active`}>All</button>
-          <button className={`btn catBtn `}>Web Development</button>
-          <button className={`btn catBtn `}>UI/UX Design</button>
-          <button className={`btn catBtn `}>Javascript</button>
-          <button className={`btn catBtn `}>3D</button>
-          <button className={`btn catBtn `}>Cloud Computing</button>
-        </div>
-        <hr />
-        <div className="row inputSearch align-items-end">
+      <div className="pillRow" role="group" aria-label="Filter by topic">
+        <button
+          type="button"
+          className={"btn catBtn" + (activeTopics.length === 0 ? " isOn" : "")}
+          onClick={() => onPickTopic(null)}
+        >
+          All
+        </button>
+        {topics.map((t) => (
+          <button
+            type="button"
+            key={t}
+            className={"btn catBtn" + (activeTopics.includes(t) ? " isOn" : "")}
+            onClick={() => onPickTopic(t)}
+          >
+            {t}
+          </button>
+        ))}
+      </div>
+
+      <div className="inputSearch">
+        <label className="searchBox">
+          <svg
+            className="searchIcon"
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.3-4.3" />
+          </svg>
           <input
-            className="col-8"
             type="text"
             placeholder="Search courses, topics or instructors…"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
+            aria-label="Search courses"
           />
-          <p className="col-1 ms-2">{`${totalResults} Results`}</p>
-          <select
-            className="col-3 ms-4 form-select"
-            //value={this.state.sortBy}
-            onChange={async (e)=>{ await this.handleChange(e)
-              onSort(this.state.sortBy);
-            }}
-          >
-            <option value="MP">Sort: Most Popular</option>
-            <option value="HR">Highest Rated</option>
-            <option value="P">Price</option>
-          </select>
-        </div>
-        {/*<div className="row btnOrder justify-content-end">
-                    <div className="col-3"></div>
-                    <select className="col form-select" >
-                        <option selected>Topic: All</option>
-                        <option value="1"></option>
-                        <option value="2"></option>
-                        <option value="3"></option>
-                    </select>
-                    <select className="col form-select" >
-                        <option selected>Video Duration: All</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                    <select className="col form-select" >
-                        <option selected>Price: All</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                    <select className="col form-select" >
-                        <option selected>Subcategory: All</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>*/}
+          {searchQuery && (
+            <button
+              type="button"
+              className="searchClear"
+              aria-label="Clear search"
+              onClick={() => onSearchChange("")}
+            >
+              ×
+            </button>
+          )}
+        </label>
+        <p className="resultCount">{`${totalResults} ${totalResults === 1 ? "Result" : "Results"}`}</p>
+        <select
+          className="form-select sortSelect"
+          value={sortValue}
+          onChange={(e) => onSort(e.target.value)}
+          aria-label="Sort courses"
+        >
+          <option value="MP">Sort: Most Popular</option>
+          <option value="HR">Sort: Highest Rated</option>
+          <option value="P">Sort: Price, low to high</option>
+        </select>
       </div>
-    );
-  }
+    </div>
+  );
 }

@@ -17,6 +17,7 @@
 }
 .footer{
     padding: var(--padComp);
+    width: 100%;
 }
 .logoFooter{
     max-width: 100% ;

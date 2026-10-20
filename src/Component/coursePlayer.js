@@ -78,7 +78,7 @@ function CoursePlayer(){
     }
     return(
         <div className="">
-            <PlayerHeader/>
+            {/* <PlayerHeader/> */}
             <div className={`row playerHolder checkoutBack ${getCert?'changeBack':''}`}>
                 {showCert()}
                 <div className={`col-8 playerInfo ${getCert?'slideR':''}`}>
