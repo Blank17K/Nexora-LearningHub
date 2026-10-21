@@ -27,7 +27,7 @@ export default function Login(props) {
       return;
     }
     setError("");
-    props.updateU(activeU);
+    props.updateU(activeU, keepSignedIn);
     if (props.check > 0) {
       logIn(`/checkout/${props.check}`);
       return;

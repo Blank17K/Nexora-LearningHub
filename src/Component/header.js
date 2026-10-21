@@ -65,6 +65,9 @@ export default function Header({ user, logout, signUp=false }) {
     navigate("/", { replace: true });
   };
 
+  // Signed-in users never see the marketing splash: "home" is the courses page.
+  const homePath = user ? "/courses" : "/";
+
   const linkClass = ({ isActive }) =>
     "navLinkN" + (isActive ? " isCurrent" : "");
 
@@ -142,7 +145,7 @@ export default function Header({ user, logout, signUp=false }) {
   return (
     <header className={"header siteHeader" + (scrolled ? " scrolled" : "")}>
       <div className="headerInner">
-        <Link to="/" className="brand" aria-label="Nexora home">
+        <Link to={homePath} className="brand" aria-label="Nexora home">
           <img alt="" src={logo} className="logoHead" />
           <span className="brandName">Nexora</span>
         </Link>
@@ -161,12 +164,19 @@ export default function Header({ user, logout, signUp=false }) {
 
         <div className={"navPanel" + (menuOpen ? " open" : "")}>
           <nav className="mainNav" aria-label="Main">
-            <NavLink to="/" end className={linkClass}>
+            <NavLink
+              to={homePath}
+              end={!user}
+              className={user ? browseClass : linkClass}
+            >
               Home
             </NavLink>
-            <NavLink to="/courses" className={browseClass}>
-              Browse
-            </NavLink>
+            {/* Signed in: Home already is the courses page, so no duplicate "Browse" */}
+            {!user && (
+              <NavLink to="/courses" className={browseClass}>
+                Browse
+              </NavLink>
+            )}
             <NavLink to="/aboutus" className={linkClass}>
               About
             </NavLink>
@@ -175,7 +185,7 @@ export default function Header({ user, logout, signUp=false }) {
           {!signUp && renderAuth()}
           {signUp && <>
           <div>
-            <Link to="/">
+            <Link to={homePath}>
             back to site
             </Link>
           </div>

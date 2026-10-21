@@ -505,7 +505,7 @@ center{
 
 .loginLeft {
     position: relative;
-    padding: 8px 64px 40px;
+    padding: 8px 64px 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;

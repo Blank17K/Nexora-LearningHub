@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop.js";
 import Splash from "./splash.js";
 import BackToSite from "./backTosite.js";
@@ -10,19 +10,27 @@ import Login from "./Login.js";
 import SignUp from "./SignUp.js";
 import Course from "./Course.js";
 import CourseView from "./CourseView.js";
-import usersInfo from "../Assets/scripts/usersList.js";
-import { savePurchase } from "../Assets/scripts/usersList.js";
+import usersInfo, {
+  savePurchase,
+  saveRegisteredUser,
+  saveSession,
+  loadSession,
+  clearSession,
+} from "../Assets/scripts/usersList.js";
 import Checkout from "./Checkout.js";
 import CoursePlayer from "./coursePlayer.js";
 import AuthPage from "./AuthPage.js"
 
 function App() {
-  const [user, setUser] = useState(null);
+  // Restore the saved session on load so a refresh doesn't log the user out
+  const [user, setUser] = useState(() => loadSession(usersInfo));
   const [userList, setUserList] = useState(usersInfo);
   const [wasCheckingOut, setCheck] = useState(-1);
 
-  const updateUser = (userData) => {
+  // remember = the "Keep me signed in" checkbox on the login form
+  const updateUser = (userData, remember = false) => {
     setUser(userData);
+    saveSession(userData.id, remember);
   };
 
   const adduserData = (fullName, email, password) => {
@@ -42,6 +50,8 @@ function App() {
 
     setUserList((prev) => [...prev, newUser]);
     setUser(newUser); // optional: auto-login
+    saveRegisteredUser(newUser); // keep the account after a refresh
+    saveSession(newUser.id);
   };
 
   const updatePurchasedCourses = (userId, courseId) => {
@@ -77,6 +87,7 @@ function App() {
 
   const logOut = () => {
     setUser(null);
+    clearSession();
   };
 
   return (
@@ -85,12 +96,17 @@ function App() {
         <Route
           path="/"
           element={
-            <>
-              <ScrollToTop />
-              <Header user={user} logout={logOut} />
-              <Splash />
-              <Footer />
-            </>
+            user ? (
+              // Signed in: skip the marketing splash
+              <Navigate to="/courses" replace />
+            ) : (
+              <>
+                <ScrollToTop />
+                <Header user={user} logout={logOut} />
+                <Splash />
+                <Footer />
+              </>
+            )
           }
         />
 
@@ -129,7 +145,7 @@ function App() {
           element={
             <>
               <ScrollToTop />
-              <Header />
+              <Header user={user} logout={logOut} />
               <AboutUs />
               <Footer />
             </>
