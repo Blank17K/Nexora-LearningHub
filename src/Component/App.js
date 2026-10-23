@@ -1,33 +1,42 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop.js";
-import Splash from "./splash.js"; 
+import Splash from "./splash.js";
 import BackToSite from "./backTosite.js";
 import Header from "./header.js";
 import AboutUs from "./AboutUs.js";
 import Footer from "./footer.js";
-import Login from "./Login.js"; 
+import Login from "./Login.js";
 import SignUp from "./SignUp.js";
 import Course from "./Course.js";
 import CourseView from "./CourseView.js";
-import usersInfo from '../Assets/scripts/usersList.js';
-import { savePurchase } from '../Assets/scripts/usersList.js';
+import usersInfo, {
+  savePurchase,
+  saveRegisteredUser,
+  saveSession,
+  loadSession,
+  clearSession,
+} from "../Assets/scripts/usersList.js";
 import Checkout from "./Checkout.js";
 import CoursePlayer from "./coursePlayer.js";
+import AuthPage from "./AuthPage.js"
 
 function App() {
-  const [user, setUser] = useState(null);
+  // Restore the saved session on load so a refresh doesn't log the user out
+  const [user, setUser] = useState(() => loadSession(usersInfo));
   const [userList, setUserList] = useState(usersInfo);
   const [wasCheckingOut, setCheck] = useState(-1);
 
-  const updateUser = (userData) => {
+  // remember = the "Keep me signed in" checkbox on the login form
+  const updateUser = (userData, remember = false) => {
     setUser(userData);
+    saveSession(userData.id, remember);
   };
 
   const adduserData = (fullName, email, password) => {
     // Safer ID: max existing + 1
     const nextId = userList.length
-      ? Math.max(...userList.map(u => u.id)) + 1
+      ? Math.max(...userList.map((u) => u.id)) + 1
       : 1;
 
     const newUser = {
@@ -39,27 +48,27 @@ function App() {
       purchasedCourses: [],
     };
 
-    setUserList(prev => [...prev, newUser]);
+    setUserList((prev) => [...prev, newUser]);
     setUser(newUser); // optional: auto-login
+    saveRegisteredUser(newUser); // keep the account after a refresh
+    saveSession(newUser.id);
   };
 
-  // Updates BOTH the userList state and the logged-in user,
-  // then persists the purchase to localStorage.
   const updatePurchasedCourses = (userId, courseId) => {
     const numericCourseId = Number(courseId);
 
-    setUserList(prevUsers =>
-      prevUsers.map(u => {
+    setUserList((prevUsers) =>
+      prevUsers.map((u) => {
         if (u.id !== userId) return u;
         if (u.purchasedCourses.includes(numericCourseId)) return u;
         return {
           ...u,
           purchasedCourses: [...u.purchasedCourses, numericCourseId],
         };
-      })
+      }),
     );
 
-    setUser(prevUser => {
+    setUser((prevUser) => {
       if (!prevUser || prevUser.id !== userId) return prevUser;
       if (prevUser.purchasedCourses.includes(numericCourseId)) return prevUser;
       return {
@@ -78,68 +87,117 @@ function App() {
 
   const logOut = () => {
     setUser(null);
+    clearSession();
   };
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={
-          <>
-            <ScrollToTop />
-            <Header user={user} logout={logOut} />
-            <Splash />
-            <Footer />
-          </>
-        } />
+        <Route
+          path="/"
+          element={
+            user ? (
+              // Signed in: skip the marketing splash
+              <Navigate to="/courses" replace />
+            ) : (
+              <>
+                <ScrollToTop />
+                <Header user={user} logout={logOut} />
+                <Splash />
+                <Footer />
+              </>
+            )
+          }
+        />
 
-        <Route path="/login" element={
+        {/* <Route path="/login" element={
+          <>
+          <Header user={null} logout={logOut} signUp={true}/>
           <Login updateU={updateUser} users={userList} check={wasCheckingOut} />
-        } />
-
-        <Route path="/signup" element={<SignUp addU={adduserData} />} />
-
-        <Route path="/aboutus" element={
-          <>
-            <ScrollToTop />
-            <BackToSite />
-            <AboutUs />
-            <Footer />
           </>
         } />
 
-        <Route path="/courses" element={
+        <Route path="/signup" element={
           <>
-            <Header user={user} logout={logOut} />
-            <Course />
-            <Footer />
+          <Header user={user} logout={logOut} signUp={true}/>
+          <SignUp addU={adduserData} />
           </>
-        } />
-
-        <Route path="/course/:id" element={
-          <>
-            <Header user={user} logout={logOut} />
-            <ScrollToTop />
-            <CourseView user={user} check={checkingOut} />
-            <Footer />
-          </>
-        } />
-
-        <Route path="/checkout/:id" element={
-          <>
-            <Header user={user} logout={logOut} />
-            <Checkout
-              checkOut={checkingOut}
-              user={user}
-              paycheck={updatePurchasedCourses}
+          
+          } /> */}
+        <Route
+          element={
+            <AuthPage
+              loginProps={{
+                updateU: updateUser,
+                users: userList,
+                check: wasCheckingOut,
+              }}
+              signupProps={{ addU: adduserData }}
             />
-          </>
-        } />
+          }
+        >
+          <Route path="/login" element={null} />
+          <Route path="/signup" element={null} />
+        </Route>
 
-        <Route path="/courseplayer" element={
-          <>
-            <CoursePlayer />
-          </>
-        } />
+        <Route
+          path="/aboutus"
+          element={
+            <>
+              <ScrollToTop />
+              <Header user={user} logout={logOut} />
+              <AboutUs />
+              <Footer />
+            </>
+          }
+        />
+
+        <Route
+          path="/courses"
+          element={
+            <>
+              <Header user={user} logout={logOut} />
+              <Course />
+              <Footer />
+            </>
+          }
+        />
+
+        <Route
+          path="/course/:id"
+          element={
+            <>
+              <Header user={user} logout={logOut} />
+              <ScrollToTop />
+              <CourseView user={user} check={checkingOut} />
+              <Footer />
+            </>
+          }
+        />
+
+        <Route
+          path="/checkout/:id"
+          element={
+            <>
+              <Header user={user} logout={logOut} />
+              <Checkout
+                checkOut={checkingOut}
+                user={user}
+                paycheck={updatePurchasedCourses}
+              />
+            </>
+          }
+        />
+
+        <Route
+          path="/courseplayer"
+          element={
+            <>
+              <Header user={user} logout={logOut} />
+              <CoursePlayer />
+            </>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

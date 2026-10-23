@@ -73,15 +73,16 @@
 /* ---------- Left column ---------- */
 
 .loginLeft {
-    padding: 8px 64px 40px;
+    position: relative;
+    padding: 8px 64px 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow-x: clip;
 }
 
 .loginContent {
-    max-width: 400px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .welcomeTitle {
@@ -96,12 +97,14 @@
     font-size: 14px;
 }
 .erorrSub{
-    argin: 0 0 24px;
+    margin: 0 0 24px;
     color: red;
     font-size: 14px;
 }
 
 .tabSwitch {
+    position: relative;
+    isolation: isolate;
     display: flex;
     background: var(--nexora-tab-bg);
     border-radius: 8px;
@@ -109,23 +112,45 @@
     margin-bottom: 24px;
 }
 
+/* White "thumb" behind the active tab. --thumb is 0% (left) or 100% (right). */
+.tabSwitch::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    border-radius: 6px;
+    background: var(--nexora-white);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    transform: translateX(var(--thumb, 0%));
+    z-index: 0;
+}
+
 .tabBtn {
+    position: relative;
+    z-index: 1;
+    display: block;
     flex: 1;
     border: none;
     background: transparent;
     padding: 10px 0;
     font-size: 14px;
     font-weight: 600;
+    text-align: center;
+    text-decoration: none !important;
     color: var(--nexora-muted);
     border-radius: 6px;
     cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+    transition: color 0.15s ease;
+}
+
+.tabBtn:hover {
+    color: var(--nexora-ink);
 }
 
 .tabBtnActive {
-    background: var(--nexora-white);
     color: var(--nexora-ink);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 a {
@@ -301,11 +326,293 @@ a:hover {
 .loginRight {
     position: relative;
     height: 100%;
+    overflow: hidden;
 }
 
 .loginHeroImg {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+/* ---------- Checklist + terms (signup form) ---------- */
+
+.passwordChecklist {
+  list-style: none;
+  margin: 4px 0 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.passwordChecklist li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--nexora-muted);
+}
+
+.checkDot {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--nexora-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--nexora-white);
+}
+
+.checkDone {
+  color: var(--nexora-ink);
+}
+
+.checkDone .checkDot {
+  background: var(--nexora-brand);
+  border-color: var(--nexora-brand);
+}
+
+.termsText {
+  font-size: 12px;
+  color: var(--nexora-muted);
+  text-align: center;
+  margin: 14px 0 0;
+}
+
+.keepSignedIn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.keepSignedIn input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--nexora-brand);
+}
+
+.primaryBtn {
+  width: 100%;
+  padding: 13px 0;
+  border: none;
+  border-radius: 8px;
+  background: var(--nexora-brand);
+  color: var(--nexora-white);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.primaryBtn:hover {
+  background: var(--nexora-brand-hover);
+}
+
+.dividerRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: var(--nexora-border);
+}
+
+.dividerText {
+  font-size: 12px;
+  color: var(--nexora-muted);
+  white-space: nowrap;
+}
+
+.oauthRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.oauthBtn {
+  flex: 1;
+  padding: 11px 0;
+  border: 1px solid var(--nexora-border);
+  border-radius: 8px;
+  background: var(--nexora-white);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.oauthBtn:hover {
+  background: #f7f8f9;
+}
+
+.signupText {
+  font-size: 13px;
+  color: var(--nexora-muted);
+  text-align: left;
+  margin: 0;
+}
+
+.signupLink {
+  color: var(--nexora-brand);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.signupLink:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Right column ---------- */
+
+.loginRight {
+  position: relative;
+  height: 100%;
+}
+
+.loginHeroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- Login <-> Register transition ---------- */
+
+:root {
+    --auth-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Panels are stacked in the stage so one can leave while the other enters */
+.authStage {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    transition: height 0.5s var(--auth-ease);
+}
+
+.authPanel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+/* Entering form slides in from the side you're heading towards */
+.authPanel.isEnter.fromRight { animation: authSlideInRight 0.55s var(--auth-ease) backwards; }
+.authPanel.isEnter.fromLeft  { animation: authSlideInLeft 0.55s var(--auth-ease) backwards; }
+
+/* Leaving form slides out the opposite way and fades */
+.authPanel.isLeave {
+    pointer-events: none;
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+    animation-fill-mode: forwards;
+}
+.authPanel.isLeave.toLeft  { animation-name: authOutLeft; }
+.authPanel.isLeave.toRight { animation-name: authOutRight; }
+
+/* Heading, tabs and fields rise in one after another */
+.authPanel.isEnter .loginContent > :not(.loginForm),
+.authPanel.isIntro .loginContent > :not(.loginForm),
+.authPanel.isEnter .loginForm > *,
+.authPanel.isIntro .loginForm > * {
+    animation: authRise 0.55s var(--auth-ease) backwards;
+}
+.authPanel.isEnter .loginContent > :nth-child(1):not(.loginForm),
+.authPanel.isIntro .loginContent > :nth-child(1):not(.loginForm) { animation-delay: 0.16s; }
+.authPanel.isEnter .loginContent > :nth-child(2):not(.loginForm),
+.authPanel.isIntro .loginContent > :nth-child(2):not(.loginForm) { animation-delay: 0.21s; }
+.authPanel.isEnter .loginContent > :nth-child(3):not(.loginForm),
+.authPanel.isIntro .loginContent > :nth-child(3):not(.loginForm) { animation-delay: 0.26s; }
+.authPanel.isEnter .loginContent > :nth-child(4):not(.loginForm),
+.authPanel.isIntro .loginContent > :nth-child(4):not(.loginForm) { animation-delay: 0.31s; }
+.authPanel.isEnter .loginContent > :nth-child(5):not(.loginForm),
+.authPanel.isIntro .loginContent > :nth-child(5):not(.loginForm) { animation-delay: 0.36s; }
+.authPanel.isEnter .loginForm > :nth-child(1),
+.authPanel.isIntro .loginForm > :nth-child(1) { animation-delay: 0.34s; }
+.authPanel.isEnter .loginForm > :nth-child(2),
+.authPanel.isIntro .loginForm > :nth-child(2) { animation-delay: 0.38s; }
+.authPanel.isEnter .loginForm > :nth-child(3),
+.authPanel.isIntro .loginForm > :nth-child(3) { animation-delay: 0.42s; }
+.authPanel.isEnter .loginForm > :nth-child(4),
+.authPanel.isIntro .loginForm > :nth-child(4) { animation-delay: 0.46s; }
+.authPanel.isEnter .loginForm > :nth-child(5),
+.authPanel.isIntro .loginForm > :nth-child(5) { animation-delay: 0.50s; }
+.authPanel.isEnter .loginForm > :nth-child(6),
+.authPanel.isIntro .loginForm > :nth-child(6) { animation-delay: 0.54s; }
+.authPanel.isEnter .loginForm > :nth-child(7),
+.authPanel.isIntro .loginForm > :nth-child(7) { animation-delay: 0.58s; }
+.authPanel.isEnter .loginForm > :nth-child(8),
+.authPanel.isIntro .loginForm > :nth-child(8) { animation-delay: 0.62s; }
+.authPanel.isEnter .loginForm > :nth-child(9),
+.authPanel.isIntro .loginForm > :nth-child(9) { animation-delay: 0.66s; }
+.authPanel.isEnter .loginForm > :nth-child(10),
+.authPanel.isIntro .loginForm > :nth-child(10) { animation-delay: 0.70s; }
+.authPanel.isEnter .loginForm > :nth-child(11),
+.authPanel.isIntro .loginForm > :nth-child(11) { animation-delay: 0.74s; }
+.authPanel.isEnter .loginForm > :nth-child(12),
+.authPanel.isIntro .loginForm > :nth-child(12) { animation-delay: 0.78s; }
+.authPanel.isEnter .loginForm > :nth-child(13),
+.authPanel.isIntro .loginForm > :nth-child(13) { animation-delay: 0.82s; }
+
+/* The tab thumb glides from the other side to the active tab */
+.authPanel.isEnter .tabSwitch::before {
+    animation: authThumb 0.55s var(--auth-ease) 0.22s backwards;
+}
+
+/* Hero photo cross-fades (leaving one stays underneath until it's removed) */
+.loginHeroImg.heroOut { z-index: 1; }
+.loginHeroImg.heroIn {
+    z-index: 2;
+    animation: authHeroIn 0.5s var(--auth-ease) backwards;
+}
+
+@keyframes authSlideInRight { from { transform: translateX(48px); } to { transform: none; } }
+@keyframes authSlideInLeft  { from { transform: translateX(-48px); } to { transform: none; } }
+@keyframes authOutLeft  { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(-48px); } }
+@keyframes authOutRight { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(48px); } }
+@keyframes authRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes authThumb { from { transform: translateX(calc(var(--thumb) + var(--thumb-from))); } to { transform: translateX(var(--thumb)); } }
+@keyframes authHeroIn { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: none; } }
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 900px) {
+    .navBar { padding: 20px 24px; }
+    .logInAndImage { grid-template-columns: 1fr; }
+    .loginRight { display: none; }
+    .loginLeft { padding: 8px 24px 40px; }
+}
+
+/* ---------- Reduced motion: swap instantly ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .authStage,
+    .authPanel,
+    .authPanel *,
+    .authPanel *::before,
+    .loginHeroImg {
+        animation: none !important;
+        transition: none !important;
+    }
+    .authPanel.isLeave,
+    .loginHeroImg.heroOut {
+        display: none;
+    }
 }

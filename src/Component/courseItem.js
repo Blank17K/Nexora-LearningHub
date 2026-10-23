@@ -1,37 +1,47 @@
 import React from "react";
-import ReactDOM from "react-dom/client"; 
-import jsImage from "../Assets/scripts/courseImages/js.png";
 import "../styleComp/courseItem.css";
 
-export default class CourseItem extends React.Component{
-    constructor(props){
-        super(props);
-        const {course} = props;
-        this.course = course;
-    }
-
-
-    render(){
-        return(
-            <div className="courseItem row">
-                <img src={this.course.imgPath} className="col-3 align-self-center" alt="courseImg"/>
-                <div className="courseContent col row">
-                    <div className="col-8">
-                        <h6>{this.course.name}</h6>
-                        <p className="descrip">{this.course.description.slice(0, 122)}...</p>
-                        <p className="rating">{this.course.rating} <span>({this.course.userNo})</span></p>
-                        <div className="banner row">
-                            <p className="ban">{this.course.banner.type}</p>
-                            <p className="ban ms-2 me-2">{this.course.banner.courseClass}</p>
-                            <p className="ban">{this.course.banner.hours}h</p>
-                            <p className="col auth">{this.course.author}</p>
-                        </div>
-                    </div>
-                    <h4 className="col align-self-center priceItem">
-                        R{this.course.price}.00 {">"}
-                    </h4>
-                </div>
+export default class CourseItem extends React.Component {
+  render() {
+    const { course } = this.props;
+    return (
+      <div className="courseItem row">
+        <div className="col-12 col-sm-3 courseThumb">
+          <img src={course.imgPath} className="align-self-center" alt={course.name} />
+        </div>
+        <div className="courseContent col row">
+          <div className="col-12 col-md-8">
+            <h6>{course.name}</h6>
+            <p className="descrip">{course.description.slice(0, 122)}...</p>
+            <p className="rating">
+              {course.rating} <span>({course.userNo.toLocaleString()})</span>
+            </p>
+            <div className="banner">
+              <p className="ban">{course.banner.type}</p>
+              <p className="ban">{course.banner.courseClass}</p>
+              <p className="ban">{course.banner.hours}h</p>
+              <p className="auth">{course.author}</p>
             </div>
-        );
-    }
+          </div>
+          <h4 className="col-12 col-md-4 align-self-center priceItem">
+            <span>R{course.price}.00</span>
+            <svg
+              className="priceArrow"
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </h4>
+        </div>
+      </div>
+    );
+  }
 }

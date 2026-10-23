@@ -1,188 +1,149 @@
 import React from "react";
-import ReactDOM from "react-dom/client";  
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styleComp/sideFilter.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../styleComp/sideFilter.css";
 
+const Stars = ({ n }) => (
+  <span className="stars" aria-hidden="true">
+    {Array.from({ length: 5 }, (_, i) => (
+      <svg key={i} viewBox="0 0 24 24" width="14" height="14" className={i < n ? "on" : "off"}>
+        <path
+          fill="currentColor"
+          d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"
+        />
+      </svg>
+    ))}
+  </span>
+);
 
-export default class SideFilter extends React.Component{
-    constructor(props){
-        super(props);
+const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
-    }
+// One checkbox row. Options that would return 0 courses are dimmed (but a
+// ticked option can always be un-ticked).
+function CheckRow({ id, label, count, checked, onChange }) {
+  const disabled = count === 0 && !checked;
+  return (
+    <div className={"form-check filterRow" + (disabled ? " isEmpty" : "")}>
+      <input
+        className="form-check-input"
+        type="checkbox"
+        id={id}
+        checked={checked}
+        disabled={disabled}
+        onChange={onChange}
+      />
+      <label className="form-check-label" htmlFor={id}>
+        {label} <sub>({count})</sub>
+      </label>
+    </div>
+  );
+}
 
-    render(){
-        return(
-            <div className="col-3 Filter">
-                <div className="Ratings fill">
-                    <h5>Ratings:</h5>
-                    <div className="form-check">
-                        <input className="form-check-input" type="radio" name="stars" id="4_stars" value="4_stars"></input>
-                        <label className="form-check-label" for="exampleRadios2">
-                            <span className="row jsutify-content-end">
-                                <i className="col-1 lni lni-star-fat"></i>
-                                <i className="col-1 lni lni-star-fat"></i>
-                                <i className="col-1 lni lni-star-fat"></i>
-                                <i className="col-1 lni lni-star-fat"></i>
-                                <sub className="col-5">4.0 & Up</sub>
-                            </span>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="radio" name="stars" id="4_stars" value="4_stars"></input>
-                        <label className="form-check-label" for="exampleRadios2">
-                            <span className="row jsutify-content-end">
-                                <i className="col-1 lni lni-star-fat"></i>
-                                <i className="col-1 lni lni-star-fat"></i>
-                                <i className="col-1 lni lni-star-fat"></i>
-                                <sub className="col-5">3.0 & Up</sub>
-                            </span>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="radio" name="stars" id="4_stars" value="4_stars"></input>
-                        <label className="form-check-label" for="exampleRadios2">
-                            <span className="row jsutify-content-end">
-                                <i className="col-1 lni lni-star-fat"></i>
-                                <i className="col-1 lni lni-star-fat"></i>
-                                <sub className="col-7">2.0 & Up</sub>
-                            </span>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="radio" name="stars" id="4_stars" value="4_stars"></input>
-                        <label className="form-check-label" for="exampleRadios2">
-                            <span className="row jsutify-content-end">
-                                <i className="col-1 lni lni-star-fat"></i>
-                                <sub className="col-8">1.0 & Up</sub>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div className="video_duration fill">
-                    <h5>Video Durarion:</h5>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="0" id="flexCheckDefault"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            0-1 hour <sub>(0)</sub>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="2" id="flexCheckDefault"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            2-3 hour <sub>(0)</sub>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="4" id="flexCheckDefault"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            4-6 hour <sub>(0)</sub>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="6" id="flexCheckDefault"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            6+ hour <sub>(0)</sub>
-                        </label>
-                    </div>
-                </div>
-                <div className="topics fill">
-                    <h5>Topics:</h5>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="Web_Dev" id="ToicDefalt"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            Web Development <sub>(0)</sub>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="Cloud_Comp" id="ToicDefalt"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            Cloud Computing<sub>(0)</sub>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="Game_Dev" id="ToicDefalt"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            Game Development<sub>(0)</sub>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="3D" id="ToicDefalt"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            3D<sub>(0)</sub>
-                        </label>
-                    </div>
-                </div>
-                <div className="subCat fill">
-                    <h5>Subcategory:</h5>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="Web_Dev" id="subTopic"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            Javascript<sub>(0)</sub>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="Cloud_Comp" id="subTopic"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                           React<sub>(0)</sub>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="Game_Dev" id="subTopic"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            Unity<sub>(0)</sub>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="3D" id="subTopic"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            Blender<sub>(0)</sub>
-                        </label>
-                    </div>
-                </div>
-                <div className="levels fill">
-                    <h5>Levels:</h5>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="Web_Dev" id="level"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            All Levels<sub>(0)</sub>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="Cloud_Comp" id="level"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                           Beginner<sub>(0)</sub>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="Game_Dev" id="level"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            Intermediate<sub>(0)</sub>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="3D" id="level"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            Expert<sub>(0)</sub>
-                        </label>
-                    </div>
-                </div>
-                <div className="price fill">
-                    <h5>Price:</h5>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="Web_Dev" id="price"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                            Free<sub>(0)</sub>
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="Cloud_Comp" id="price"/>
-                        <label className="form-check-label" for="flexCheckDefault">
-                           Paid<sub>(0)</sub>
-                        </label>
-                    </div>
-                </div>
+export default function SideFilter({
+  ratingSteps,
+  durationBuckets,
+  filters,
+  counts,
+  topics,
+  levels,
+  activeCount,
+  onRating,
+  onToggle,
+  onClear,
+}) {
+  return (
+    <aside className="Filter" aria-label="Course filters">
+      <div className="filterTop">
+        <h5>Filters</h5>
+        {activeCount > 0 && (
+          <button type="button" className="clearBtn" onClick={onClear}>
+            Clear all ({activeCount})
+          </button>
+        )}
+      </div>
+
+      <div className="Ratings fill">
+        <h6>Rating</h6>
+        <div className="form-check filterRow">
+          <input
+            className="form-check-input"
+            type="radio"
+            name="rating"
+            id="rate-any"
+            checked={!filters.rating}
+            onChange={() => onRating(0)}
+          />
+          <label className="form-check-label" htmlFor="rate-any">
+            Any rating <sub>({counts.rating[0]})</sub>
+          </label>
+        </div>
+        {ratingSteps.map((step) => {
+          const count = counts.rating[step];
+          const disabled = count === 0 && filters.rating !== step;
+          return (
+            <div
+              className={"form-check filterRow" + (disabled ? " isEmpty" : "")}
+              key={step}
+            >
+              <input
+                className="form-check-input"
+                type="radio"
+                name="rating"
+                id={`rate-${step}`}
+                checked={filters.rating === step}
+                disabled={disabled}
+                onChange={() => onRating(step)}
+              />
+              <label className="form-check-label" htmlFor={`rate-${step}`}>
+                <Stars n={Math.floor(step)} />
+                <span className="rateText">{step.toFixed(1)} &amp; up</span>
+                <sub>({count})</sub>
+              </label>
             </div>
-        )
-    }
+          );
+        })}
+      </div>
 
+      <div className="video_duration fill">
+        <h6>Course duration</h6>
+        {durationBuckets.map((b) => (
+          <CheckRow
+            key={b.id}
+            id={`dur-${b.id}`}
+            label={b.label}
+            count={counts.durations[b.id]}
+            checked={filters.durations.includes(b.id)}
+            onChange={() => onToggle("durations", b.id)}
+          />
+        ))}
+      </div>
+
+      <div className="topics fill">
+        <h6>Topic</h6>
+        {topics.map((t) => (
+          <CheckRow
+            key={t}
+            id={`topic-${slug(t)}`}
+            label={t}
+            count={counts.topics[t]}
+            checked={filters.topics.includes(t)}
+            onChange={() => onToggle("topics", t)}
+          />
+        ))}
+      </div>
+
+      <div className="levels fill">
+        <h6>Level</h6>
+        {levels.map((l) => (
+          <CheckRow
+            key={l}
+            id={`level-${slug(l)}`}
+            label={l}
+            count={counts.levels[l]}
+            checked={filters.levels.includes(l)}
+            onChange={() => onToggle("levels", l)}
+          />
+        ))}
+      </div>
+    </aside>
+  );
 }

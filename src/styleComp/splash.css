@@ -1,77 +1,383 @@
 :root{
     --primary: #fff;
     --btnCol: #0F6B57;
+    --btnColDark: #0b5545;
     --worldPad: 3rem;
     --grey: #DDDDDD;
     --cardCol: #004133;
+    --ease: cubic-bezier(.22, 1, .36, 1);
 }
 #root{
     min-height: 100vh;
 }
+
+/* ───────── Shared motion ───────── */
+@keyframes revealUp{
+    from{ opacity: 0; transform: translateY(28px); }
+    to{ opacity: 1; transform: none; }
+}
+@keyframes heroVisualIn{
+    from{ opacity: 0; transform: translateX(32px) scale(.96); }
+    to{ opacity: 1; transform: none; }
+}
+@keyframes floaty{
+    0%, 100%{ transform: translateY(0); }
+    50%{ transform: translateY(-12px); }
+}
+@keyframes glowPulse{
+    0%, 100%{ opacity: .55; transform: scale(1); }
+    50%{ opacity: .85; transform: scale(1.06); }
+}
+
+/* Scroll reveal: hidden until Splash adds .in via IntersectionObserver */
+.splashSec [data-reveal]{
+    opacity: 0;
+}
+.splashSec [data-reveal].in{
+    opacity: 1;
+    animation: revealUp .85s var(--ease) var(--d, 0ms) backwards;
+}
+
+.splashSec{
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+}
+
+/* ───────── Hero ───────── */
 .intro{
-    padding: 5rem;
+    padding: clamp(1.5rem, 5vw, 5rem);
+    row-gap: 2.5rem;
+}
+.heroItem{
+    animation: revealUp .9s var(--ease) var(--d, 0ms) backwards;
 }
 .introText h1{
-    font-size: 6vw;
-    margin-bottom: 1rem;
+    font-size: clamp(2.6rem, 5.4vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -.035em;
+    color: #0e1f1a;
+    margin-bottom: 1.25rem;
 }
-.strtBtn{
-    background-color: var(--btnCol);
-    color: var(--primary);
-}
-.catBtn{
+.heroAccent{
+    background: linear-gradient(100deg, #0F6B57 10%, #22b08f 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
     color: var(--btnCol);
 }
+.heroLead{
+    max-width: 32rem;
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: #4a5a55;
+}
+.heroActions{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .85rem;
+    margin-top: 1.75rem;
+}
+
+.heroVisual{
+    position: relative;
+    isolation: isolate;
+}
+.heroVisualIn{
+    animation: heroVisualIn 1.1s var(--ease) .2s backwards;
+}
+.heroVisual::before{
+    content: "";
+    position: absolute;
+    inset: 8% 4%;
+    z-index: -1;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(34, 176, 143, .35), rgba(34, 176, 143, 0));
+    filter: blur(30px);
+    animation: glowPulse 6s ease-in-out infinite;
+}
+.adImg{
+    display: block;
+    width: 100%;
+    animation: floaty 7s ease-in-out 1.3s infinite;
+}
+
+/* Buttons (scoped so Bootstrap's .btn:hover can't wipe the colours) */
+.splashSec .btn{
+    border-radius: 999px;
+    font-weight: 600;
+    padding: .8rem 1.6rem;
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease), background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+}
+.splashSec .btn:active{
+    transform: scale(.98);
+}
+.splashSec .strtBtn{
+    background-color: var(--btnCol);
+    color: var(--primary);
+    border: 1px solid var(--btnCol);
+    box-shadow: 0 8px 22px rgba(15, 107, 87, .25);
+}
+.splashSec .strtBtn:hover{
+    background-color: var(--btnColDark);
+    border-color: var(--btnColDark);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(15, 107, 87, .35);
+    text-decoration: none;
+}
+.splashSec .catBtn{
+    color: var(--btnCol);
+    background: transparent;
+    border: 1px solid var(--btnCol);
+    margin: 0;
+}
+.splashSec .catBtn:hover{
+    background: rgba(15, 107, 87, .08);
+    color: var(--btnColDark);
+    border-color: var(--btnColDark);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+.arrowIcon{
+    margin-left: .35rem;
+    vertical-align: -3px;
+    transition: transform .3s var(--ease);
+}
+.splashSec .btn:hover .arrowIcon{
+    transform: translateX(5px);
+}
+
+/* ───────── Banners ───────── */
 .banner{
     max-width: 100vw;
 }
 .banner img{
+    display: block;
     width: 100%;
 }
+
+/* ───────── Section titles ───────── */
 .popularClass, .theMovement{
     padding: var(--worldPad);
 }
-.card-img-top{
+.sectionTitle{
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: #0e1f1a;
+    margin-bottom: 1.75rem;
+}
+.popularClass .sectionTitle{
+    position: relative;
+    width: fit-content;
+    padding-bottom: .6rem;
+}
+.popularClass .sectionTitle::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 3rem;
+    border-radius: 3px;
+    background: var(--btnCol);
+}
+
+/* ───────── Popular cards ───────── */
+.popCard{
+    overflow: hidden;
+    border: 1px solid #e4ebe8;
+    border-radius: 1.1rem;
+    background: #fff;
+    transition: transform .45s var(--ease), box-shadow .45s var(--ease), border-color .45s var(--ease);
+}
+.popCard:hover{
+    transform: translateY(-8px);
+    border-color: rgba(15, 107, 87, .35);
+    box-shadow: 0 22px 48px rgba(0, 65, 51, .16);
+}
+.cardMedia{
+    overflow: hidden;
     border-bottom: solid 2px var(--btnCol);
+}
+.card-img-top{
+    display: block;
+    transition: transform .7s var(--ease);
+}
+.popCard:hover .card-img-top{
+    transform: scale(1.06);
+}
+.courseCat{
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-bottom: .75rem;
 }
 .card-subtitle{
     border-radius: 1rem;
     width: fit-content;
-    padding: 0.25rem 1rem;
+    padding: .25rem .9rem;
+    margin-bottom: 0 !important;
+    font-size: .75rem;
+    font-weight: 600;
 }
 .best{
     background-color: var(--btnCol);
     color: var(--primary) !important;
 }
 .begn{
-    background-color: var(--grey);
+    background-color: #e8eeec;
+    color: #3c4a46 !important;
+}
+.popCard .card-title{
+    font-weight: 700;
+    letter-spacing: -.01em;
+    color: #0e1f1a;
+}
+.popCard .card-text{
+    color: #5b6b66;
+}
+.popCard .card-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .9rem 1rem;
+    background: #f6f9f8;
+    border-top: 1px solid #e4ebe8;
+}
+.popCard .card-footer p{
+    margin: 0;
+    color: #4a5a55;
+    font-size: .9rem;
+}
+.popCard .rating{
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+}
+.starIcon{
+    color: #f5b301;
+    margin-right: .1rem;
+}
+.popCard .price{
+    font-weight: 700;
+    color: var(--btnCol) !important;
+}
 
+/* ───────── Testimonials ───────── */
+.theMovement .sectionTitle{
+    width: 100%;
+    max-width: 44rem;
+    margin-bottom: .5rem;
 }
-.theMovement h3{
-    margin-bottom: 2rem;
+
+.moveCard{
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    border-radius: 1.1rem;
+    background: linear-gradient(145deg, #004133 0%, #0a5a47 100%);
+    transition: transform .45s var(--ease), box-shadow .45s var(--ease);
 }
-.card-body p{
-    color: var(--primary) ;
+.moveCard::before{
+    content: "\201C";
+    position: absolute;
+    bottom: -2.2rem;
+    right: 1.4rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 6rem;
+    line-height: 1;
+    color: rgba(255, 255, 255, .12);
+    pointer-events: none;
+    transition: transform .6s var(--ease), color .6s var(--ease);
 }
-.theMovement .card{
-    background-color: var(--cardCol);
+.moveCard:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 22px 48px rgba(0, 65, 51, .28);
+}
+.moveCard:hover::before{
+    transform: translateY(-6px) scale(1.1);
+    color: rgba(255, 255, 255, .2);
+}
+.theMovement .card-body{
+    padding: 1.5rem;
+}
+.theMovement .card-body p{
+    color: var(--primary);
+    line-height: 1.6;
+}
+.moveAuthor{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+.moveAuthor img{
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .18);
 }
 .txtCardMove{
     max-height: fit-content;
 }
-.freeTrail{
-    padding: var(--worldPad);
-    background-color: var(--cardCol);
-    color: var(--primary);
-}
-.freeTrail div img{
-    width:75%;
-}
-.freeTrailBtn{
-    background-color: var(--primary);
-    color: var(--cardCol);
+.txtCardMove p{
+    margin: 0;
+    line-height: 1.35;
 }
 
+/* ───────── Free course CTA ───────── */
+.freeTrail{
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
+    overflow: hidden;
+    padding: calc(var(--worldPad) + 1rem) var(--worldPad);
+    background:
+        radial-gradient(60rem 24rem at 85% 0%, rgba(34, 176, 143, .22), transparent 60%),
+        linear-gradient(135deg, #003327 0%, #004133 55%, #0a5a47 100%);
+    color: var(--primary);
+    row-gap: 2rem;
+}
+.freeTrail div img{
+    width: 75%;
+    border-radius: 1.25rem;
+    box-shadow: 0 24px 50px rgba(0, 0, 0, .3);
+    animation: floaty 8s ease-in-out infinite;
+}
+.freeTrail center{
+    height: auto;
+}
+.freeTrail h2{
+    font-size: clamp(1.5rem, 2.3vw, 2.1rem);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    margin-bottom: .6rem;
+}
+.freeTrail p{
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, .82);
+}
+.splashSec .freeTrailBtn{
+    background-color: var(--primary);
+    color: var(--cardCol);
+    border: 1px solid var(--primary);
+}
+.splashSec .freeTrailBtn:hover{
+    background-color: #eafaf5;
+    color: var(--cardCol);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, .28);
+    text-decoration: none;
+}
+
+/* ───────── Global rules used across the site ───────── */
 a {
   text-decoration: none;
 }
@@ -92,4 +398,20 @@ center{
     background-color: var(--primary);
     color: var(--cardCol);
     border: solid 3px var(--cardCol);
+}
+
+/* ───────── Mobile ───────── */
+@media (max-width: 767.98px){
+    :root{ --worldPad: 1.5rem; }
+    .freeTrail .freeImg{ text-align: center; }
+    .freeTrail div img{ width: 70%; }
+}
+
+/* ───────── Reduced motion ───────── */
+@media (prefers-reduced-motion: reduce){
+    .splashSec [data-reveal]{ opacity: 1; }
+    .splashSec *, .splashSec *::before{
+        animation: none !important;
+        transition-duration: .01ms !important;
+    }
 }

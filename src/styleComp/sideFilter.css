@@ -4,14 +4,132 @@
     --worldPad: 3rem;
     --grey: #DDDDDD;
     --cardCol: #004133;
+    --ease: cubic-bezier(.22, 1, .36, 1);
+}
+.Filter{
+    padding: 1.25rem 1.25rem 1.5rem;
+    background: #f7faf9;
+    border: 1px solid #e4ebe8;
+    border-radius: 1.1rem;
+    animation: courseFadeUp .6s var(--ease) .1s backwards;
+}
+@media (min-width: 992px){
+    .Filter{
+        position: sticky;
+        top: 5.75rem;
+        max-height: calc(100vh - 7rem);
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+}
+.filterTop{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 2rem;
+}
+.filterTop h5{
+    font-weight: 700;
+    letter-spacing: -.01em;
+    color: #0e1f1a;
+}
+.clearBtn{
+    padding: .25rem .75rem;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--btnCol);
+    background: transparent;
+    border: 1px solid rgba(15, 107, 87, .35);
+    border-radius: 999px;
+    cursor: pointer;
+    animation: courseFadeUp .3s var(--ease) backwards;
+    transition: background-color .2s var(--ease), color .2s var(--ease);
+}
+.clearBtn:hover{
+    background: var(--btnCol);
+    color: var(--primary);
 }
 .fill{
-    margin-top: 3rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #e4ebe8;
+}
+.fill h6{
+    margin-bottom: .75rem;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #5b6b66;
 }
 .fill label{
-    padding-left: .5rem;
+    padding-left: .25rem;
 }
 label sub{
     color: var(--btnCol);
     font-weight: bold;
+    margin-left: .25rem;
+}
+
+/* Rows */
+.filterRow{
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    min-height: 1.9rem;
+    margin-bottom: .2rem;
+    padding-left: 0;
+}
+.filterRow .form-check-input{
+    float: none;
+    margin: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+    border-color: #9db8b0;
+    transition: background-color .2s var(--ease), border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.filterRow .form-check-input:checked{
+    background-color: var(--btnCol);
+    border-color: var(--btnCol);
+}
+.filterRow .form-check-input:focus{
+    border-color: var(--btnCol);
+    box-shadow: 0 0 0 .25rem rgba(15, 107, 87, .2);
+}
+.filterRow .form-check-label{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    cursor: pointer;
+    font-size: .92rem;
+    color: #2b3a35;
+    transition: color .2s var(--ease), transform .2s var(--ease);
+}
+.filterRow:hover .form-check-label{
+    color: var(--btnCol);
+}
+.filterRow .form-check-input:checked + .form-check-label{
+    font-weight: 600;
+    color: #0e1f1a;
+}
+.filterRow.isEmpty{
+    opacity: .45;
+}
+.filterRow.isEmpty .form-check-input,
+.filterRow.isEmpty .form-check-label{
+    cursor: not-allowed;
+}
+
+/* Star rating rows */
+.stars{
+    display: inline-flex;
+    gap: 1px;
+    margin-right: .5rem;
+}
+.stars .on{ color: #f5b301; }
+.stars .off{ color: #d5dedb; }
+.rateText{
+    font-size: .85rem;
+    color: #5b6b66;
 }
