@@ -1,10 +1,11 @@
-import usersData from './usersList.json'
+import usersData from "./usersList.json";
 
-const STORAGE_KEY = "purchasedCourses"; // shape: { [userId]: [courseId, ...] }
+const STORAGE_KEY = "purchasedCourses"; // { [userId]: [courseId, ...] }
 const USERS_KEY = "nexoraUsers";        // accounts created through Sign Up
-const SESSION_KEY = "nexoraSession";    // shape: { id } of the signed-in user
+const SESSION_KEY = "nexoraSession";    // { id } of the signed-in user
 const CART_KEY = "nexoraCart";          // shape: { [userId]: [courseId, ...] }
 const FAV_KEY = "nexoraFavourites";     // shape: { [userId]: [courseId, ...] }
+const PROGRESS_KEY = "lessonProgress";  // { [userId]: { [courseId]: { completed: [], lastLesson } } }
 
 // "local" survives closing the browser, "session" only survives a refresh.
 function store(kind) {
@@ -41,6 +42,12 @@ function loadSaved() {
     return saved && typeof saved === "object" ? saved : {};
 }
 
+function loadProgress() {
+    const data = readJSON("local", PROGRESS_KEY, {});
+    return data && typeof data === "object" ? data : {};
+}
+
+
 // Reads a { [userId]: [courseId, ...] } map and returns one user's list.
 function loadUserList(key, userId) {
     const all = readJSON("local", key, {});
@@ -69,8 +76,10 @@ const extraUsers = Array.isArray(storedUsers)
     ? storedUsers.filter((s) => s && !usersData.some((u) => u.id === s.id))
     : [];
 
-// Base data comes from usersList.json; registered accounts, purchases, cart and
-// favourites saved in the browser (localStorage) are merged on top of it.
+// Base data comes from usersList.json; registered accounts, purchases and
+// lesson progress made in the browser are merged on top of it.
+const progressByUser = loadProgress();
+
 const usersInfo = [...usersData, ...extraUsers].map((user) => ({
     ...user,
     purchasedCourses: Array.from(
@@ -78,6 +87,7 @@ const usersInfo = [...usersData, ...extraUsers].map((user) => ({
     ),
     cart: loadCart(user.id),
     favourites: loadFavourites(user.id),
+    progress: progressByUser[user.id] || {},
 }));
 
 // Call this after a successful Sign Up so the account survives a refresh.
@@ -126,6 +136,46 @@ export function savePurchase(userId, courseId) {
             // storage unavailable (private mode / quota) - ignore
         }
     }
+}
+
+// ── Lesson progress (used by coursePlayer.js) ─────────────
+
+/**
+ * Persist a user's progress for one course.
+ * @param {number} userId
+ * @param {number|string} courseId
+ * @param {{ completed?: number[], lastLesson?: number }} payload
+ */
+export function saveProgress(userId, courseId, payload = {}) {
+    if (!userId || courseId == null) return;
+    const all = loadProgress();
+    const forUser = all[userId] || {};
+    forUser[courseId] = {
+        completed: Array.from(new Set(payload.completed || [])),
+        lastLesson:
+            typeof payload.lastLesson === "number" ? payload.lastLesson : 0,
+    };
+    all[userId] = forUser;
+    writeJSON("local", PROGRESS_KEY, all);
+
+    // Keep the in-memory user object in sync so navigation doesn't reload stale data.
+    const user = usersInfo.find((u) => u.id === userId);
+    if (user) {
+        user.progress = user.progress || {};
+        user.progress[courseId] = forUser[courseId];
+    }
+}
+
+/**
+ * Read a user's saved progress for one course, or null if none exists.
+ * @param {number} userId
+ * @param {number|string} courseId
+ * @returns {{ completed: number[], lastLesson: number } | null}
+ */
+export function loadProgressFor(userId, courseId) {
+    if (!userId || courseId == null) return null;
+    const all = loadProgress();
+    return all[userId]?.[courseId] || null;
 }
 
 export default usersInfo;
