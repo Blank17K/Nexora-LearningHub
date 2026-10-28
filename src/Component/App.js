@@ -189,15 +189,16 @@ function App() {
           }
         />
 
-        <Route
-          path="/courseplayer"
-          element={
-            <>
-              <Header user={user} logout={logOut} />
-              <CoursePlayer />
-            </>
-          }
-        />
+      <Route
+        path="/courseplayer/:id"
+        element={
+          <>
+            <ScrollToTop />
+
+            <CoursePlayer user={user} />
+          </>
+        }
+      />
       </Routes>
     </BrowserRouter>
   );
