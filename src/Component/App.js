@@ -34,6 +34,10 @@ function App() {
     setUser(userData);
     saveSession(userData.id, remember);
   };
+  const addToFavourites = (courseId) => {
+    if (user.favourites.includes(courseId)) return; // already favourited
+    user.favourites = [...user.favourites, courseId];
+  };
   const moveToCart = (courseId) => {
     setUser(prevUser => ({
       ...prevUser,
@@ -167,7 +171,7 @@ function App() {
           element={
             <>
               <Header user={user} logout={logOut} />
-              <Course />
+              <Course addToFavourites = {addToFavourites}/>
               <Footer />
             </>
           }

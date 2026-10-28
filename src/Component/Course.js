@@ -179,7 +179,7 @@ export default class Course extends React.Component {
         style={{ "--i": index }}
       >
         <Link to={`/course/${course.id}`} className="courseLink">
-          <CourseItem course={course} />
+          <CourseItem course={course} addToFavourites={this.props.addToFavourites} />
         </Link>
         <hr />
       </div>

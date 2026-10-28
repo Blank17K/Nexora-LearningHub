@@ -146,9 +146,9 @@ export default function Cart({ user }) {
 
       {/* ---------- Display via renderCourses ---------- */}
       <div className="courseList row">
-        <div className="col-10">
+        <div className="col-8">
         {visibleCourses.length === 0 ? (
-          <div className="emptyState col-8">
+          <div className="emptyState">
             <p>No courses in your cart.</p>
             {userCart.length === 0 && (
               <Link to="/courses" className="browseBtn">
@@ -160,7 +160,7 @@ export default function Cart({ user }) {
           renderCourses(visibleCourses)
         )}
         </div>
-        <div className="TotalCost col-2">
+        <div className="TotalCost col-4">
           <div className="StickyCard CartTotal">
             <h3 className="CartTotalTitle">Order Summary</h3>
 

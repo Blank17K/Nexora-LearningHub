@@ -176,7 +176,7 @@ export default function CourseView(props) {
                   </div>
                 )}
                 {beforeYouStart.length > 0 && (
-                  <div>
+                  <div> 
                     <h3>Before you start</h3>
                     <ul>
                       {beforeYouStart.map((line, i) => (
