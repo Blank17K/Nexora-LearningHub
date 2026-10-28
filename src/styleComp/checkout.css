@@ -4,7 +4,10 @@
     --worldPad: 3rem;
     --grey: #c9c9c9;
     --cardCol: #004133;
+    --mint: #8ee6cf;
 }
+
+/* ───────── Payment form (unchanged look) ───────── */
 .CoursePayCard{
     background-color: var(--primary);
 }
@@ -39,81 +42,189 @@
     color: var(--primary);
     width: 100% !important;
 }
-.checkoutBack {
-  min-height: 100%;
-  position: relative;
-  background: transparent; /* or your default bg */
-  transition: background-color .5s ease .5s;
-}
-
-.checkoutBack::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle, #0F6B57, #004133);
-  opacity: 0;
-  transition: opacity .5s ease;
-  z-index: -1; /* keep it behind content */
-  pointer-events: none;
-}
-
-.checkoutBack.changeBack::before {
-  opacity: 1;
-}
-.cardPayment{
-    transition: .5s;
-}
-.slideOut{
-    transform: translateX(-150%);   
-}
-.paidRec{
-    position: absolute;
-    left: 0%;
-    max-width: 45%;
-    padding: 2rem;
-    color: var(--primary);
-    transition: .5s .5s;
-}
-.slideoutIn{
-    transform: translateX(-150%);
-}
 .back{
     padding-top: 1rem;
     color: var(--cardCol);
-    transition: .5s;
+    cursor: pointer;
 }
-.backInv{
-    padding-top: 1rem;
-    color: var(--primary);
-}
-.buttons button{
-    width: fit-content;
-}
-.solidBtn{
-    background-color: var(--primary);
-    color: var(--cardCol);
-    transition: .5s;
-}
-.solidBtn:hover{
-    color: var(--primary);
-    background: none;
-    border: solid 2px var(--primary);
-}
-.outlineBtn{
-    color: var(--primary);
-    border: solid 2px var(--primary);
-    transition: .5s;
-}
-.outlineBtn:hover{
-    background-color: var(--primary);
-    color: var(--cardCol);
-    border: none;
-}
-
 .is-invalid {
   border-color: #dc3545 !important;
   background-image: none;
 }
 .is-invalid:focus {
   box-shadow: 0 0 0 .25rem rgba(220, 53, 69, .25);
+}
+
+/* ───────── "You're enrolled" screen ───────── */
+.enrolled{
+    min-height: calc(100vh - 73px);          /* 73px ≈ header height */
+    padding: 5rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 4rem;
+    align-items: start;
+    color: var(--primary);
+    background:
+        radial-gradient(ellipse at 75% 0%, #0f8a6f 0%, rgba(15, 138, 111, 0) 55%),
+        linear-gradient(200deg, #146b58 0%, #0d4f40 55%, #07372c 100%);
+    animation: enrolledIn .6s ease both;
+}
+@keyframes enrolledIn{
+    from{ opacity: 0; transform: translateY(12px); }
+    to{ opacity: 1; transform: none; }
+}
+
+.enrolledLeft{
+    padding-top: 1.5rem;
+}
+.enrolledBadge{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--mint);
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+.enrolledTick{
+    width: 56px;
+    height: 56px;
+}
+.enrolledLeft h1{
+    font-size: clamp(3rem, 5.5vw, 4.75rem);
+    font-weight: 800;
+    letter-spacing: -.02em;
+    line-height: 1.05;
+    margin: 0 0 1.75rem;
+}
+.enrolledText{
+    font-size: 1.45rem;
+    line-height: 1.35;
+    font-weight: 500;
+    margin-bottom: 3.5rem;
+    max-width: 30rem;
+}
+
+.enrolledButtons{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+.enrolledBtn{
+    border-radius: .6rem;
+    padding: 1.05rem 1.6rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color .25s ease, color .25s ease, transform .25s ease;
+}
+.enrolledBtn:focus-visible{
+    outline: 3px solid var(--mint);
+    outline-offset: 3px;
+}
+.enrolledBtnSolid{
+    background: var(--primary);
+    color: #0f6b57;
+    border: 2px solid var(--primary);
+}
+.enrolledBtnSolid:hover{
+    background: transparent;
+    color: var(--primary);
+}
+.enrolledBtnOutline{
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid rgba(255, 255, 255, .85);
+}
+.enrolledBtnOutline:hover{
+    background: var(--primary);
+    color: #0f6b57;
+}
+
+/* white card on the right */
+.enrolledCard{
+    background: var(--primary);
+    color: #111;
+    border-radius: 2.75rem;
+    padding: 1.5rem 1.75rem;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, .18);
+    max-height: 34rem;            /* about 3 courses, the rest scrolls */
+    overflow-y: auto;
+}
+.enrolledEmpty{
+    text-align: center;
+    padding: 3rem 1.75rem;
+    color: #444;
+}
+.enrolledItem,
+.enrolledItem:hover{
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    padding: 1.4rem 0;
+    border-bottom: 2px solid #c9c9c9;
+    color: inherit;
+    text-decoration: none;
+}
+.enrolledItem:focus-visible{
+    outline: 3px solid var(--btnCol);
+    outline-offset: 2px;
+    border-radius: .75rem;
+}
+.enrolledItem .enrolledInfo{
+    flex: 1;
+    min-width: 0;
+}
+.enrolledItem .enrolledInfo h3{
+    transition: color .25s ease;
+}
+.enrolledItem:hover .enrolledInfo h3{
+    color: var(--btnCol);
+}
+.enrolledArrow{
+    flex-shrink: 0;
+    color: var(--btnCol);
+    transition: transform .3s ease;
+}
+.enrolledItem:hover .enrolledArrow{
+    transform: translateX(6px);
+}
+.enrolledItem:last-child{
+    border-bottom: none;
+}
+.enrolledThumb{
+    width: 190px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 1.1rem;
+    flex-shrink: 0;
+    background: #e5e5e5;
+}
+.enrolledInfo h3{
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+    font-weight: 800;
+    letter-spacing: -.01em;
+    margin: 0 0 .75rem;
+}
+.enrolledInfo p{
+    margin: 0;
+    font-size: 1.15rem;
+    color: #222;
+}
+
+/* tablet / phone: stack the two halves */
+@media (max-width: 991px){
+    .enrolled{
+        grid-template-columns: 1fr;
+        padding: 3rem 1.5rem;
+        gap: 2.5rem;
+    }
+    .enrolledText{ margin-bottom: 2rem; }
+}
+@media (max-width: 575px){
+    .enrolledItem{ flex-direction: column; align-items: flex-start; }
+    .enrolledThumb{ width: 100%; }
+    .enrolledCard{ border-radius: 1.75rem; }
+}
+@media (prefers-reduced-motion: reduce){
+    .enrolled{ animation: none; }
 }

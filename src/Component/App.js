@@ -16,10 +16,15 @@ import usersInfo, {
   saveSession,
   loadSession,
   clearSession,
+  loadCart,
+  saveCart,
+  loadFavourites,
+  saveFavourites,
 } from "../Assets/scripts/usersList.js";
 import Checkout from "./Checkout.js";
 import CoursePlayer from "./coursePlayer.js";
-import AuthPage from "./AuthPage.js"
+import AuthPage from "./AuthPage.js";
+import MyCourses from "./Mycourses.js";
 
 function App() {
   // Restore the saved session on load so a refresh doesn't log the user out
@@ -27,9 +32,19 @@ function App() {
   const [userList, setUserList] = useState(usersInfo);
   const [wasCheckingOut, setCheck] = useState(-1);
 
+  // The search text lives here so the Header (where the user types)
+  // and the Course page (where results are filtered) share it.
+  const [searchQuery, setSearchQuery] = useState("");
+
   // remember = the "Keep me signed in" checkbox on the login form
   const updateUser = (userData, remember = false) => {
-    setUser(userData);
+    // Re-read this user's cart + favourites from storage so they are
+    // always up to date, even if the user logged out and back in.
+    setUser({
+      ...userData,
+      cart: loadCart(userData.id),
+      favourites: loadFavourites(userData.id),
+    });
     saveSession(userData.id, remember);
   };
 
@@ -46,6 +61,8 @@ function App() {
       password,
       cards: [],
       purchasedCourses: [],
+      cart: [],
+      favourites: [],
     };
 
     setUserList((prev) => [...prev, newUser]);
@@ -74,11 +91,60 @@ function App() {
       return {
         ...prevUser,
         purchasedCourses: [...prevUser.purchasedCourses, numericCourseId],
+        // A bought course no longer belongs in the cart
+        cart: (prevUser.cart || []).filter((c) => c !== numericCourseId),
       };
     });
 
     // Persist to localStorage so it survives a refresh
     savePurchase(userId, numericCourseId);
+
+    // Keep the saved cart in sync too
+    saveCart(
+      userId,
+      loadCart(userId).filter((c) => c !== numericCourseId),
+    );
+  };
+
+  // ---------- Per-user Cart + Favourites ----------
+  const cart = user?.cart || [];
+  const favourites = user?.favourites || [];
+
+  const addToCart = (courseId) => {
+    if (!user) return;
+    const id = Number(courseId);
+    if (cart.includes(id)) return;
+    const next = [...cart, id];
+    setUser({ ...user, cart: next });
+    saveCart(user.id, next);
+  };
+
+  const removeFromCart = (courseId) => {
+    if (!user) return;
+    const id = Number(courseId);
+    const next = cart.filter((c) => c !== id);
+    setUser({ ...user, cart: next });
+    saveCart(user.id, next);
+  };
+
+  const toggleFavourite = (courseId) => {
+    if (!user) return;
+    const id = Number(courseId);
+    const next = favourites.includes(id)
+      ? favourites.filter((c) => c !== id)
+      : [...favourites, id];
+    setUser({ ...user, favourites: next });
+    saveFavourites(user.id, next);
+  };
+
+  // Everything the future Cart / Favourites pages and the heart icon on the
+  // course price will need. Pass `shop` to them when we build those.
+  const shop = {
+    cart,
+    favourites,
+    addToCart,
+    removeFromCart,
+    toggleFavourite,
   };
 
   const checkingOut = (id) => {
@@ -88,6 +154,16 @@ function App() {
   const logOut = () => {
     setUser(null);
     clearSession();
+  };
+
+  // One shared set of props, spread into EVERY page's Header.
+  const headerProps = {
+    user,
+    logout: logOut,
+    searchQuery,
+    onSearchChange: setSearchQuery,
+    cartCount: cart.length,
+    favCount: favourites.length,
   };
 
   return (
@@ -102,7 +178,7 @@ function App() {
             ) : (
               <>
                 <ScrollToTop />
-                <Header user={user} logout={logOut} />
+                <Header {...headerProps} />
                 <Splash />
                 <Footer />
               </>
@@ -110,20 +186,6 @@ function App() {
           }
         />
 
-        {/* <Route path="/login" element={
-          <>
-          <Header user={null} logout={logOut} signUp={true}/>
-          <Login updateU={updateUser} users={userList} check={wasCheckingOut} />
-          </>
-        } />
-
-        <Route path="/signup" element={
-          <>
-          <Header user={user} logout={logOut} signUp={true}/>
-          <SignUp addU={adduserData} />
-          </>
-          
-          } /> */}
         <Route
           element={
             <AuthPage
@@ -145,7 +207,7 @@ function App() {
           element={
             <>
               <ScrollToTop />
-              <Header user={user} logout={logOut} />
+              <Header {...headerProps} />
               <AboutUs />
               <Footer />
             </>
@@ -156,8 +218,11 @@ function App() {
           path="/courses"
           element={
             <>
-              <Header user={user} logout={logOut} />
-              <Course />
+              <Header {...headerProps} />
+              <Course
+                searchQuery={searchQuery}
+                onSearchChange={setSearchQuery}
+              />
               <Footer />
             </>
           }
@@ -167,7 +232,7 @@ function App() {
           path="/course/:id"
           element={
             <>
-              <Header user={user} logout={logOut} />
+              <Header {...headerProps} />
               <ScrollToTop />
               <CourseView user={user} check={checkingOut} />
               <Footer />
@@ -179,7 +244,7 @@ function App() {
           path="/checkout/:id"
           element={
             <>
-              <Header user={user} logout={logOut} />
+              <Header {...headerProps} />
               <Checkout
                 checkOut={checkingOut}
                 user={user}
@@ -193,9 +258,61 @@ function App() {
           path="/courseplayer"
           element={
             <>
-              <Header user={user} logout={logOut} />
+              <Header {...headerProps} />
               <CoursePlayer />
             </>
+          }
+        />
+
+        <Route
+          path="/mycourses"
+          element={
+            user ? (
+              <>
+                <Header {...headerProps} />
+                <MyCourses user={user} />
+                <Footer />
+              </>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        {/* Placeholders, replace with the real pages later */}
+        <Route
+          path="/cart"
+          element={
+            user ? (
+              <>
+                <Header {...headerProps} />
+                <div className="container mt-4">
+                  <h2>Your Cart ({shop.cart.length})</h2>
+                  <p>Cart page coming soon.</p>
+                </div>
+                <Footer />
+              </>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        <Route
+          path="/favourites"
+          element={
+            user ? (
+              <>
+                <Header {...headerProps} />
+                <div className="container mt-4">
+                  <h2>Your Favourites ({shop.favourites.length})</h2>
+                  <p>Favourites page coming soon.</p>
+                </div>
+                <Footer />
+              </>
+            ) : (
+              <Navigate to="/login" replace />
+            )
           }
         />
       </Routes>

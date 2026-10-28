@@ -2,9 +2,9 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styleComp/courseSearch.css";
 
+// CHANGED: removed the `searchQuery` and `onSearchChange` props.
+// The search input now lives in the Header.
 export default function CourseSearch({
-  searchQuery,
-  onSearchChange,
   totalResults,
   sortValue,
   onSort,
@@ -32,8 +32,8 @@ export default function CourseSearch({
         </button>
         {topics.map((t) => (
           <button
-            type="button"
             key={t}
+            type="button"
             className={"btn catBtn" + (activeTopics.includes(t) ? " isOn" : "")}
             onClick={() => onPickTopic(t)}
           >
@@ -43,41 +43,13 @@ export default function CourseSearch({
       </div>
 
       <div className="inputSearch">
-        <label className="searchBox">
-          <svg
-            className="searchIcon"
-            viewBox="0 0 24 24"
-            width="18"
-            height="18"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <circle cx="11" cy="11" r="7" />
-            <path d="M21 21l-4.3-4.3" />
-          </svg>
-          <input
-            type="text"
-            placeholder="Search courses, topics or instructors…"
-            value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
-            aria-label="Search courses"
-          />
-          {searchQuery && (
-            <button
-              type="button"
-              className="searchClear"
-              aria-label="Clear search"
-              onClick={() => onSearchChange("")}
-            >
-              ×
-            </button>
-          )}
-        </label>
-        <p className="resultCount">{`${totalResults} ${totalResults === 1 ? "Result" : "Results"}`}</p>
+        {/* REMOVED: the <label className="searchBox"> block with the search
+            icon, the text input and the clear (×) button. */}
+
+        <p className="resultCount">
+          {`${totalResults} ${totalResults === 1 ? "Result" : "Results"}`}
+        </p>
+
         <select
           className="form-select sortSelect"
           value={sortValue}

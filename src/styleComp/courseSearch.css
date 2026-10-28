@@ -150,6 +150,7 @@
 }
 .resultCount{
     margin: 0;
+    margin-right: auto; /* New : pushes the sort dopdown to the right  */
     font-weight: 700;
     white-space: nowrap;
     color: #0e1f1a;

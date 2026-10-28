@@ -3,6 +3,8 @@ import usersData from './usersList.json'
 const STORAGE_KEY = "purchasedCourses"; // shape: { [userId]: [courseId, ...] }
 const USERS_KEY = "nexoraUsers";        // accounts created through Sign Up
 const SESSION_KEY = "nexoraSession";    // shape: { id } of the signed-in user
+const CART_KEY = "nexoraCart";          // shape: { [userId]: [courseId, ...] }
+const FAV_KEY = "nexoraFavourites";     // shape: { [userId]: [courseId, ...] }
 
 // "local" survives closing the browser, "session" only survives a refresh.
 function store(kind) {
@@ -39,6 +41,26 @@ function loadSaved() {
     return saved && typeof saved === "object" ? saved : {};
 }
 
+// Reads a { [userId]: [courseId, ...] } map and returns one user's list.
+function loadUserList(key, userId) {
+    const all = readJSON("local", key, {});
+    const list = all && typeof all === "object" ? all[userId] : [];
+    return Array.isArray(list) ? list : [];
+}
+
+function saveUserList(key, userId, list) {
+    const all = readJSON("local", key, {});
+    const next = all && typeof all === "object" ? all : {};
+    next[userId] = list;
+    writeJSON("local", key, next);
+}
+
+export const loadCart = (userId) => loadUserList(CART_KEY, userId);
+export const saveCart = (userId, list) => saveUserList(CART_KEY, userId, list);
+export const loadFavourites = (userId) => loadUserList(FAV_KEY, userId);
+export const saveFavourites = (userId, list) =>
+    saveUserList(FAV_KEY, userId, list);
+
 const saved = loadSaved();
 
 // Accounts registered in the browser are merged after the ones in usersList.json
@@ -47,13 +69,15 @@ const extraUsers = Array.isArray(storedUsers)
     ? storedUsers.filter((s) => s && !usersData.some((u) => u.id === s.id))
     : [];
 
-// Base data comes from usersList.json; registered accounts and purchases made
-// in the browser (stored in localStorage) are merged on top of it.
+// Base data comes from usersList.json; registered accounts, purchases, cart and
+// favourites saved in the browser (localStorage) are merged on top of it.
 const usersInfo = [...usersData, ...extraUsers].map((user) => ({
     ...user,
     purchasedCourses: Array.from(
         new Set([...(user.purchasedCourses || []), ...(saved[user.id] || [])])
     ),
+    cart: loadCart(user.id),
+    favourites: loadFavourites(user.id),
 }));
 
 // Call this after a successful Sign Up so the account survives a refresh.

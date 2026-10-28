@@ -1,9 +1,11 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CoursePayCard from "./CoursePayCard.js";
+import CheckoutCourseView from "./CheckoutCourseView.js";
+import Receipt, { makeReference, detectCardBrand } from "./Receipt.js";
 import coursesInfo from "../Assets/scripts/courseList.js";
-import ticC from '../Assets/Images/tickC.svg';
-import '../styleComp/checkout.css';
+import ticC from "../Assets/Images/tickC.svg";
+import "../styleComp/checkout.css";
 
 function Checkout(props) {
   const [form, setForm] = useState({
@@ -16,12 +18,25 @@ function Checkout(props) {
   });
   const navigate = useNavigate();
   const { id } = useParams();
-  const [slideRemove, setSlideR] = useState('');
+
+  // true once the payment has gone through -> shows the "enrolled" screen
+  const [paid, setPaid] = useState(false);
+
+  // The receipt for the payment that was just made, and whether its pop-up is open
+  const [receipt, setReceipt] = useState(null);
+  const [showReceipt, setShowReceipt] = useState(false);
 
   const course = useMemo(
     () => coursesInfo.find((c) => String(c.id) === String(id)),
     [id]
   );
+
+  // Tell App we're no longer "waiting to check out". This used to be called
+  // during render, which makes React warn; an effect does the same job cleanly.
+  useEffect(() => {
+    if (typeof props.checkOut === "function") props.checkOut(-1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleBack = () => {
     navigate(`/course/${id}`);
@@ -85,9 +100,8 @@ function Checkout(props) {
   if (!props.user) {
     return (
       <div className="container mt-4">
-        {props.checkOut(-1)}
         <h3>Please log in to continue</h3>
-        <button className="btn btn-secondary mt-3" onClick={() => navigate('/login')}>
+        <button className="btn btn-secondary mt-3" onClick={() => navigate("/login")}>
           Go to Login
         </button>
       </div>
@@ -97,7 +111,6 @@ function Checkout(props) {
   if (!course) {
     return (
       <div className="container mt-4">
-        {props.checkOut(-1)}
         <button className="btn btn-secondary mb-3" onClick={handleBack}>
           Back to Site
         </button>
@@ -156,45 +169,84 @@ function Checkout(props) {
       return;
     }
 
-    // All valid — proceed
-    console.log("Submitting:", Object.fromEntries(
-      Object.entries(form).map(([k, v]) => [k, v.value])
-    ));
-
     // Update App state + persist
     addPurchasedCourse();
 
-    setSlideR('slideOut');
+    // Build the receipt now (only the card brand + last 4 digits are kept)
+    const cardDigits = form.card.value.replace(/\D/g, "");
+    setReceipt({
+      reference: makeReference(),
+      paidAt: new Date(),
+      courses: [course],
+      discountPercent: 0,
+      payment: { brand: detectCardBrand(cardDigits), last4: cardDigits.slice(-4) },
+    });
+
+    setPaid(true);
+    window.scrollTo({ top: 0 });
   };
 
-  const paymentSuccess = () => {
+  // ───────────────────────── "You're enrolled" screen ─────────────────────────
+  if (paid) {
+    // Greet the signed-in user by their own name (first name only)
+    const firstName = (props.user.name || "").trim().split(" ")[0] || "there";
+
     return (
-      <>
-        <div className={`container paidRec ${slideRemove === '' ? 'slideoutIn' : ''}`}>
-          <div className="row">
-            <img alt="tick circle" src={ticC} className="col imgTick" />
-            <h3 className="col-8">{`Your Enrolled ${props.user.name}`}</h3>
+      <section className="enrolled">
+        <div className="enrolledLeft">
+          <div className="enrolledBadge">
+            <img alt="" src={ticC} className="enrolledTick" />
+            <span>You're enrolled, {firstName}</span>
           </div>
-          <h1>Let's build the thing.</h1>
-          <p>{`Lesson one takes ${course.courseModules[0].duration}. By the end of module one you'll know ${course.courseModules[0].title}.`}</p>
-          <div className="buttons row">
-            <button className="btn col solidBtn">Start Lesson <i className="lni lni-arrow-right"></i></button>
-            <button className="btn outlineBtn col ms-4">View Recipt</button>
+
+          <h1>Let's jump in!!</h1>
+
+          <p className="enrolledText">
+            Your transaction has been completed successfully.
+            <br />
+            We have emailed you the details of your order.
+          </p>
+
+          <div className="enrolledButtons">
+            <button
+              type="button"
+              className="enrolledBtn enrolledBtnSolid"
+              onClick={() => navigate("/courses")}
+            >
+              See courses <i className="lni lni-arrow-right"></i>
+            </button>
+            <button
+              type="button"
+              className="enrolledBtn enrolledBtnOutline"
+              onClick={() => setShowReceipt(true)}
+            >
+              View Receipt
+            </button>
           </div>
         </div>
-      </>
-    );
-  };
 
+        {/* White card: every course this user owns (newest first) */}
+        <CheckoutCourseView user={props.user} />
+
+        {showReceipt && receipt && (
+          <Receipt
+            receipt={receipt}
+            user={props.user}
+            onClose={() => setShowReceipt(false)}
+          />
+        )}
+      </section>
+    );
+  }
+
+  // ───────────────────────────── Payment form ─────────────────────────────
   return (
-    <div className={`payArea mt-4 checkoutBack ${slideRemove === "" ? '' : 'changeBack'}`}>
-      {props.checkOut(-1)}
-      <p className={`${slideRemove === '' ? 'back' : 'backInv'} mb-3`} onClick={handleBack}>
+    <div className="payArea mt-4">
+      <p className="back mb-3" onClick={handleBack}>
         <i className="lni lni-arrow-left"></i> Back to Site
       </p>
       <div className="row justify-content-center">
-        {paymentSuccess()}
-        <div className={`col cardPayment ${slideRemove}`}>
+        <div className="col cardPayment">
           <h2>You're one step from building it</h2>
           <p>Lifetime access, source files, and a certificate when you finish.</p>
 
@@ -303,7 +355,7 @@ function Checkout(props) {
           </div>
         </div>
         <div className="col">
-          <CoursePayCard course={course} paid={slideRemove === '' ? false : true} />
+          <CoursePayCard course={course} paid={false} />
         </div>
       </div>
     </div>
