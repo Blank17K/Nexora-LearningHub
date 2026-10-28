@@ -3282,67 +3282,423 @@ a {
 /*!**********************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/styleComp/coursePlayer.css ***!
   \**********************************************************************************/
-:root{
-    --primary: #fff;
-    --btnCol: #0F6B57;
-    --worldPad: 3rem;
-    --grey: #c9c9c9;
-    --cardCol: #004133;
-}
-.playerHolder{
-    min-height: 80vh !important;
-    width: 100vw;
-    padding: 0 2rem;
-}
-.player{
-    width: 100%;
-}
-.playerInfo{
-    border-right: solid 2px grey;
+/* ───── Shell ───── */
+.cpShell {
+  padding: 0 2rem 4rem;
 }
 
-.btnSol{
-    color: var(--cardCol);
-    border: solid 1px var(--cardCol);
+.cpHolder {
+  row-gap: 2rem;
+  align-items: flex-start;
+  min-height: 70vh;
 }
-.toR{
-    text-align: right;
-    padding-right: 1rem;
-    color: var(--cardCol);
+
+/* ───── Header progress bar ───── */
+.cpTop {
+  padding: .5rem;
+  margin-top:10px;
+  margin-bottom:10px;
 }
-.radioBut{
-    color: var(--cardCol);
-    border: solid 1px var(--cardCol);
-    border-radius: .25rem;
-    padding: .5rem .5rem;
+
+.cpCourseName {
+  font-weight: 600;
+  color: var(--cardCol);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.courseComp{
-    color: var(--primary);
-    background-color: var(--cardCol);
-    width: 100%;
-    padding: 2rem 0;
+
+.cpProgress {
+  height: .6rem;
+  background: #e4ebe8;
+  border-radius: 999px;
+  overflow: hidden;
 }
-.courseComp:hover{
-    border: solid 2px var(--cardCol);
+
+.cpProgressFill {
+  height: 100%;
+  background: var(--btnCol);
+  border-radius: 999px;
+  transition: width .5s cubic-bezier(.22, 1, .36, 1);
 }
-.slideR{
-    transform: translateX(-150%);
+
+.cpProgressPct {
+  font-weight: 700;
+  color: var(--cardCol);
 }
-.slideL{
-    transform: translateX(150%);
+
+.cpProgressCount {
+  color: #5b6b66;
+  font-size: .9rem;
+}
+
+/* ───── Player panel ───── */
+.cpPlayerInfo {
+  background: #fff;
+  border: 1px solid #e4ebe8;
+  border-radius: 1.1rem;
+  padding: 1.25rem;
+  transition: box-shadow .35s var(--ease);
+}
+
+.cpPlayerMedia {
+  position: relative;
+  border-radius: .85rem;
+  overflow: hidden;
+}
+
+.cpPlayerMedia .player {
+  width: 100%;
+  display: block;
+}
+
+.cpPlayBadge {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 2rem;
+  background: rgba(0, 65, 51, .18);
+  opacity: 0;
+  transition: opacity .3s var(--ease);
+}
+
+.cpPlayerMedia:hover .cpPlayBadge {
+  opacity: 1;
+}
+
+.cpPlayerMeta {
+  padding-top: 1rem;
+}
+
+.cpEyebrow {
+  margin: 0 0 .25rem;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--btnCol);
+}
+
+.cpLessonTitle {
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: #0e1f1a;
+}
+
+.cpLessonBlurb {
+  color: #4a5a55;
+  line-height: 1.6;
+}
+
+.cpActions {
+  margin-top: 1rem;
+  row-gap: .5rem;
+}
+
+.btnSol {
+  color: var(--cardCol);
+  border: 1px solid var(--cardCol);
+  background: #fff;
+  transition: background .25s var(--ease), color .25s var(--ease), transform .2s var(--ease);
+}
+
+.btnSol:hover {
+  background: var(--cardCol);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.btnSol:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cpRule {
+  margin: 1.25rem 0;
+  color: #cfdad6;
+  opacity: 1;
+}
+
+.cpNavRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem;
+}
+
+.cpPrimary {
+  background: var(--cardCol);
+  color: #fff;
+  font-weight: 700;
+  transition: background .25s var(--ease), transform .2s var(--ease);
+}
+
+.cpPrimary:hover {
+  background: var(--btnCol);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.cpPrimary:disabled {
+  opacity: .5;
+}
+
+.cpUpNext {
+  margin: 0 0 0 auto;
+  color: #5b6b66;
+  font-size: .9rem;
+}
+
+.cpUpNext b {
+  color: var(--cardCol);
+}
+
+/* ───── Sidebar ───── */
+.cpPlayerNav {
+  background: #f7faf9;
+  border: 1px solid #e4ebe8;
+  border-radius: 1.1rem;
+  padding: 1rem;
+}
+
+.cpModule+.cpModule {
+  margin-top: .5rem;
+}
+
+.cpModuleHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: .5rem;
+  background: #cee8e2;
+  border: none;
+  padding: .8rem 1rem;
+  font-weight: 600;
+  font-size: .9rem;
+  border-radius: .6rem;
+  cursor: pointer;
+  transition: background .2s var(--ease);
+}
+
+.cpModuleHeader:hover {
+  background: #b9ded6;
+}
+
+.cpModuleHeader.isDone {
+  background: #d6efe9;
+}
+
+.cpModuleMeta {
+  color: #2b3a35;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.cpLessons {
+  list-style: none;
+  margin: .35rem 0 0;
+  padding: 0;
+}
+
+.cpLessons li {
+  position: relative;
+}
+
+.cpLessonRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .55rem .6rem .55rem 1.4rem;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-size: .88rem;
+  color: #2b3a35;
+  border-radius: .5rem;
+  cursor: pointer;
+  transition: background .2s var(--ease), color .2s var(--ease);
+}
+
+.cpLessonRow:hover {
+  background: rgba(15, 107, 87, .08);
+  color: var(--btnCol);
+}
+
+.cpLessonRow.isActive {
+  background: var(--cardCol);
+  color: #fff;
+  font-weight: 600;
+}
+
+.cpLessonRow.isActive .cpLessonTime {
+  color: rgba(255, 255, 255, .8);
+}
+
+.cpLessonRow.isDone:not(.isActive) .cpLessonName {
+  color: #5b6b66;
+}
+
+.cpLessonCheck {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  font-size: .75rem;
+  border-radius: 50%;
+  border: 1.5px solid #cfdad6;
+  color: #fff;
+  background: transparent;
+}
+
+.cpLessonRow.isDone .cpLessonCheck {
+  background: var(--btnCol);
+  border-color: var(--btnCol);
+}
+
+.cpLessonRow.isActive .cpLessonCheck {
+  border-color: #fff;
+}
+
+.cpLessonName {
+  flex: 1;
+}
+
+.cpLessonTime {
+  font-size: .78rem;
+  color: #7b8984;
+  white-space: nowrap;
+}
+
+.cpUndo {
+  position: absolute;
+  right: .4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: .68rem;
+  color: #7b8984;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .2s var(--ease);
+}
+
+.cpLessons li:hover .cpUndo {
+  opacity: 1;
+}
+
+/* ───── Certificate button ───── */
+.cpCertBtn {
+  width: 100%;
+  padding: 1rem 0;
+  border-radius: .75rem;
+  font-weight: 700;
+}
+
+.cpCertBtn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+/* ───── Certificate overlay ───── */
+.cpCertOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: rgba(0, 33, 25, .55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s var(--ease);
+}
+
+.cpCertOverlay.isOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cpCertCard {
+  position: relative;
+  max-width: min(92vw, 46rem);
+  width: 100%;
+  background: #fff;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(0, 65, 51, .35);
+  transform: translateY(16px) scale(.98);
+  transition: transform .35s var(--ease);
+}
+
+.cpCertOverlay.isOpen .cpCertCard {
+  transform: none;
+}
+
+.cpCertImg {
+  width: 100%;
+  border-radius: .75rem;
+  display: block;
+}
+
+.cpCertClose {
+  position: absolute;
+  top: .5rem;
+  right: .75rem;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  background: #eef3f1;
+  color: #2b3a35;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background .2s var(--ease);
+}
+
+.cpCertClose:hover {
+  background: #dbe5e1;
+}
+
+.cpCertCard h4 {
+  margin: 1rem 0 .25rem;
+  font-weight: 800;
+  color: #0e1f1a;
+}
+
+.cpCertCard p {
+  margin: 0 0 1.25rem;
+  color: #5b6b66;
+}
+
+/* ───── Focus / a11y ───── */
+.cpShell :is(button, [tabindex]):focus-visible {
+  outline: 2px solid var(--btnCol);
+  outline-offset: 2px;
+}
+
+/* ───── Reduced motion ───── */
+@media (prefers-reduced-motion: reduce) {
+
+  .cpShell *,
+  .cpShell *::before {
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ───── Mobile ───── */
+@media (max-width: 991.98px) {
+  .cpShell {
+    padding: 0 1rem 3rem;
+  }
+
+  .cpCourseName {
     display: none;
-}
-.playerNav, .playerInfo {
-    overflow-x: hidden;
-    max-width: 100vw;
-    transition: .5s;
-}
-.imgCert{
-    position: absolute;
-    transition: .5s .5s;
-    height: 100%;
-    width: 100%;
-}
-.noneDisplay{
-    display: none;
+  }
 }
