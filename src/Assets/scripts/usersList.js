@@ -1,4 +1,5 @@
 import usersData from "./usersList.json";
+import { recordActivity } from "./progress.js";
 
 const STORAGE_KEY = "purchasedCourses"; // { [userId]: [courseId, ...] }
 const USERS_KEY = "nexoraUsers";        // accounts created through Sign Up
@@ -47,12 +48,13 @@ function loadProgress() {
     return data && typeof data === "object" ? data : {};
 }
 
-
 // Reads a { [userId]: [courseId, ...] } map and returns one user's list.
-function loadUserList(key, userId) {
+// If nothing has been saved for this user yet, `fallback` is returned
+// (that's how the starter cart / favourites from usersList.json show up).
+function loadUserList(key, userId, fallback = []) {
     const all = readJSON("local", key, {});
-    const list = all && typeof all === "object" ? all[userId] : [];
-    return Array.isArray(list) ? list : [];
+    const list = all && typeof all === "object" ? all[userId] : undefined;
+    return Array.isArray(list) ? list : fallback;
 }
 
 function saveUserList(key, userId, list) {
@@ -62,9 +64,11 @@ function saveUserList(key, userId, list) {
     writeJSON("local", key, next);
 }
 
-export const loadCart = (userId) => loadUserList(CART_KEY, userId);
+export const loadCart = (userId, fallback = []) =>
+    loadUserList(CART_KEY, userId, fallback);
 export const saveCart = (userId, list) => saveUserList(CART_KEY, userId, list);
-export const loadFavourites = (userId) => loadUserList(FAV_KEY, userId);
+export const loadFavourites = (userId, fallback = []) =>
+    loadUserList(FAV_KEY, userId, fallback);
 export const saveFavourites = (userId, list) =>
     saveUserList(FAV_KEY, userId, list);
 
@@ -76,8 +80,8 @@ const extraUsers = Array.isArray(storedUsers)
     ? storedUsers.filter((s) => s && !usersData.some((u) => u.id === s.id))
     : [];
 
-// Base data comes from usersList.json; registered accounts, purchases and
-// lesson progress made in the browser are merged on top of it.
+// Base data comes from usersList.json; registered accounts, purchases, cart,
+// favourites and lesson progress made in the browser are merged on top of it.
 const progressByUser = loadProgress();
 
 const usersInfo = [...usersData, ...extraUsers].map((user) => ({
@@ -85,8 +89,8 @@ const usersInfo = [...usersData, ...extraUsers].map((user) => ({
     purchasedCourses: Array.from(
         new Set([...(user.purchasedCourses || []), ...(saved[user.id] || [])])
     ),
-    cart: loadCart(user.id),
-    favourites: loadFavourites(user.id),
+    cart: loadCart(user.id, user.cart || []),
+    favourites: loadFavourites(user.id, user.favourites || []),
     progress: progressByUser[user.id] || {},
 }));
 
@@ -138,18 +142,19 @@ export function savePurchase(userId, courseId) {
     }
 }
 
-// ── Lesson progress (used by coursePlayer.js) ─────────────
+// ── Lesson progress (used by coursePlayer.js and the My Courses page) ──
 
 /**
  * Persist a user's progress for one course.
- * @param {number} userId
- * @param {number|string} courseId
- * @param {{ completed?: number[], lastLesson?: number }} payload
+ * Also counts as "learning activity" (for the streak) when a new lesson
+ * has been completed.
  */
 export function saveProgress(userId, courseId, payload = {}) {
     if (!userId || courseId == null) return;
     const all = loadProgress();
     const forUser = all[userId] || {};
+    const before = (forUser[courseId]?.completed || []).length;
+
     forUser[courseId] = {
         completed: Array.from(new Set(payload.completed || [])),
         lastLesson:
@@ -157,6 +162,8 @@ export function saveProgress(userId, courseId, payload = {}) {
     };
     all[userId] = forUser;
     writeJSON("local", PROGRESS_KEY, all);
+
+    if (forUser[courseId].completed.length > before) recordActivity(userId);
 
     // Keep the in-memory user object in sync so navigation doesn't reload stale data.
     const user = usersInfo.find((u) => u.id === userId);
@@ -168,8 +175,6 @@ export function saveProgress(userId, courseId, payload = {}) {
 
 /**
  * Read a user's saved progress for one course, or null if none exists.
- * @param {number} userId
- * @param {number|string} courseId
  * @returns {{ completed: number[], lastLesson: number } | null}
  */
 export function loadProgressFor(userId, courseId) {

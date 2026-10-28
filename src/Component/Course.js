@@ -88,7 +88,8 @@ export default class Course extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchQuery: "",
+      // The search text is NOT kept here: it lives in App and is typed in the
+      // Header, so it arrives as this.props.searchQuery.
       showAll: false,
       sortC: "MP", // MP -> Most Popular, HR -> Highest Rated, P -> Price (low to high)
       filters: EMPTY_FILTERS,
@@ -98,9 +99,13 @@ export default class Course extends React.Component {
     this.levels = getLevelList(this.courses);
   }
 
-  handleSearchChange = (query) => {
-    this.setState({ searchQuery: query, showAll: false });
-  };
+  // When the search text (typed in the Header) changes, collapse the list
+  // back to the first page.
+  componentDidUpdate(prevProps) {
+    if (prevProps.searchQuery !== this.props.searchQuery && this.state.showAll) {
+      this.setState({ showAll: false });
+    }
+  }
 
   changeSort = (sortVal) => {
     this.setState({ sortC: sortVal });
@@ -133,12 +138,15 @@ export default class Course extends React.Component {
     this.setState({ filters: EMPTY_FILTERS, showAll: false });
   };
 
+  // The search text lives in App, so clear it through the callback.
   clearAll = () => {
-    this.setState({ filters: EMPTY_FILTERS, searchQuery: "", showAll: false });
+    this.setState({ filters: EMPTY_FILTERS, showAll: false });
+    if (this.props.onSearchChange) this.props.onSearchChange("");
   };
 
   getFilteredCourses = () => {
-    const { searchQuery, sortC, filters } = this.state;
+    const { sortC, filters } = this.state;
+    const searchQuery = this.props.searchQuery || "";
 
     // Start from the source list (never mutate state/source)
     let result = this.courses.filter((course) => matchesFilters(course, filters));
@@ -172,6 +180,8 @@ export default class Course extends React.Component {
   };
 
   renderCourses(list) {
+    // `shop` is null when nobody is signed in -> no heart buttons are drawn
+    const { shop } = this.props;
     return list.map((course, index) => (
       <div
         className="courseRow"
@@ -179,7 +189,12 @@ export default class Course extends React.Component {
         style={{ "--i": index }}
       >
         <Link to={`/course/${course.id}`} className="courseLink">
-          <CourseItem course={course} />
+          <CourseItem
+            course={course}
+            mode="hrt"
+            active={!!shop?.favourites.includes(course.id)}
+            onAction={shop ? () => shop.toggleFavourite(course.id) : undefined}
+          />
         </Link>
         <hr />
       </div>
@@ -187,7 +202,7 @@ export default class Course extends React.Component {
   }
 
   render() {
-    const { searchQuery, sortC, filters, showAll } = this.state;
+    const { sortC, filters, showAll } = this.state;
     const filteredCourses = this.getFilteredCourses();
     const visible = showAll ? filteredCourses : filteredCourses.slice(0, PAGE_SIZE);
     const activeCount = countActiveFilters(filters);
@@ -196,8 +211,6 @@ export default class Course extends React.Component {
     return (
       <div className="courseSearchComp">
         <CourseSearch
-          searchQuery={searchQuery}
-          onSearchChange={this.handleSearchChange}
           totalResults={filteredCourses.length}
           sortValue={sortC}
           onSort={this.changeSort}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../styleComp/courseview.css";
+import "../styleComp/cartFav.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import coursesInfo from "../Assets/scripts/courseList.js";
 import CourseCard from "./CourseCard.js";
@@ -42,6 +43,24 @@ export default function CourseView(props) {
 
   const numericId = Number(id);
   const alreadyOwned = props.user?.purchasedCourses?.includes(numericId) ?? false;
+
+  // Cart + favourites (App passes them in as `shop`)
+  const shop = props.shop;
+  const inCart = !!shop?.cart?.includes(numericId);
+  const isFav = !!shop?.favourites?.includes(numericId);
+
+  // Signed-out visitors are sent to the login page first
+  const requireLogin = (action) => {
+    if (!props.user || !shop) {
+      navigate("/login");
+      return;
+    }
+    action();
+  };
+  const onCartClick = () =>
+    requireLogin(() => (inCart ? navigate("/cart") : shop.addToCart(numericId)));
+  const onHeartClick = () =>
+    requireLogin(() => shop.toggleFavourite(numericId));
 
   const checkOutTime = () => {
     if (!props.user) {
@@ -272,7 +291,40 @@ export default function CourseView(props) {
               {alreadyOwned ? "Go to Course" : "Enroll now"}
             </div>
 
-            <div className="StickyCardBtn2">Try the first lesson free</div>
+            <div className="spStickyActions">
+              {!alreadyOwned && (
+                <button
+                  type="button"
+                  className={"spCartBtn" + (inCart ? " isIn" : "")}
+                  onClick={onCartClick}
+                >
+                  {inCart ? "In your cart · View cart" : "Add to cart"}
+                </button>
+              )}
+              <button
+                type="button"
+                className={"spHeartBtn" + (isFav ? " isOn" : "")}
+                onClick={onHeartClick}
+                aria-pressed={isFav}
+                aria-label={isFav ? "Remove from favourites" : "Add to favourites"}
+                title={isFav ? "Remove from favourites" : "Add to favourites"}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="22"
+                  height="22"
+                  fill={isFav ? "currentColor" : "none"}
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z" />
+                </svg>
+              </button>
+            </div>
+
 
             <div className="StickyCardDescr">
               <div>

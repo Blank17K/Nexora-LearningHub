@@ -1,9 +1,7 @@
-// Small localStorage helpers for the "My Courses" page.
+// Small localStorage helpers for the "My Courses" page: course ratings and the
+// weekly learning streak. (Lesson progress itself lives in usersList.js, saved
+// by the course player through saveProgress().)
 // Everything is stored per user, so two accounts on one browser don't mix.
-//
-// CoursePlayer should call setLessonsCompleted(user.id, courseId, n) whenever
-// a lesson is finished. That one call updates the progress bar, the % label,
-// the "completed" / certificate counts and the learning streak.
 
 const key = (kind, userId) => `nexora_${kind}_${userId}`;
 
@@ -24,24 +22,15 @@ const write = (k, value) => {
   }
 };
 
-// Total lessons = sum of every module's lessons (same maths as CourseView)
+// Total lessons = every lesson in every module. This is the same number the
+// course player and the course page use, so the percentages always agree.
 export const totalLessonsOf = (course) => {
   const sum = (course.courseModules || []).reduce(
-    (s, m) => s + (m.lessons || 0),
+    (s, m) => s + (m.lessonList ? m.lessonList.length : m.lessons || 0),
     0,
   );
   return sum || course.lessons || 0;
 };
-
-// ---------- Progress: { [courseId]: lessonsCompleted } ----------
-export const loadProgress = (userId) => read(key("progress", userId), {});
-
-export function setLessonsCompleted(userId, courseId, count) {
-  const all = loadProgress(userId);
-  all[courseId] = Math.max(0, Math.floor(count));
-  write(key("progress", userId), all);
-  recordActivity(userId);
-}
 
 // ---------- Ratings: { [courseId]: 1..5 } ----------
 export const loadRatings = (userId) => read(key("ratings", userId), {});

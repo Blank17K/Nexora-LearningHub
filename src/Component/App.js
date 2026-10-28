@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop.js";
 import Splash from "./splash.js";
-import BackToSite from "./backTosite.js";
 import Header from "./header.js";
 import AboutUs from "./AboutUs.js";
 import Footer from "./footer.js";
-import Login from "./Login.js";
-import SignUp from "./SignUp.js";
 import Course from "./Course.js";
 import CourseView from "./CourseView.js";
 import usersInfo, {
@@ -40,12 +37,13 @@ function App() {
 
   // remember = the "Keep me signed in" checkbox on the login form
   const updateUser = (userData, remember = false) => {
-    // Re-read this user's cart + favourites from storage so they are
-    // always up to date, even if the user logged out and back in.
+    // Re-read this user's cart + favourites from storage so they are always up
+    // to date, even if the user logged out and back in. If nothing has been
+    // saved yet, fall back to the starter lists that came with the account.
     setUser({
       ...userData,
-      cart: loadCart(userData.id),
-      favourites: loadFavourites(userData.id),
+      cart: loadCart(userData.id, userData.cart || []),
+      favourites: loadFavourites(userData.id, userData.favourites || []),
     });
     saveSession(userData.id, remember);
   };
@@ -101,46 +99,62 @@ function App() {
     // Persist to localStorage so it survives a refresh
     savePurchase(userId, numericCourseId);
 
-    // Keep the saved cart in sync too
+    // Keep the saved cart in sync too (fallback = the cart currently on screen,
+    // so a starter cart that was never saved isn't wiped by mistake)
+    const onScreenCart = user && user.id === userId ? user.cart || [] : [];
     saveCart(
       userId,
-      loadCart(userId).filter((c) => c !== numericCourseId),
+      loadCart(userId, onScreenCart).filter((c) => c !== numericCourseId),
     );
   };
 
   // ---------- Per-user Cart + Favourites ----------
-  const cart = user?.cart || [];
+  // Courses the user already owns never count as "in the cart".
+  const ownedIds = user?.purchasedCourses || [];
+  const cart = (user?.cart || []).filter((id) => !ownedIds.includes(id));
   const favourites = user?.favourites || [];
 
+  // These use the "previous state" form of setUser so several calls in a row
+  // (e.g. "move to favourites" = add favourite + remove from cart) never
+  // overwrite each other.
   const addToCart = (courseId) => {
-    if (!user) return;
     const id = Number(courseId);
-    if (cart.includes(id)) return;
-    const next = [...cart, id];
-    setUser({ ...user, cart: next });
-    saveCart(user.id, next);
+    setUser((prev) => {
+      if (!prev) return prev;
+      const list = prev.cart || [];
+      if (list.includes(id) || (prev.purchasedCourses || []).includes(id)) {
+        return prev;
+      }
+      const next = [...list, id];
+      saveCart(prev.id, next);
+      return { ...prev, cart: next };
+    });
   };
 
   const removeFromCart = (courseId) => {
-    if (!user) return;
     const id = Number(courseId);
-    const next = cart.filter((c) => c !== id);
-    setUser({ ...user, cart: next });
-    saveCart(user.id, next);
+    setUser((prev) => {
+      if (!prev) return prev;
+      const next = (prev.cart || []).filter((c) => c !== id);
+      saveCart(prev.id, next);
+      return { ...prev, cart: next };
+    });
   };
 
   const toggleFavourite = (courseId) => {
-    if (!user) return;
     const id = Number(courseId);
-    const next = favourites.includes(id)
-      ? favourites.filter((c) => c !== id)
-      : [...favourites, id];
-    setUser({ ...user, favourites: next });
-    saveFavourites(user.id, next);
+    setUser((prev) => {
+      if (!prev) return prev;
+      const list = prev.favourites || [];
+      const next = list.includes(id)
+        ? list.filter((c) => c !== id)
+        : [...list, id];
+      saveFavourites(prev.id, next);
+      return { ...prev, favourites: next };
+    });
   };
 
-  // Everything the future Cart / Favourites pages and the heart icon on the
-  // course price will need. Pass `shop` to them when we build those.
+  // Everything the Cart / Favourites pages and the buttons on the course page need.
   const shop = {
     cart,
     favourites,
@@ -167,6 +181,10 @@ function App() {
     cartCount: cart.length,
     favCount: favourites.length,
   };
+
+  // Pages that only make sense when signed in
+  const signedInOnly = (page) =>
+    user ? page : <Navigate to="/login" replace />;
 
   return (
     <BrowserRouter>
@@ -224,6 +242,7 @@ function App() {
               <Course
                 searchQuery={searchQuery}
                 onSearchChange={setSearchQuery}
+                shop={user ? shop : null}
               />
               <Footer />
             </>
@@ -236,12 +255,13 @@ function App() {
             <>
               <Header {...headerProps} />
               <ScrollToTop />
-              <CourseView user={user} check={checkingOut} />
+              <CourseView user={user} check={checkingOut} shop={shop} />
               <Footer />
             </>
           }
         />
 
+        {/* /checkout/5 buys one course, /checkout/cart buys everything in the cart */}
         <Route
           path="/checkout/:id"
           element={
@@ -258,85 +278,53 @@ function App() {
 
         <Route
           path="/favourites"
-          element={
+          element={signedInOnly(
             <>
-              <Header user={user} logout={logOut} />
-              <Favourites user={user}/>
+              <ScrollToTop />
+              <Header {...headerProps} />
+              <Favourites user={user} shop={shop} />
               <Footer />
-            </>
-          }
+            </>,
+          )}
         />
+
         <Route
           path="/cart"
-          element={
+          element={signedInOnly(
             <>
+              <ScrollToTop />
               <Header {...headerProps} />
-              <Cart user={user}/>
+              <Cart user={user} shop={shop} />
               <Footer />
-            </>
-          }
+            </>,
+          )}
         />
-      <Route
-        path="/courseplayer/:id"
-        element={
-          <>
-            <ScrollToTop />
-
-            <CoursePlayer user={user} />
-          </>
-        }
-      />
 
         <Route
           path="/mycourses"
-          element={
-            user ? (
-              <>
-                <Header {...headerProps} />
-                <MyCourses user={user} />
-                <Footer />
-              </>
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
-
-        {/* Placeholders, replace with the real pages later */}
-        <Route
-          path="/cart"
-          element={
-            user ? (
-              <>
-                <Header {...headerProps} />
-                <div className="container mt-4">
-                  <h2>Your Cart ({shop.cart.length})</h2>
-                  <p>Cart page coming soon.</p>
-                </div>
-                <Footer />
-              </>
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
+          element={signedInOnly(
+            <>
+              <Header {...headerProps} />
+              <MyCourses user={user} />
+              <Footer />
+            </>,
+          )}
         />
 
         <Route
-          path="/favourites"
+          path="/courseplayer/:id"
           element={
-            user ? (
-              <>
-                <Header {...headerProps} />
-                <div className="container mt-4">
-                  <h2>Your Favourites ({shop.favourites.length})</h2>
-                  <p>Favourites page coming soon.</p>
-                </div>
-                <Footer />
-              </>
-            ) : (
-              <Navigate to="/login" replace />
-            )
+            <>
+              <ScrollToTop />
+              <CoursePlayer user={user} />
+            </>
           }
+        />
+
+        {/* Old link without a course id: send people to their courses */}
+        <Route
+          path="/courseplayer"
+          element={<Navigate to="/mycourses" replace />}
         />
       </Routes>
     </BrowserRouter>

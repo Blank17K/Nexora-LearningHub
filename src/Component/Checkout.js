@@ -6,6 +6,7 @@ import Receipt, { makeReference, detectCardBrand } from "./Receipt.js";
 import coursesInfo from "../Assets/scripts/courseList.js";
 import ticC from "../Assets/Images/tickC.svg";
 import "../styleComp/checkout.css";
+import "../styleComp/cartFav.css";
 
 function Checkout(props) {
   const [form, setForm] = useState({
@@ -26,10 +27,22 @@ function Checkout(props) {
   const [receipt, setReceipt] = useState(null);
   const [showReceipt, setShowReceipt] = useState(false);
 
-  const course = useMemo(
-    () => coursesInfo.find((c) => String(c.id) === String(id)),
-    [id]
-  );
+  // /checkout/cart buys everything in the cart, /checkout/5 buys course 5
+  const isCart = id === "cart";
+
+  const payCourses = useMemo(() => {
+    if (isCart) {
+      const owned = props.user?.purchasedCourses || [];
+      return (props.user?.cart || [])
+        .filter((cid) => !owned.includes(cid))
+        .map((cid) => coursesInfo.find((c) => c.id === Number(cid)))
+        .filter(Boolean);
+    }
+    const one = coursesInfo.find((c) => String(c.id) === String(id));
+    return one ? [one] : [];
+  }, [id, isCart, props.user]);
+
+  const total = payCourses.reduce((sum, c) => sum + Number(c.price || 0), 0);
 
   // Tell App we're no longer "waiting to check out". This used to be called
   // during render, which makes React warn; an effect does the same job cleanly.
@@ -39,7 +52,7 @@ function Checkout(props) {
   }, []);
 
   const handleBack = () => {
-    navigate(`/course/${id}`);
+    navigate(isCart ? "/cart" : `/course/${id}`);
   };
 
   const validators = {
@@ -108,18 +121,6 @@ function Checkout(props) {
     );
   }
 
-  if (!course) {
-    return (
-      <div className="container mt-4">
-        <button className="btn btn-secondary mb-3" onClick={handleBack}>
-          Back to Site
-        </button>
-        <h3>Course not found</h3>
-        <p>No course matches id: {id}</p>
-      </div>
-    );
-  }
-
   const handleChange = (field) => (e) => {
     let value = e.target.value;
 
@@ -146,7 +147,7 @@ function Checkout(props) {
   // Notifies App to update the user's purchasedCourses list.
   const addPurchasedCourse = () => {
     if (typeof props.paycheck === "function") {
-      props.paycheck(props.user.id, course.id);
+      payCourses.forEach((c) => props.paycheck(props.user.id, c.id));
     }
   };
 
@@ -177,7 +178,7 @@ function Checkout(props) {
     setReceipt({
       reference: makeReference(),
       paidAt: new Date(),
-      courses: [course],
+      courses: payCourses,
       discountPercent: 0,
       payment: { brand: detectCardBrand(cardDigits), last4: cardDigits.slice(-4) },
     });
@@ -239,11 +240,31 @@ function Checkout(props) {
     );
   }
 
+  // Nothing to pay for (bad link, or an empty cart)
+  if (payCourses.length === 0) {
+    return (
+      <div className="container mt-4">
+        <button className="btn btn-secondary mb-3" onClick={handleBack}>
+          {isCart ? "Back to cart" : "Back to Site"}
+        </button>
+        <h3>{isCart ? "Your cart is empty" : "Course not found"}</h3>
+        <p>
+          {isCart
+            ? "Add a course to your cart and it will show up here."
+            : `No course matches id: ${id}`}
+        </p>
+        <button className="btn submitBtn" onClick={() => navigate("/courses")}>
+          Browse courses
+        </button>
+      </div>
+    );
+  }
+
   // ───────────────────────────── Payment form ─────────────────────────────
   return (
     <div className="payArea mt-4">
       <p className="back mb-3" onClick={handleBack}>
-        <i className="lni lni-arrow-left"></i> Back to Site
+        <i className="lni lni-arrow-left"></i> {isCart ? "Back to cart" : "Back to Site"}
       </p>
       <div className="row justify-content-center">
         <div className="col cardPayment">
@@ -348,14 +369,35 @@ function Checkout(props) {
           </div>
 
           <button className="btn submitBtn" onClick={onPayment}>
-            {`Pay R${course.price} and start learning`}
+            {`Pay R${total} and start learning`}
           </button>
           <div id="CardNumber" className="form-text">
             30-day refund, no questions. You'll get access the moment this clears.
           </div>
         </div>
         <div className="col">
-          <CoursePayCard course={course} paid={false} />
+          {isCart ? (
+            <div className="spPaySummary">
+              <h4>Your order · {payCourses.length} {payCourses.length === 1 ? "course" : "courses"}</h4>
+              {payCourses.map((c) => (
+                <div className="spPayRow" key={c.id}>
+                  <img src={c.imgPath} alt="" />
+                  <div>
+                    <strong>{c.name}</strong>
+                    <small>{c.author}</small>
+                  </div>
+                  <span>R{c.price}</span>
+                </div>
+              ))}
+              <div className="spPayTotal">
+                <span>Total</span>
+                <span>R{total}</span>
+              </div>
+              <p className="spPayNote">once-off · lifetime access</p>
+            </div>
+          ) : (
+            <CoursePayCard course={payCourses[0]} paid={false} />
+          )}
         </div>
       </div>
     </div>

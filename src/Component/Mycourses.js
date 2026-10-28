@@ -2,8 +2,8 @@ import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styleComp/myCourses.css";
 import coursesInfo from "../Assets/scripts/courseList.js";
+import { loadProgressFor } from "../Assets/scripts/usersList.js";
 import {
-  loadProgress,
   loadRatings,
   saveRating,
   totalLessonsOf,
@@ -53,10 +53,10 @@ export default function MyCourses({ user }) {
   const [showAll, setShowAll] = useState(false);
   const [ratings, setRatings] = useState(() => loadRatings(user.id));
 
-  const progress = useMemo(() => loadProgress(user.id), [user.id]);
   const streak = useMemo(() => getStreakWeeks(user.id), [user.id]);
 
-  // Every course this user has bought, in purchase order
+  // Every course this user has bought, in purchase order.
+  // Progress comes from the course player (saved through usersList.js).
   const owned = useMemo(
     () =>
       (user.purchasedCourses || [])
@@ -64,7 +64,8 @@ export default function MyCourses({ user }) {
           const course = coursesInfo.find((c) => c.id === Number(id));
           if (!course) return null;
           const total = totalLessonsOf(course);
-          const done = Math.min(progress[course.id] || 0, total);
+          const saved = loadProgressFor(user.id, course.id);
+          const done = Math.min((saved?.completed || []).length, total);
           return {
             course,
             order,
@@ -74,7 +75,7 @@ export default function MyCourses({ user }) {
           };
         })
         .filter(Boolean),
-    [user.purchasedCourses, progress],
+    [user.id, user.purchasedCourses],
   );
 
   const categories = useMemo(
@@ -276,8 +277,7 @@ export default function MyCourses({ user }) {
               {visible.map(({ course, total, done, pct }) => (
                 <li className="mcRow" key={course.id}>
                   <Link
-                    to="/courseplayer"
-                    state={{ courseId: course.id }}
+                    to={`/courseplayer/${course.id}`}
                     className="mcThumb"
                     aria-label={`Open ${course.name}`}
                   >
@@ -286,9 +286,7 @@ export default function MyCourses({ user }) {
 
                   <div className="mcInfo">
                     <h2>
-                      <Link to="/courseplayer" state={{ courseId: course.id }}>
-                        {course.name}
-                      </Link>
+                      <Link to={`/courseplayer/${course.id}`}>{course.name}</Link>
                     </h2>
                     <p className="mcDesc">{course.description}</p>
                     <div className="mcMeta">
