@@ -2,10 +2,15 @@ import React, { useState, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import coursesInfo from "../Assets/scripts/courseList.js";
 import CourseItem from "./courseItem.js"; // adjust path if needed
+import "../styleComp/cart.css";
 
 export default function Cart({ user }) {
   const navigate = useNavigate();
+  // cart course objects
+  const cartCourses = coursesInfo.filter(c => user.cart.includes(c.id));
 
+  // total
+  const totalCost = cartCourses.reduce((sum, c) => sum + c.price, 0);
   const [userCart, setFavourites] = useState(
     coursesInfo.filter((course) => user.cart.includes(course.id))
   );
@@ -21,6 +26,10 @@ export default function Cart({ user }) {
     user.favourites = user.favourites.filter((id) => id !== courseId);
   };
 
+  const removeFromCart = (courseId) => {
+    setFavourites((prev) => prev.filter((c) => c.id !== courseId));
+    user.cart = user.cart.filter((id) => id !== courseId);
+  }
   const filteredCourses = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
 
@@ -63,7 +72,7 @@ export default function Cart({ user }) {
         style={{ "--i": index }}
       >
         <Link to={`/course/${course.id}`} className="courseLink">
-          <CourseItem course={course} fav={true}/>
+          <CourseItem course={course} fav={'x'} handleCourse={removeFromCart}/>
         </Link>
         <hr />
       </div>
@@ -136,9 +145,10 @@ export default function Cart({ user }) {
       </div>
 
       {/* ---------- Display via renderCourses ---------- */}
-      <div className="courseList">
+      <div className="courseList row">
+        <div className="col-10">
         {visibleCourses.length === 0 ? (
-          <div className="emptyState">
+          <div className="emptyState col-8">
             <p>No courses in your cart.</p>
             {userCart.length === 0 && (
               <Link to="/courses" className="browseBtn">
@@ -149,13 +159,50 @@ export default function Cart({ user }) {
         ) : (
           renderCourses(visibleCourses)
         )}
+        </div>
+        <div className="TotalCost col-2">
+          <div className="StickyCard CartTotal">
+            <h3 className="CartTotalTitle">Order Summary</h3>
+
+            <div className="CartTotalItems">
+              {cartCourses.length === 0 ? (
+                <p className="CartTotalEmpty">No items in cart.</p>
+              ) : (
+                cartCourses.map(course => (
+                  <div className="CartTotalRow" key={course.id}>
+                    <span className="CartTotalName">{course.name}</span>
+                    <span className="CartTotalPrice">R{course.price}</span>
+                  </div>
+                ))
+              )}
+            </div>
+
+            <div className="StickyCardDescr CartTotalFooter">
+              <div>
+                <p>Subtotal</p>
+                <p>Items</p>
+              </div>
+              <div>
+                <p>R{totalCost}</p>
+                <p>{cartCourses.length}</p>
+              </div>
+            </div>
+
+            <div className="StickyCardPrice CartTotalGrand">
+              <h3>R{totalCost}</h3>
+              <p>total · once-off</p>
+            </div>
+
+            <div className="StickyCarDBtn">Checkout</div>
+          </div>
+        </div>
       </div>
 
       {filteredCourses.length > 6 && (
         <button
-          type="button"
-          className="showAllBtn"
-          onClick={() => setShowAll((v) => !v)}
+        type="button"
+        className="showAllBtn"
+        onClick={() => setShowAll((v) => !v)}
         >
           {showAll ? "Show less" : `Show all (${filteredCourses.length})`}
         </button>

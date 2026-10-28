@@ -271,13 +271,7 @@ export default function CourseView(props) {
             <div className="StickyCarDBtn" onClick={checkOutTime}>
               {alreadyOwned ? "Go to Course" : "Enroll now"}
             </div>
-<<<<<<< HEAD
             <div className="StickyCardBtn2">Add To favourites <i className="lni lni-heart"></i></div>
-=======
-
-            <div className="StickyCardBtn2">Try the first lesson free</div>
-
->>>>>>> b1da8dcaed9780b2ae8da8581079c04d9eaf3e03
             <div className="StickyCardDescr">
               <div>
                 <p>{course.banner.hours}h of project lessons</p>

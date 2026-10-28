@@ -34,7 +34,15 @@ function App() {
     setUser(userData);
     saveSession(userData.id, remember);
   };
-
+  const moveToCart = (courseId) => {
+    setUser(prevUser => ({
+      ...prevUser,
+      favourites: prevUser.favourites.filter(id => id !== courseId),
+      cart: prevUser.cart.includes(courseId)
+        ? prevUser.cart
+        : [...prevUser.cart, courseId]
+    }));
+};
   const adduserData = (fullName, email, password) => {
     // Safer ID: max existing + 1
     const nextId = userList.length
@@ -196,7 +204,7 @@ function App() {
           element={
             <>
               <Header user={user} logout={logOut} />
-              <Favourites user={user}/>
+              <Favourites user={user} moveToCart={moveToCart} />
               <Footer />
             </>
           }

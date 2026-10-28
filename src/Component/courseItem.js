@@ -3,7 +3,7 @@ import "../styleComp/courseItem.css";
 
 export default class CourseItem extends React.Component {
   render() {
-    const { course, fav=false } = this.props;
+    const { course, fav='hrt', handleCourse } = this.props;
     
     return (
       <div className="courseItem row">
@@ -15,16 +15,16 @@ export default class CourseItem extends React.Component {
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            this.props.onToggleFavourite?.(course.id);
+            handleCourse?.(course.id);
           }}
         >
-          {fav = 'hrt' ? (
+          {fav == 'hrt' ? (
             <i className="lni lni-heart"></i>
           ) : '' }
-          {fav = 'crt'?(
+          {fav == 'crt'?(
             <i className="lni lni-cart-1"></i>
           ):''}
-          {fav = 'x'?(
+          {fav == 'x'?(
             <i>x</i>
           ):''}
         </button>

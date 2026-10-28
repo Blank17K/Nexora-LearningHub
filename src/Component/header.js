@@ -92,7 +92,7 @@ export default function Header({ user, logout, signUp=false }) {
     return (
       <div className="headerActions">
         <div className="cartPref" onClick={()=>{navigate('/favourites')}}><i class="lni lni-heart"></i></div>
-        <div className="cartPref" on><i class="lni lni-cart-1"></i><span className="cartAmount">{user.cart.length}</span></div>
+        <div className="cartPref" onClick={()=>{navigate('/cart')}}><i class="lni lni-cart-1"></i><span className="cartAmount">{user.cart.length}</span></div>
         <div className={"userMenu" + (userOpen ? " open" : "")} ref={userRef}>
           <button
             type="button"

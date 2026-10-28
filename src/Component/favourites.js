@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import coursesInfo from "../Assets/scripts/courseList.js";
 import CourseItem from "./courseItem.js"; // adjust path if needed
 
-export default function Favourites({ user }) {
+export default function Favourites({ user, moveToCart }) {
   const navigate = useNavigate();
 
   const [userFavourites, setFavourites] = useState(
@@ -54,7 +54,7 @@ export default function Favourites({ user }) {
 
   const totalResults = filteredCourses.length;
   const visibleCourses = showAll ? filteredCourses : filteredCourses.slice(0, 6);
-
+  
   const renderCourses = (list) => {
     return list.map((course, index) => (
       <div
@@ -63,7 +63,7 @@ export default function Favourites({ user }) {
         style={{ "--i": index }}
       >
         <Link to={`/course/${course.id}`} className="courseLink">
-          <CourseItem course={course} fav={true}/>
+          <CourseItem course={course} fav={'crt'} handleCourse={moveToCart}/>
         </Link>
         <hr />
       </div>
