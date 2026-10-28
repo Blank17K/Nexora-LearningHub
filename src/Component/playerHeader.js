@@ -1,24 +1,39 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../Assets/Images/Logo.png";
 
-function PlayerHeader() {
+export default function PlayerHeader({ courseName, pct = 0, done = 0, total = 0 }) {
   return (
-    <div className="row align-items-center header">
-      <div className="col-1">
-        <img alt="logo" src={logo} className="logoHead" />
+    <header className="cpTop d-flex align-items-center">
+      {/* Brand */}
+      <Link to="/courses" className="d-flex align-items-center text-decoration-none me-4" style={{ color: 'inherit' }}>
+        <img alt="Nexora" src={logo} style={{ width: '2rem', marginRight: '0.5rem' }} />
+        <span style={{ fontWeight: 800, fontSize: '1.2rem', color: '#0e1f1a' }}>Nexora</span>
+      </Link>
+
+      {/* Course Name */}
+      <div className="cpCourseName me-auto" title={courseName}>
+        {courseName}
       </div>
-      <div className="col-2">
-        <b>Nexora</b>
+
+      {/* Progress */}
+      <div className="d-flex align-items-center gap-3" style={{ width: '300px' }}>
+        <div className="flex-grow-1">
+          <div
+            className="cpProgress"
+            role="progressbar"
+            aria-valuenow={pct}
+            aria-valuemin={0}
+            aria-valuemax={100}
+          >
+            <div className="cpProgressFill" style={{ width: `${pct}%` }} />
+          </div>
+        </div>
+        <div className="text-nowrap">
+          <span className="cpProgressPct">{pct}%</span>
+          <span className="cpProgressCount ms-2">({done}/{total})</span>
+        </div>
       </div>
-      <div className="col-3"></div>
-      <div className="col-6 browseTxt row align-items-center">
-        <div className="loaderN col-6"></div>
-        <p className="col">{`22%`}</p>
-        <p className="col-4">{`7 of 32 lessons`}</p>
-      </div>
-      <hr className="mt-3"/>
-    </div>
+    </header>
   );
 }
-
-export default PlayerHeader;
