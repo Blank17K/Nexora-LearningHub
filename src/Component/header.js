@@ -91,6 +91,8 @@ export default function Header({ user, logout, signUp=false }) {
 
     return (
       <div className="headerActions">
+        <div className="cartPref" onClick={()=>{navigate('/favourites')}}><i class="lni lni-heart"></i></div>
+        <div className="cartPref"><i class="lni lni-cart-1"></i><span className="cartAmount">{user.cart.length}</span></div>
         <div className={"userMenu" + (userOpen ? " open" : "")} ref={userRef}>
           <button
             type="button"
@@ -116,7 +118,6 @@ export default function Header({ user, logout, signUp=false }) {
               <path d="M6 9l6 6 6-6" />
             </svg>
           </button>
-
           <div className="userDropdown" role="menu">
             <div className="userDropHead">
               <span className="userAvatar lg">{getInitials(user.name)}</span>

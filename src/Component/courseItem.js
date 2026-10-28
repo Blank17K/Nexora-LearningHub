@@ -3,9 +3,32 @@ import "../styleComp/courseItem.css";
 
 export default class CourseItem extends React.Component {
   render() {
-    const { course } = this.props;
+    const { course, fav=false } = this.props;
+    
     return (
       <div className="courseItem row">
+        {/* like button — top right */}
+        <button
+          type="button"
+          className="likeCourse"
+          aria-label="Add to favourites"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.props.onToggleFavourite?.(course.id);
+          }}
+        >
+          {fav = 'hrt' ? (
+            <i className="lni lni-heart"></i>
+          ) : '' }
+          {fav = 'crt'?(
+            <i className="lni lni-cart-1"></i>
+          ):''}
+          {fav = 'x'?(
+            <i>x</i>
+          ):''}
+        </button>
+
         <div className="col-12 col-sm-3 courseThumb">
           <img src={course.imgPath} className="align-self-center" alt={course.name} />
         </div>
@@ -23,7 +46,9 @@ export default class CourseItem extends React.Component {
               <p className="auth">{course.author}</p>
             </div>
           </div>
-          <h4 className="col-12 col-md-4 align-self-center priceItem">
+
+          {/* price — bottom right */}
+          <h4 className="col-12 col-md-4 align-self-end priceItem">
             <span>R{course.price}.00</span>
             <svg
               className="priceArrow"

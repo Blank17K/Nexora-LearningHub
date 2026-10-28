@@ -137,3 +137,42 @@ a {
     text-decoration: none;
     color: inherit;
 }
+/* make the item a positioning context */
+.courseItem {
+  position: relative;
+}
+
+/* like — top right */
+.likeCourse {
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--cardCol);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform .25s var(--ease), background-color .25s var(--ease);
+}
+.likeCourse:hover {
+  transform: scale(1.1);
+}
+
+/* price — bottom right, no longer sharing a flex row with the like */
+.priceItem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .35rem;
+  font-weight: bold;
+  color: #0e1f1a;
+  margin-bottom: 0;
+}

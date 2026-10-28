@@ -20,6 +20,8 @@ import usersInfo, {
 import Checkout from "./Checkout.js";
 import CoursePlayer from "./coursePlayer.js";
 import AuthPage from "./AuthPage.js"
+import Favourites from "./favourites.js";
+import Cart from "./cart.js";
 
 function App() {
   // Restore the saved session on load so a refresh doesn't log the user out
@@ -195,6 +197,26 @@ function App() {
             <>
               <Header user={user} logout={logOut} />
               <CoursePlayer />
+            </>
+          }
+        />
+        <Route
+          path="/favourites"
+          element={
+            <>
+              <Header user={user} logout={logOut} />
+              <Favourites user={user}/>
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <>
+              <Header user={user} logout={logOut} />
+              <Cart user={user}/>
+              <Footer />
             </>
           }
         />
